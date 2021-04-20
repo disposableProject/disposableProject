@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form name="registerForm" id="registerForm">
+<form name="registerForm" id="registerForm" method = "post">
+<div style="display: flex; flex-direction: column;">
 <input id="userid" name="userid">
 <input id="email" name="email">
 <input id="password" name="password" type="password">
@@ -16,13 +17,14 @@
 <input id="phone" name="phone">
 <input id="notice" name="notice">
 <button onclick="register()">회원가입</button>
+</div>
 </form>
 <script>
 function register(){
 	 var registerData = $("form[name=registerForm]").serialize() ;
 	 console.log(registerData)
 	 $.ajax({
-         type : 'post',
+         type : 'POST',
          url : '/user/ceoRegisterPro.do',
          data : registerData,
          dataType : 'json',
