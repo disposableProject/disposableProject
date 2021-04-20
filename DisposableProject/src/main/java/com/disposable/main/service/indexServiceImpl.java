@@ -1,5 +1,5 @@
 package com.disposable.main.service;
 
-public interface indexService {
+public class indexServiceImpl {
 
 }
