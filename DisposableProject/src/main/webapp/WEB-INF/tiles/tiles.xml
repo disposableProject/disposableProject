@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+ 
+	<!--// main layout -->
+	<definition name="mainTiles" template="/WEB-INF/views/index.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/include/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	<!-- 기본 메인-->
+	<definition name="index" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/include/main.jsp" />
+	</definition>
+	<!-- 회원
+	<definition name="user/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/user/user.jsp" />
+	</definition>-->
+	
+	<!-- 가게
+	<definition name="shop/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/shop/{1}.jsp" />
+	</definition>-->
+		
+	<!-- 관리자
+	<definition name="management/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/management/{1}.jsp" />
+	</definition>-->
+		
+	<definition name="*/*" extends="mainTiles">
+		<put-attribute name="body"  expression="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*" extends="mainTiles" >
+		<put-attribute name="body"  expression="/WEB-INF/views/{1}.jsp" />
+	</definition>
+</tiles-definitions>
