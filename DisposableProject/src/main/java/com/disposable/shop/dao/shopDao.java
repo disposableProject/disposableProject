@@ -1,5 +1,8 @@
 package com.disposable.shop.dao;
 
-public class shopDao {
+import org.springframework.context.annotation.Configuration;
+
+@Configuration("shopDao")
+public interface shopDao {
 
 }

@@ -1,5 +1,8 @@
 package com.disposable.management.dao;
 
-public class managementDao {
+import org.springframework.context.annotation.Configuration;
+
+@Configuration("managementDao")
+public interface managementDao {
 
 }
