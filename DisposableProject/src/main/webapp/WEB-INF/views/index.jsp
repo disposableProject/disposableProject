@@ -8,8 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header" />  <!--공통으로 쓸 메인헤더-->
-  	<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
-  	<tiles:insertAttribute name="footer"/>   <!--요청에의해 바뀌는 body부분-->
+	<div style="height: 100px;width:100%;background: red">
+		<tiles:insertAttribute name="header" />
+	</div>
+	
+	<div>
+		<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
+	</div>
+	
+	<div style="height: 300px;width:100%;background: red">
+		<tiles:insertAttribute name="footer"/> 
+	</div>
 </body>
 </html>

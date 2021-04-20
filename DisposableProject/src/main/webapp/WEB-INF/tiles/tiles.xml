@@ -5,20 +5,34 @@
 <tiles-definitions>
  
 	<!--// main layout -->
-	<definition name="index" template="/WEB-INF/views/index.jsp">
+	<definition name="mainTiles" template="/WEB-INF/views/index.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/include/header.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
-
-	<!-- 로그인 요청에 대한 페이지 설정
-	<definition name="login" extends="mainTemplate">
-		<put-attribute name="body" value="/WEB-INF/jsp/로그인jsp파일.jsp" />
+	<!-- 기본 메인-->
+	<definition name="index" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/include/main.jsp" />
 	</definition>
--->
-	<!-- 게시판 요청에 대한 페이지 설정
-	<definition name="login" extends="mainTemplate">
-		<put-attribute name="body" value="/WEB-INF/jsp/대쉬보드jsp파일.jsp" />
+	<!-- 회원
+	<definition name="user/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/user/user.jsp" />
+	</definition>-->
+	
+	<!-- 가게
+	<definition name="shop/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/shop/{1}.jsp" />
+	</definition>-->
+		
+	<!-- 관리자
+	<definition name="management/*" extends="mainTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/views/management/{1}.jsp" />
+	</definition>-->
+		
+	<definition name="*/*" extends="mainTiles">
+		<put-attribute name="body"  expression="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
- -->
+	<definition name="*" extends="mainTiles" >
+		<put-attribute name="body"  expression="/WEB-INF/views/{1}.jsp" />
+	</definition>
 </tiles-definitions>
