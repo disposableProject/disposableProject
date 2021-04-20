@@ -29,4 +29,20 @@ public class userRestController {
 		
 		return resultMap;
 	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 
+	 */
+	@RequestMapping(value="/ceoRegisterPro2.do", method=RequestMethod.POST)
+	public Map<String, Object> ceoRegisterPro2(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println(paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		List<Map<String, Object>> detailCodeList = null;
+		
+		return resultMap;
+	}
 }
