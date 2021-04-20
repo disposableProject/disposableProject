@@ -4,10 +4,11 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/default.css?v=210420" /><!-- 버전 수정 -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-header
+<a href="/user/ceoRegister.do">사장님 회원가입</a>
 </body>
 </html>
