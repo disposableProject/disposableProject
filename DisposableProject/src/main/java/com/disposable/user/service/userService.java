@@ -9,4 +9,6 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public interface userService {
 	List<Map<String,Object>> test (Map<String, Object> paramMap) throws SQLException;
+	int checkUserId (Map<String, Object> paramMap) throws SQLException;
+	int checkEmail (Map<String, Object> paramMap) throws SQLException;
 }

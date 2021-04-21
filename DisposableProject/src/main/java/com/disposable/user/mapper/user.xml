@@ -4,7 +4,11 @@
 	<select id="test" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT * FROM MEMBERS
 	</select>
-	
-	
+	<select id="checkUserId" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM CEOMEMBERS WHERE USERID = #{userId}
+	</select>
+	<select id="checkEmail" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM CEOMEMBERS WHERE EMAIL = #{email}
+	</select>
 	
 </mapper>
