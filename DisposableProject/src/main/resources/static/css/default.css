@@ -4,3 +4,11 @@ html,body {
 	margin: 0px;
 	padding: 0px;
 }
+
+
+#purpleButton{
+background: white;border: 2px solid purple;height: 40px;width: 120px;
+}
+#purpleButton:hover{ 
+background: purple;border: 2px solid purple;color:white;height: 40px;width: 120px;cursor: pointer;
+}
