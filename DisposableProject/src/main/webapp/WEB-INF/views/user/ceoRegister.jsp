@@ -75,8 +75,8 @@ function checkId(){
 		alert("아이디를 입력 해주세요");
 		return false;
 	}
-	var regExp = /^[a-z0-9]{4,10}$/;
-	if(!regExp.test(email)){
+	var regExp = /^[a-z0-9]{4,20}$/;
+	if(!regExp.test(userId)){
 		alert("아이디는 영 소문자, 숫자 4~10자리로 입력해주세요.");
 		return false;
 	}
