@@ -11,5 +11,6 @@
 </head>
 <body>
 <a href="/user/ceoRegister.do">사장님 회원가입</a>
+<a href="/user/userRegister.do">일반 회원가입</a>
 </body>
 </html>

@@ -30,7 +30,8 @@ public class userRestController {
 	 */
 	@RequestMapping(value="/ceoRegisterPro.do", method=RequestMethod.POST)
 	public Map<String, Object> ceoRegisterPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
-		System.out.println(paramMap);
+		System.out.println("왔니");
+		System.out.println("paramMap:" + paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		List<Map<String, Object>> userList = userservice.test(paramMap);
 		System.out.println(userList);
@@ -45,6 +46,7 @@ public class userRestController {
 	 * @throws Exception
 	 * @description  사장님 아이디 중복 체크
 	 */
+
 	@RequestMapping(value="/checkUserId.do", method=RequestMethod.POST)
 	public Map<String, Object> checkUserId(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
 		System.out.println(paramMap);
@@ -74,4 +76,5 @@ public class userRestController {
 		
 		return resultMap;
 	}
+	
 }
