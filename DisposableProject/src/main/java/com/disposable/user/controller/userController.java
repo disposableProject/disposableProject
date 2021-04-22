@@ -26,4 +26,14 @@ public class userController {
 		System.out.println("ceoRegister");
 		return "user/ceoRegister";
 	}
+	/**
+	 * @author 정연우
+	 * @description 일반 회원가입 페이지 이동
+	 */
+	@RequestMapping(value="userRegister.do")
+	public String userRegister() {
+		System.out.println("userRegister");
+		return "user/userRegister";
+	}
+	
 }

@@ -44,16 +44,37 @@ public class userRestController {
 	 * @return Map<String, Object>
 	 * @throws SQLException
 	 * @throws Exception
-	 * @description 
+	 * @description  사장님 아이디 중복 체크
 	 */
-	/*
-	@RequestMapping(value="/ceoRegisterPro2.do", method=RequestMethod.POST)
-	public Map<String, Object> ceoRegisterPro2(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+
+	@RequestMapping(value="/checkUserId.do", method=RequestMethod.POST)
+	public Map<String, Object> checkUserId(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
 		System.out.println(paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
-		List<Map<String, Object>> detailCodeList = null;
+		int userCheck = userservice.checkUserId(paramMap);
+		resultMap.put("JavaData", userCheck);
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description  사장님 이메일 중복 체크
+	 */
+	@RequestMapping(value="/checkEmail.do", method=RequestMethod.POST)
+	public Map<String, Object> checkEmail(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println(paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		int emailCheck = userservice.checkEmail(paramMap);
+		if(emailCheck == 0) {
+			resultMap.put("JavaData", "YES");
+		}else {
+			resultMap.put("JavaData", "NO");
+		}
 		
 		return resultMap;
 	}
-	*/
+	
 }

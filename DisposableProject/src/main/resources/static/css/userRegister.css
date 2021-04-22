@@ -1,0 +1,57 @@
+@charset "UTF-8";
+#userRegisterForm input {
+  width: 90%;
+  height: 40px;
+  border: #ccc 2px solid;
+  outline: none;
+}
+#userRegisterForm #phone {
+  width: 90%;
+  height: 40px;
+  border: #ccc 2px solid;
+  outline: none;
+}
+#userRegisterForm #phone:focus {
+  border: #264e36 2px solid;
+}
+#userRegisterForm input:focus {
+  border: #264e36 2px solid;
+}
+#userRegisterForm textarea {
+  width: 90%;
+  height: 100px;
+  border: #ccc 2px solid;
+  resize: none;
+  outline: none;
+}
+#userRegisterForm textarea:focus {
+  border: #264e36 2px solid;
+}
+#userRegisterForm tbody tr {
+  height: 60px;
+}
+#userRegisterForm thead {
+  width: 100%;
+  margin-bottom: 30px;
+}
+#userRegisterForm thead tr {
+  border-bottom: solid black 2px;
+  height: 80px;
+}
+#userRegisterForm table {
+  margin: auto;
+  width: 650px;
+  border-collapse: collapse;
+  border-spacing: 0 10px;
+}
+.text {
+  width: 130px;
+  font-weight: bold;
+}
+
+#userRegisterForm tbody #regiButton {
+  background: #264e36;
+  border: 2px solid #b2cfbe;
+  color: white;
+  cursor: pointer;
+}
