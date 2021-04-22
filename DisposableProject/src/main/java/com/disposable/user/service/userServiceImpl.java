@@ -22,4 +22,14 @@ public class userServiceImpl implements userService{
 		// TODO Auto-generated method stub
 		return userDao.test(paramMap);
 	}
+	@Override
+	public int checkUserId(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.checkUserId(paramMap);
+	}
+	@Override
+	public int checkEmail(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.checkEmail(paramMap);
+	}
 }

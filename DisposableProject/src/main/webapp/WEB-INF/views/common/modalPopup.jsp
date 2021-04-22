@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
 	})
 });
 
-function poenPopup(modalName){
+function openPopup(modalName){
 	$("#modalBack").show()
 	$("#"+modalName).show()
 }

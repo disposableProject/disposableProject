@@ -2,12 +2,12 @@
 #registerForm input{
 width: 90%; height: 40px;border: gray 2px solid; outline: none;
 }
-#registerForm #phone{
+/* #registerForm #phone{
 width: 29%; height: 40px;border: gray 2px solid; outline: none;
 }
 #registerForm #phone:focus{
 border: purple 2px solid
-}
+} */
 #registerForm input:focus{
 border: purple 2px solid
 }
@@ -27,10 +27,11 @@ width:100%; margin-bottom: 30px
 border-bottom: solid black 2px;height: 80px
 }
 #registerForm table{
-margin: auto;width:650px; border-collapse: collapse; border-spacing: 0 10px;
+margin: auto;width:600px; border-collapse: collapse; border-spacing: 0 10px;text-align: center;
 }
+
 .text{
-width: 130px;font-weight: bold;
+width: 130px;font-weight: bold;text-align: left;
 }
 
 #registerForm tbody #regiButton{ 

@@ -5,6 +5,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/default.css?v=210421" /><!-- 버전 수정 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script  src="/js/common/common.js?v=210421"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>

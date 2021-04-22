@@ -9,4 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("userDao")
 public interface userDao {
 	public  List<Map<String,Object>> test (Map<String, Object> paramMap) throws SQLException;
+	public  int checkUserId (Map<String, Object> paramMap) throws SQLException;
+	public  int checkEmail (Map<String, Object> paramMap) throws SQLException;
 }
