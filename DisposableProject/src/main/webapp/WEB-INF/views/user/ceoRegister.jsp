@@ -20,7 +20,7 @@
 			<tr>
 				<td class="text">아이디</td>
 				<td><input id="userid" name="userid"></td>
-				<td><button id="purpleButton">중복체크</button></td>
+				<td><button id="purpleButton" onclick="checkId()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td class="text">이메일</td>
