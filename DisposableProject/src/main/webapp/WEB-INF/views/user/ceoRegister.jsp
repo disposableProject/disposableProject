@@ -39,8 +39,8 @@
 			</tr>
 			<tr>
 				<td class="text">주소</td>
-				<td><input id="address" name="address"></td>
-				<td><button id="purpleButton" type="button" onclick="openPopup('addressCheckModal')">주소검색</button></td>
+				<td><input id="address" name="address" readonly="readonly"></td>
+				<td><button id="purpleButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
 			</tr>
 			<tr>
 				<td class="text">가게이름</td>
@@ -175,6 +175,8 @@ function register(){
 		}
 	});
 }
+
+
 </script>
 </body>
 </html>

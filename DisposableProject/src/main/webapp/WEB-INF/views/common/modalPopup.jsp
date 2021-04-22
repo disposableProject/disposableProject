@@ -21,21 +21,7 @@ function openPopup(modalName){
 	$("#"+modalName).show()
 }
 
-function findAddress(){
-	var address = $("#findAddress").val()
-	console.log(address)
-	 $.ajax({
-		url:'https://dapi.kakao.com/v2/local/search/address.json?query='+encodeURIComponent(address),
-		type:'GET',
-		headers: {'Authorization' : 'KakaoAK d61e73554c802f3ea12e511348e9a361'},
-		success:function(data){
-			console.log(data);
-		},
-		error : function(e){
-			console.log(e);
-		}
-	});
-}
+
 </script>
 
 <div id="modalBack"></div>
@@ -48,14 +34,6 @@ function findAddress(){
 		</table>
 	</div>
 </div>
-<div id="addressCheckModal" class="modal">
-	<div id="modalInner">
-		<table>
-			<tr><td colspan="3"><h5 style="text-align: center;">가게의 주소를 입력해주세요</h5></td></tr>
-			<tr><td class="text">주소:</td><td><input id="findAddress"/></td><td><button id="purpleButton" onclick="findAddress()">주소찾기</button></td></tr>
-			<tr></tr>
-		</table>
-	</div>
-</div>
+
 </body>
 </html>

@@ -17,5 +17,11 @@ var common = {
 				
 				}
 				return obj;
-	},
+	},findAddress: function(input) {
+		new daum.Postcode({
+			oncomplete: function(data) {
+			input.val(data.address)
+			}
+		}).open();
+	}
 }

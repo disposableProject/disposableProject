@@ -68,7 +68,9 @@ public class userRestController {
 		System.out.println(paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		int emailCheck = userservice.checkEmail(paramMap);
+		
 		if(emailCheck == 0) {
+			userservice.emailauth(paramMap);
 			resultMap.put("JavaData", "YES");
 		}else {
 			resultMap.put("JavaData", "NO");

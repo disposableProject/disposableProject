@@ -5,7 +5,9 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/default.css?v=210421" /><!-- 버전 수정 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="/js/common/common.js?v=210421"></script>
+<script  src="/js/common/common.js?v=210423"></script>
+<script  src="/js/common/config.js?v=210422"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
