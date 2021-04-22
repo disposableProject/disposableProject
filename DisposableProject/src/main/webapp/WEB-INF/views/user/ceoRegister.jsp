@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210423" /><!-- 버전 수정 -->
+<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210422" /><!-- 버전 수정 -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>사장님 회원가입</title>
 </head>

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="height: 100px;width:100%;background: red">
+	<div style="height: 100px;width:100%;background: #f2f2f2">
 		<tiles:insertAttribute name="header" />
 	</div>
 	
@@ -16,7 +16,7 @@
 		<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
 	</div>
 	
-	<div style="height: 300px;width:100%;background: red">
+	<div style="height: 300px;width:100%;background: #f2f2f2">
 		<tiles:insertAttribute name="footer"/> 
 	</div>
 </body>
