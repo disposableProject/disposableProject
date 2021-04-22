@@ -12,7 +12,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,9 @@ public class userServiceImpl implements userService{
 	@Autowired
 	private userDao userDao;
 	@Autowired
-	HttpServletResponse response;
+	HttpServletRequest request;
+	
+
 	@Override
 	public List<Map<String, Object>> test(Map<String, Object> paramMap) throws SQLException {
 		// TODO Auto-generated method stub
@@ -51,18 +54,16 @@ public class userServiceImpl implements userService{
 	
 	public int emailauth(Map<String, Object> paramMap) {
 		String email = (String) paramMap.get("email");
+		HttpSession session = request.getSession();	
 		System.out.println("이메일 인증 실행");
 		int result = 0;
 		String subject = "회원가입 인증코드입니다."; 
 		String authCode = randomString(15);
 		System.out.println("authCode ==>"+authCode);
 		//Cookie cookie = new Cookie("authNum",authCode);
-		CookieGenerator cg = new CookieGenerator();
-		cg.setCookieName("authNum");
-		cg.addCookie(response, authCode);
+		session.setAttribute("authNum", authCode);
+		
 
-	//	cookie.setMaxAge(60*60*3);
-	//	response.addCookie(cookie);  
 		
 		String context = ""
 				+ "<div style='background:`lightgreen`;width:`350px`;height:`150px`;color:`white`;display:`flex`;align-items:`center`;justify-content:`center`;font-size:`20px`;font-weight:`bold`"
