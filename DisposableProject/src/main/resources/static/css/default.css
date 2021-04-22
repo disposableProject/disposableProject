@@ -12,3 +12,10 @@ background: white;border: 2px solid purple;height: 40px;width: 120px;
 #purpleButton:hover{ 
 background: purple;border: 2px solid purple;color:white;height: 40px;width: 120px;cursor: pointer;
 }
+
+#dupliButton{
+background: white;border: 2px solid #264e36;height: 40px;width: 120px;
+}
+#dupliButton{ 
+background: #264e36;border: 2px solid #264e36;color:white;height: 40px;width: 120px;cursor: pointer;
+}

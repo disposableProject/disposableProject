@@ -11,4 +11,5 @@ public interface userService {
 	List<Map<String,Object>> test (Map<String, Object> paramMap) throws SQLException;
 	int checkUserId (Map<String, Object> paramMap) throws SQLException;
 	int checkEmail (Map<String, Object> paramMap) throws SQLException;
+	int emailauth(Map<String, Object> paramMap);
 }

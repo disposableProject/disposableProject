@@ -20,6 +20,8 @@ function openPopup(modalName){
 	$("#modalBack").show()
 	$("#"+modalName).show()
 }
+
+
 </script>
 
 <div id="modalBack"></div>
@@ -32,14 +34,6 @@ function openPopup(modalName){
 		</table>
 	</div>
 </div>
-<div id="addressCheckModal" class="modal">
-	<div id="modalInner">
-		<table>
-			<tr><td colspan="3"><h5 style="text-align: center;">가게의 주소를 입력해주세요</h5></td></tr>
-			<tr><td class="text">주소:</td><td><input /></td><td><button id="purpleButton">입력완료</button></td></tr>
-			<tr></tr>
-		</table>
-	</div>
-</div>
+
 </body>
 </html>
