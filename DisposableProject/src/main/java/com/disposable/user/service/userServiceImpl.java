@@ -1,7 +1,7 @@
 package com.disposable.user.service;
 
+import java.security.MessageDigest;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.CookieGenerator;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.disposable.common.SMTPAuthenticator;
 import com.disposable.user.dao.userDao;
@@ -34,11 +34,12 @@ public class userServiceImpl implements userService{
 	@Autowired
 	HttpServletRequest request;
 	
-
+	@Transactional
 	@Override
-	public List<Map<String, Object>> test(Map<String, Object> paramMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return userDao.test(paramMap);
+	public Integer ceoRegisterPro(Map<String, Object> paramMap) throws SQLException {
+		String password = encrypt((String)paramMap.get("password"));
+		paramMap.put("password", password);
+		return userDao.ceoRegisterPro(paramMap);
 	}
 	@Override
 	public int checkUserId(Map<String, Object> paramMap) throws SQLException {
@@ -50,8 +51,13 @@ public class userServiceImpl implements userService{
 		// TODO Auto-generated method stub
 		return userDao.checkEmail(paramMap);
 	}
-	
-	
+	@Override
+	public Map<String, Object> loginPro(Map<String, Object> paramMap) throws SQLException {
+		String password = encrypt((String)paramMap.get("password"));
+		paramMap.put("password", password);
+		return userDao.loginPro(paramMap);
+	}
+	//메일 전송
 	public int emailauth(Map<String, Object> paramMap) {
 		String email = (String) paramMap.get("email");
 		HttpSession session = request.getSession();	
@@ -102,6 +108,7 @@ public class userServiceImpl implements userService{
 		
 		return result;
 	}
+	//메일 난수 생성
 	public String randomString(int num) {
 		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+ "0123456789"+ "abcdefghijklmnopqrstuvxyz";
 		 StringBuilder sb = new StringBuilder(num); 
@@ -111,4 +118,29 @@ public class userServiceImpl implements userService{
 			} 
 			return sb.toString(); 
 	}
+	//암호화
+	public static String encrypt(String planText) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(planText.getBytes());
+			byte byteData[] = md.digest();
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				String hex = Integer.toHexString(0xff & byteData[i]);
+				if (hex.length() == 1) {
+					hexString.append('0');
+				}
+				hexString.append(hex);
+			}
+			return hexString.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+	
 }

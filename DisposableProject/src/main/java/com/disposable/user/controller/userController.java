@@ -35,5 +35,13 @@ public class userController {
 		System.out.println("userRegister");
 		return "user/userRegister";
 	}
-	
+	/**
+	 * @author 손호일
+	 * @description 사장님 로그인 페이지 이동
+	 */
+	@RequestMapping(value="ceoLogin.do")
+	public String ceoLogin() {
+		System.out.println("ceoLogin");
+		return "user/ceoLogin";
+	}
 }
