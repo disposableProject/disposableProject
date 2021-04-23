@@ -1,5 +1,5 @@
 var common = {
-		serializeObject: function(formName) {
+	serializeObject: function(formName) {
 			var obj = null;
 				try {
 					if (formName[0].tagName && formName[0].tagName.toUpperCase() == "FORM") {
@@ -23,5 +23,11 @@ var common = {
 			input.val(data.address)
 			}
 		}).open();
+	},progressOn: function(msg,progressName) {
+		$("."+progressName+" h2").html(msg)
+		$("."+progressName).show()
+	},progressOff: function(progressName) {
+		$("."+progressName).hide()
+		$("."+progressName+" h2").html('')
 	}
 }

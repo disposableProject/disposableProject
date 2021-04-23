@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210422" /><!-- 버전 수정 -->
+<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210421" /><!-- 버전 수정 -->
 
 
 <form name="registerForm" id="registerForm" method = "post">
@@ -15,10 +15,10 @@
 			<tr>
 				<td class="text">아이디</td>
 				<td>
-					<input id="userid" name="userid">
-					<input type="hidden"  id="useridCheck" name="useridCheck">
+					<input id="useridCheck" name="useridCheck">
+					<input type="hidden"  id="userid" name="userid">
 				</td>
-				<td><button id="purpleButton" type="button"  onclick="checkId()">중복체크</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button"  onclick="checkId()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td class="text">이메일</td>
@@ -26,42 +26,42 @@
 					<input id="emailCheck" name="emailCheck" >
 					<input type="hidden"  id="email" name="email"/>
 				</td>
-				<td><button id="purpleButton" type="button" onclick="checkEmail()">이메일 인증</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button" onclick="checkEmail()">이메일 인증</button></td>
 			</tr>
 			<tr>
 				<td class="text">비밀번호</td>
 				<td><input id="password" name="password" type="password"></td>
-				<td></td>
+				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td class="text">비밀번호확인</td>
 				<td><input id="password2" name="password2" type="password"></td>
-				<td></td>
+				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td class="text">주소</td>
 				<td><input id="address" name="address" readonly="readonly"></td>
-				<td><button id="purpleButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
 			</tr>
 			<tr>
 				<td class="text">가게이름</td>
-				<td><input id="shopName" name="shopName"></td>
-				<td></td>
+				<td><input id="storename" name="storename"></td>
+				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td class="text">전화번호</td>
 				<td style="font-size: large;font-weight: bold;"><input id="phone" name="phone"></td>
-				<td></td>
+				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td class="text">공지사항</td>
 				<td><textarea id="notice" name="notice"></textarea>
-				<td></td>
+				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><input type="button" id="regiButton" onclick="register()" value="회원가입" /></td>
-				<td></td>
+				<td class="btnTd"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -118,12 +118,14 @@ function checkEmail(){
 		return false;
 	}
 	//로딩 프로그레스 추가하기
+	common.progressOn('메일을 전송중 입니다.','GreenProgress')
 	$.ajax({
 		type : 'POST',
 		url : '/user/checkEmail.do',
 		data : {email: emailCheck},
 		dataType : 'json',
 		success : function(data){
+			common.progressOff('GreenProgress');
 			if(data.JavaData == "YES"){
 				openPopup('emailCheckModal')
 			}else{
@@ -132,6 +134,7 @@ function checkEmail(){
 			}
 		},
 		error: function(xhr, status, error){
+			common.progressOff('GreenProgress');
 			alert(error);
 		}
 	});
@@ -154,6 +157,7 @@ function authNumcheck(){
 				}else{
 					alert("인증번호가 다릅니다.");
 				}
+				$("#authNum").val('')
 			},
 			error: function(xhr, status, error){
 				alert(error);
@@ -186,9 +190,9 @@ function register(){
 		$("#password2").focus();
 		return false;
 	}
-	if(registerData.shopName == null || registerData.shopName == ""){
+	if(registerData.storename == null || registerData.storename == ""){
 		alert("가게 이름을 입력하세요");
-		$("#shopName").focus();
+		$("#storename").focus();
 		return false;
 	}
 	if(registerData.phone == null || registerData.phone == ""){
@@ -209,10 +213,11 @@ function register(){
 		data : registerData,
 		dataType : 'json',
 		success : function(json){
-			alert(json);
+			alert("가입되었습니다.");
+			location.href = '/user/usermain.do'
 		},
 		error: function(xhr, status, error){
-			alert(error);
+			alert("가입에 실패했습니다."+error);
 		}
 	});
 }

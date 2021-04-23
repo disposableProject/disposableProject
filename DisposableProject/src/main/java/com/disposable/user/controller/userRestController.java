@@ -30,16 +30,15 @@ public class userRestController {
 	 * @return Map<String, Object>
 	 * @throws SQLException
 	 * @throws Exception
-	 * @description 
+	 * @description 사장님 회원가입
 	 */
 	@RequestMapping(value="/ceoRegisterPro.do", method=RequestMethod.POST)
 	public Map<String, Object> ceoRegisterPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
-		System.out.println("왔니");
 		System.out.println("paramMap:" + paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
-		List<Map<String, Object>> userList = userservice.test(paramMap);
-		System.out.println(userList);
-		resultMap.put("JavaData", userList);
+		Integer registerCheck = userservice.ceoRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		resultMap.put("JavaData", registerCheck);
 		return resultMap;
 	}
 	/**
@@ -105,6 +104,26 @@ public class userRestController {
 		}else {
 			resultMap.put("JavaData", "NO");
 		}
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 사장님 로그인
+	 */
+	@RequestMapping(value="/loginPro.do", method=RequestMethod.POST)
+	public Map<String, Object> loginPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> loginCheck = userservice.loginPro(paramMap);
+		HttpSession session = request.getSession();	
+		System.out.println(loginCheck);
+		System.out.println((String) loginCheck.get("USERID"));
+		session.setAttribute("userid", (String) loginCheck.get("USERID"));
+		resultMap.put("JavaData", loginCheck);
 		return resultMap;
 	}
 }
