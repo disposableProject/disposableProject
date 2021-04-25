@@ -1,18 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/css/default.css?v=210421" /><!-- 버전 수정 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="/css/default.css?v=210423" /><!-- 버전 수정 -->
+<link rel="stylesheet" type="text/css" href="/css/common.css?v=2104144" /><!-- 버전 수정 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="/js/common/common.js?v=210423"></script>
+
 <script  src="/js/common/config.js?v=210422"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <a href="/user/ceoRegister.do">사장님 회원가입</a>
+<a href="/user/ceoLogin.do">사장님 로그인</a>
 <a href="/user/userRegister.do">일반 회원가입</a>
-</body>
-</html>
+<c:out value="${userid}"></c:out>
