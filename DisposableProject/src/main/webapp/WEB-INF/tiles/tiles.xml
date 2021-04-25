@@ -3,16 +3,28 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
  
 <tiles-definitions>
- 
+ 	<definition name="shopadmin" template="/WEB-INF/views/shopAdmin.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/include/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="left" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+
+	<definition name="shop/*" extends="shopadmin">
+		<put-attribute name="body"  expression="/WEB-INF/views/shop/{1}.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/views/include/left.jsp" />
+	</definition>
 	<!--// main layout -->
 	<definition name="mainTiles" template="/WEB-INF/views/index.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/include/header.jsp" />
 		<put-attribute name="body" value="" />
+		<put-attribute name="left" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	<!-- 기본 메인-->
 	<definition name="index" extends="mainTiles">
 		 <put-attribute name="body"  expression="/WEB-INF/views/include/main.jsp" />
+		 <put-attribute name="left"  expression="/WEB-INF/views/include/none.jsp" />
 	</definition>
 	<!-- 회원
 	<definition name="user/*" extends="mainTiles">
@@ -31,9 +43,17 @@
 		
 	<definition name="*/*" extends="mainTiles">
 		<put-attribute name="body"  expression="/WEB-INF/views/{1}/{2}.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/views/include/none.jsp" />
 	</definition>
 	<definition name="*" extends="mainTiles" >
 		<put-attribute name="body"  expression="/WEB-INF/views/{1}.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/views/include/none.jsp" />
 	</definition>
 	
+
+	
+
+
+	
+
 </tiles-definitions>

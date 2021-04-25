@@ -14,7 +14,7 @@
 	<div style="min-height: 600px">
 		<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
 	</div>
-	
+	<tiles:insertAttribute name="left"/> 
 	<div>
 		<tiles:insertAttribute name="footer"/> 
 	</div>
