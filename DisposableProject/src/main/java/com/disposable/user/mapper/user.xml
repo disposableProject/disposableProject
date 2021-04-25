@@ -17,6 +17,13 @@
 		SELECT COUNT(*) FROM CEOMEMBERS WHERE EMAIL = #{email}
 	</select>
 	<select id="loginPro" resultType="java.util.Map" parameterType="java.util.Map">
-		SELECT userid FROM CEOMEMBERS WHERE USERID = #{userid} AND EMAIL = #{email} AND PASSWORD = #{password}
+		SELECT 
+		CMS.USERID,
+		CMS.STORENUM,
+		SP.STORENAME 
+		FROM CEOMEMBERS CMS
+		INNER JOIN SHOP SP
+		ON CMS.STORENUM = SP.STORENUM
+		WHERE CMS.USERID = #{userid} AND CMS.EMAIL = #{email} AND CMS.PASSWORD = #{password}
 	</select>
 </mapper>

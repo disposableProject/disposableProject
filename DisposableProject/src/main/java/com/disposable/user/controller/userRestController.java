@@ -122,7 +122,7 @@ public class userRestController {
 		HttpSession session = request.getSession();	
 		System.out.println(loginCheck);
 		System.out.println((String) loginCheck.get("USERID"));
-		session.setAttribute("userid", (String) loginCheck.get("USERID"));
+		session.setAttribute("userInfo", loginCheck);
 		resultMap.put("JavaData", loginCheck);
 		return resultMap;
 	}

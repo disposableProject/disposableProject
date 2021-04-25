@@ -9,4 +9,7 @@
 <a href="/user/ceoRegister.do">사장님 회원가입</a>
 <a href="/user/ceoLogin.do">사장님 로그인</a>
 <a href="/user/userRegister.do">일반 회원가입</a>
-<c:out value="${userid}"></c:out>
+<c:out value="${userInfo.USERID}"></c:out>
+<c:if test="${userInfo != null && userInfo != ''}">
+	<a href="/shop/shopManagementSelect.do">${userInfo.STORENAME}</a>
+</c:if>

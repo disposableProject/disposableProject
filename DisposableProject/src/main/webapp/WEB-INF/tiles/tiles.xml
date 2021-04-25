@@ -35,4 +35,5 @@
 	<definition name="*" extends="mainTiles" >
 		<put-attribute name="body"  expression="/WEB-INF/views/{1}.jsp" />
 	</definition>
+	
 </tiles-definitions>

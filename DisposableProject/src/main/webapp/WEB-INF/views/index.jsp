@@ -11,8 +11,7 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
-	
-	<div>
+	<div style="min-height: 600px">
 		<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
 	</div>
 	

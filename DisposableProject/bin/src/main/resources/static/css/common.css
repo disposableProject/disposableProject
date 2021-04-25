@@ -1,0 +1,42 @@
+@charset "UTF-8";
+.modal{
+position: fixed;
+width: 500px;
+height: 300px;
+top: 130px;
+left: 50%;
+margin-left: -250px; /* Negative half of width. */
+background: white;
+border: 2px solid black;
+display: none;
+}
+#modalInner{
+display: flex;flex-direction:column;justify-content: center;align-items: center;
+}
+#modalBack{
+position: fixed;width: 100%;height: 100%;top:0px;background-color: black;opacity: 0.6;display: none
+}
+#modalInner input{
+width: 100%px;height: 35px;border: gray 2px solid; outline: none;
+}
+
+
+#progressInner{
+position: fixed;
+justify-content:center;
+align-items:center;
+width: 500px;
+height: 500px;
+padding-left:180px;
+padding-top:250px;
+top: 0px;
+left: 50%;
+margin-left: -400px;
+display: none;
+}
+#progressBack{
+position: fixed;width: 100%;height: 100%;top:0px;background-color: #264e36;opacity: 0.6;display: none;
+}
+#progressContent{
+display: flex;flex-direction:column;justify-content: center;align-items: center;
+}
