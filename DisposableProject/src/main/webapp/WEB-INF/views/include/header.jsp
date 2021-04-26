@@ -6,10 +6,20 @@
 
 <script  src="/js/common/config.js?v=210422"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+.topNav{
+height: 120px;
+-webkit-box-shadow: 2px 6px 11px -2px rgba(0,0,0,0.05); 
+box-shadow: 2px 6px 11px -2px rgba(0,0,0,0.05);
+}
+</style>
+
+<nav class="topNav">
 <a href="/user/ceoRegister.do">사장님 회원가입</a>
 <a href="/user/ceoLogin.do">사장님 로그인</a>
 <a href="/user/userRegister.do">일반 회원가입</a>
 <c:out value="${userInfo.USERID}"></c:out>
 <c:if test="${userInfo != null && userInfo != ''}">
-	<a href="/shop/shopManagementSelect.do">${userInfo.STORENAME}</a>
+	<a href="/management/managementMain.do">${userInfo.STORENAME}</a>
 </c:if>
+</nav>
