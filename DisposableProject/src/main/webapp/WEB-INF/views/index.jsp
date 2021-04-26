@@ -11,10 +11,14 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div style="min-height: 600px">
-		<tiles:insertAttribute name="body"/>   <!--요청에의해 바뀌는 body부분-->
+	<div style="display: flex;">
+		<div style="min-height: 800px;">
+			<tiles:insertAttribute name="left"/> 
+		</div>
+		<div style="min-height: 800px;width: 100%">
+			<tiles:insertAttribute name="body"/>
+		</div>
 	</div>
-	<tiles:insertAttribute name="left"/> 
 	<div>
 		<tiles:insertAttribute name="footer"/> 
 	</div>
