@@ -10,7 +10,7 @@ width: 100%;border-collapse: collapse;margin: auto;border-top: 2px solid #747474
 height: 50px;border-bottom: 1px solid #e7e7e7;
 }
 .shopInfoContainer table .titleTd{
-background: #f8f8f8;width: 100px;color:#393939;font-size: 13px;font-weight: bold;text-align: center;
+background: #f8f8f8;width: 100px;color:#393939;font-size: 13px;font-weight: bold;text-align: center;border-right: 1px solid #e7e7e7;
 }
 </style>
 

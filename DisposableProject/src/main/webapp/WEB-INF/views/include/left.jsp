@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 .sideNav{
-background: #B6CBA3;min-height: 800px
+background: #B6CBA3;min-height: 800px;height: 100%
 }
 .sideNav ul{
 width:216px;margin: 0px;padding:0px;list-style: none;text-align: center;margin: auto;

@@ -42,4 +42,13 @@ public class managementController {
 		System.out.println("managementOrders");
 		return "management/managementOrders";
 	}
+	/**
+	 * @author 손호일
+	 * @description 음식 등록 페이지 이동
+	 */
+	@RequestMapping(value="foodInsert.do")
+	public String foodInsert() {
+		System.out.println("foodInsert");
+		return "management/foodInsert";
+	}
 }

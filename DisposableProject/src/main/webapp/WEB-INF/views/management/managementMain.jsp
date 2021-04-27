@@ -15,7 +15,11 @@ display: none
 </style>
 <div class="managementMContainer">
 	<div class="innerContainer">
+		<div>
 		<h1>shopname</h1>
+		<h4>8.8/10</h4>
+		</div>
+		
 		<span class="totalCount">
 			<h5>오늘의 주문</h5>
 			<h3>3건</h3>
