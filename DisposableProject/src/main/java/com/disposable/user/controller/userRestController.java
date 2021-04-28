@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.disposable.common.NaverLoginBO;
 import com.disposable.user.service.userService;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @RestController
 @RequestMapping("/user")
@@ -22,6 +24,10 @@ public class userRestController {
 	
 	@Autowired
 	private userService userservice;
+	
+	@Autowired
+	private NaverLoginBO naverloginbo;
+	
 	@Autowired
 	HttpServletRequest request;
 	/**
@@ -126,4 +132,85 @@ public class userRestController {
 		resultMap.put("JavaData", loginCheck);
 		return resultMap;
 	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description  유저 이메일 중복 체크
+	 */
+	@RequestMapping(value="/checkUserEmail.do", method=RequestMethod.POST)
+	public Map<String, Object> checkUserEmail(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println(paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		int emailCheck = userservice.checkUserEmail(paramMap);
+		
+		if(emailCheck == 0) {
+			userservice.emailauth(paramMap);
+			resultMap.put("JavaData", "YES");
+		}else {
+			resultMap.put("JavaData", "NO");
+		}
+		
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 유저 회원가입
+	 */
+	@RequestMapping(value="/userRegisterPro.do", method=RequestMethod.POST)
+	public Map<String, Object> userRegisterPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Integer registerCheck = userservice.userRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		resultMap.put("JavaData", registerCheck);
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description  유저 닉네임 중복 체크
+	 */
+	@RequestMapping(value="/checkNickname.do", method=RequestMethod.POST)
+	public Map<String, Object> checkNickname(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println(paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		int nicknameCheck = userservice.checkNickname(paramMap);
+		
+		if(nicknameCheck == 0) {
+			resultMap.put("JavaData", "YES");
+		}else {
+			resultMap.put("JavaData", "NO");
+		}
+		
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 유저 로그인
+	 */
+	@RequestMapping(value="/userLoginPro.do", method=RequestMethod.POST)
+	public Map<String, Object> userLoginPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> loginCheck = userservice.userLoginPro(paramMap);
+		HttpSession session = request.getSession();	
+		session.setAttribute("userInfo", loginCheck);
+		resultMap.put("JavaData", loginCheck);
+		return resultMap;
+	}
+
 }

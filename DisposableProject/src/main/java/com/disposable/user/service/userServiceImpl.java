@@ -77,8 +77,8 @@ public class userServiceImpl implements userService{
 				+ "인증코드: "+authCode
 				+ "</div>";
 		
-		Properties p = new Properties(); // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙체
-		p.put("mail.smtp.host","gmail-smtp.l.google.com"); // 占쏙옙占싱뱄옙 SMTP
+		Properties p = new Properties(); 
+		p.put("mail.smtp.host","gmail-smtp.l.google.com");
 		
 		p.put("mail.smtp.port", "465");
 		p.put("mail.smtp.starttls.enable", "true");
@@ -143,4 +143,49 @@ public class userServiceImpl implements userService{
 		}
 	}
 	
+	@Override
+	public int checkUserEmail(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.checkUserEmail(paramMap);
+	}
+	@Transactional
+	@Override
+	public Integer userRegisterPro(Map<String, Object> paramMap) throws SQLException {
+		String password = encrypt((String)paramMap.get("password"));
+		paramMap.put("password", password);
+		return userDao.userRegisterPro(paramMap);
+	}
+	@Override
+	public int checkNickname(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.checkNickname(paramMap);
+	}
+	@Override
+	public Map<String, Object> userLoginPro(Map<String, Object> paramMap) throws SQLException {
+		String password = encrypt((String)paramMap.get("password"));
+		paramMap.put("password", password);
+		return userDao.userLoginPro(paramMap);
+	}
+	@Override
+	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.naverConnectionCheck(apiJson);
+	}
+	@Override
+	public Integer setNaverConnection(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.setNaverConnection(paramMap);
+	}
+	
+	@Override
+	public Integer userNaverRegisterPro(Map<String, Object> paramMap) throws SQLException {
+		String password = encrypt((String)paramMap.get("password"));
+		paramMap.put("password", password);
+		return userDao.userNaverRegisterPro(paramMap);
+	}
+	@Override
+	public Map<String, Object> userNaverLoginPro(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.userNaverLoginPro(paramMap);
+	}
 }
