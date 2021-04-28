@@ -26,4 +26,34 @@
 		ON CMS.STORENUM = SP.STORENUM
 		WHERE CMS.USERID = #{userid} AND CMS.EMAIL = #{email} AND CMS.PASSWORD = #{password}
 	</select>
+	<select id="checkUserEmail" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM MEMBERS WHERE EMAIL = #{email}
+	</select>
+	<insert id="userRegisterPro" parameterType="java.util.Map">
+		INSERT 
+		INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE) VALUES (#{email},#{nickname},#{password},#{phone})
+	</insert>
+	<select id="checkNickname" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM MEMBERS WHERE NICKNAME = #{nickname}
+	</select>
+	<select id="userLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND PASSWORD = #{password}
+	</select>
+	<select id="naverConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,NAVERLOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setNaverConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET NAVERLOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+	<insert id="userNaverRegisterPro" parameterType="java.util.Map">
+		INSERT 
+		INTO MEMBERS VALUES (#{email},#{nickname},#{password},#{mobile},'',#{id})
+	</insert>
+	<select id="userNaverLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND NAVERLOGIN = #{id}
+	</select>
 </mapper>
