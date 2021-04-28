@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="/css/userRegister.css?version=21042510" />
 <form name="userRegisterForm" id="userRegisterForm" method="POST">
 	<input type="hidden"  id="email" name="email" value="${email}"/>
 	<input type="hidden"  id="password" name="password"  value="${password}">
 	<input type="hidden"  id="id" name="id"  value="${password}">
+	<input type="hidden"  id="flag" name="flag"  value="${flag}">
+	<c:if test="${phone != null && phone != ''}">
+	<input type="hidden"  id="phone" name="phone"  value="${phone}">
+	</c:if>
 	
 	<table>
 		<thead>
@@ -21,6 +26,7 @@
 				</td>
 				<td><button id="dupliButton" type="button" onclick="checkNickname()">중복체크</button></td>
 			</tr>
+		<c:if test="${phone == null || phone == ''}">
 			<tr>
 				<td class="text">전화번호</td>
 				<td>
@@ -28,6 +34,7 @@
 				</td>
 				<td></td>
 			</tr>
+		</c:if>
 			<tr>
 				<td></td>
 				<td><input type="button" id="regiButton" onclick="register()" value="회원가입" /></td>
@@ -90,9 +97,11 @@ function register(){
 		alert("올바른 번호 형식을 입력하세요");
 		return false;
 	}
+	
+	
 	$.ajax({
 		type : 'POST',
-		url : '/user/userKakaoRegisterPro.do',
+		url : '/user/userSnsRegisterPro.do',
 		data : registerData,
 		dataType : 'json',
 		success : function(data){

@@ -113,7 +113,8 @@ public class userController {
 			model.addAttribute("email",apiJson.get("email"));
 			model.addAttribute("password",apiJson.get("id"));
 			model.addAttribute("phone",apiJson.get("mobile"));
-			return "user/setNickname";
+			model.addAttribute("flag","naver");
+			return "user/setSnsInfo";
 		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
 			userservice.setNaverConnection(apiJson);
 			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
@@ -137,14 +138,18 @@ public class userController {
 	}
 	/**
 	 * @author 손호일
-	 * @description 카카오 회원가입 추가 정보 입력
+	 * @description SNS 회원가입 추가 정보 입력
 	 */
-	@RequestMapping(value="setKakaoInfo.do")
+	@RequestMapping(value="setSnsInfo.do")
 	public String setKakaoInfo(Model model,HttpSession session,@RequestParam Map<String,Object> paramMap) {
 		System.out.println("setKakaoInfo");	
 		System.out.println("param ==>"+paramMap);
-		model.addAttribute("email",paramMap.get("kakaoEmail"));
-		model.addAttribute("password",paramMap.get("kakaoId"));
-		return "user/setKakaoInfo";
+		
+		model.addAttribute("email",paramMap.get("email"));
+		model.addAttribute("password",paramMap.get("id"));
+		model.addAttribute("flag",paramMap.get("flag"));
+		return "user/setSnsInfo";
 	}
+	
+
 }

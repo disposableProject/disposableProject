@@ -1,18 +1,4 @@
-$( document ).ready(function() {
-	$.ajax({
-		type : 'POST',
-		url : '/api/getKakaoApi.do',
-		data : {},
-		dataType : 'text',
-		success : function(data){
-			Kakao.init(data);
-		},
-		error: function(xhr, status, error){
-			alert("API 등록에 실패했습니다."+error);
-		}
-	});
 
-});
 
 
 //카카오로그인
@@ -62,18 +48,4 @@ function kakaoLoginPro(response){
 	});
 	
 }
-//카카오로그아웃  
-function kakaoLogout() {
-	if (Kakao.Auth.getAccessToken()) {
-		Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-				console.log(response)
-		},
-		fail: function (error) {
-			console.log(error)
-		},
-		})
-	Kakao.Auth.setAccessToken(undefined)
-	}
-}
+

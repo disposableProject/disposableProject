@@ -208,4 +208,24 @@ public class userServiceImpl implements userService{
 		// TODO Auto-generated method stub
 		return userDao.userKakaoRegisterPro(paramMap);
 	}
+	@Override
+	public Map<String, Object> googleConnectionCheck(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.googleConnectionCheck(paramMap);
+	}
+	@Override
+	public Integer setGoogleConnection(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.setGoogleConnection(paramMap);
+	}
+	@Override
+	public Map<String, Object> userGoogleLoginPro(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.userGoogleLoginPro(paramMap);
+	}
+	@Override
+	public Integer userGoogleRegisterPro(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.userGoogleRegisterPro(paramMap);
+	}
 }

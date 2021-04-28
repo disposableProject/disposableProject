@@ -36,13 +36,25 @@
 				<td><a href="javascript:kakaoLogin()">kakao Login</a></td>
 				<td class="btnTd"></td>
 			</tr>
+				<tr>
+				<td></td>
+				<td><a class="g-signin2"  onClick="onSignIn()">Google Login</a></td>
+				<td class="btnTd"></td>
+			</tr>
 		</tbody>
 	</table>
 </form>
 
-<form name="kakaoForm" id="kakaoForm" method = "post" action="/user/setKakaoInfo.do">
-<input type="hidden" name="kakaoEmail" id="kakaoEmail" />
-<input type="hidden" name="kakaoId" id="kakaoId" />
+<form name="kakaoForm" id="kakaoForm" method = "post" action="/user/setSnsInfo.do">
+<input type="hidden" name="email" id="kakaoEmail" />
+<input type="hidden" name="id" id="kakaoId" />
+<input type="hidden" name="flag" id="flag" value="kakao" />
+</form>
+
+<form name="googleForm" id="googleForm" method = "post" action="/user/setSnsInfo.do">
+<input type="hidden" name="email" id="googleEmail" />
+<input type="hidden" name="id" id="googleId" />
+<input type="hidden" name="flag" id="flag" value="google" />
 </form>
 <script>
 function Login(){
@@ -78,8 +90,31 @@ function Login(){
 	});
 }
 
-
-
+function googleLoginPro(profile){
+	console.log(profile.getEmail())
+	$.ajax({
+		type : 'POST',
+		url : '/user/googleLoginPro.do',
+		data : {email: profile.getEmail(), id:profile.getId()},
+		dataType : 'json',
+		success : function(data){
+			if(data.JavaData == "YES"){
+				location.href = '/user/usermain.do'
+			}else if(data.JavaData == "register"){
+				console.log(profile.getEmail())
+				$("#googleEmail").val(profile.getEmail());
+				$("#googleId").val(profile.getId());
+				$("#googleForm").submit();
+			}else{
+				alert("로그인에 실패했습니다");
+			}
+			
+		},
+		error: function(xhr, status, error){
+			alert("로그인에 실패했습니다."+error);
+		}
+	});
+}
 
 
 </script>

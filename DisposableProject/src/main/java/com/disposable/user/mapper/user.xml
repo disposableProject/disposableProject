@@ -63,11 +63,26 @@
 		UPDATE MEMBERS SET KAKAOLOGIN = #{id}
 		WHERE EMAIL = #{email}
 	</update>
-		<select id="userKakaoLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+	<select id="userKakaoLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT EMAIL,NICKNAME FROM MEMBERS 
 		WHERE EMAIL = #{email} AND KAKAOLOGIN = #{id}
 	</select>
 	<insert id="userKakaoRegisterPro" parameterType="java.util.Map">
 		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,KAKAOLOGIN) VALUES  (#{email},#{nickname},#{password},#{phone},#{id})
+	</insert>
+	<select id="googleConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,GOOGLELOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setGoogleConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET GOOGLELOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+	<select id="userGoogleLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND GOOGLELOGIN = #{id}
+	</select>
+	<insert id="userGoogleRegisterPro" parameterType="java.util.Map">
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,GOOGLELOGIN) VALUES  (#{email},#{nickname},#{password},#{phone},#{id})
 	</insert>
 </mapper>

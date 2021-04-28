@@ -25,4 +25,8 @@ public interface userService {
 	Integer setKakaoConnection (Map<String, Object> paramMap) throws SQLException;
 	Map<String, Object> userKakaoLoginPro (Map<String, Object> paramMap) throws SQLException;
 	Integer userKakaoRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	Map<String, Object> googleConnectionCheck (Map<String, Object> paramMap) throws SQLException;
+	Integer setGoogleConnection (Map<String, Object> paramMap) throws SQLException;
+	Map<String, Object> userGoogleLoginPro (Map<String, Object> paramMap) throws SQLException;
+	Integer userGoogleRegisterPro (Map<String, Object> paramMap) throws SQLException;
 }
