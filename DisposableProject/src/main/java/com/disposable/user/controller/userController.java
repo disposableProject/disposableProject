@@ -92,10 +92,11 @@ public class userController {
 		oauthToken = naverloginbo.getAccessToken(session, code, state);
 		//로그인 사용자 정보를 읽어온다.
 		String apiResult = naverloginbo.getUserProfile(oauthToken);
+		System.out.println("apiResult =>"+apiResult);
 		ObjectMapper objectMapper =new ObjectMapper();
 		Map<String, Object> apiJson = (Map<String, Object>) objectMapper.readValue(apiResult, Map.class).get("response");
 		
-		apiJson.put("password",apiJson.get("id"));
+		//apiJson.put("password",apiJson.get("id"));
 		Map<String, Object> naverConnectionCheck = userservice.naverConnectionCheck(apiJson);
 		
 		if(naverConnectionCheck == null) { //일치하는 이메일 없으면 가입
@@ -122,7 +123,7 @@ public class userController {
 			session.setAttribute("userInfo", loginCheck);
 		}
 
-		return "user/user";
+		return "redirect:usermain.do";
 	}
 	/**
 	 * @author 손호일

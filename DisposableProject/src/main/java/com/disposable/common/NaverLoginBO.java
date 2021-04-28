@@ -22,7 +22,6 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
 @Component
-@PropertySource("api.properties")
 public class NaverLoginBO {
 	
 	/* 인증 요청문을 구성하는 파라미터 */
@@ -105,14 +104,13 @@ public class NaverLoginBO {
 				.apiKey(CLIENT_ID)
 				.apiSecret(CLIENT_SECRET)
 				.callback(REDIRECT_URI).build(NaverLoginApi.instance());
- 
+
 		OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
-        oauthService.signRequest(oauthToken, request);
-        Response response = request.send();
-        
-        return response.getBody();
-    }
-    public void naverProfile() { 
+		oauthService.signRequest(oauthToken, request);
+		Response response = request.send();
+		return response.getBody();
+	}
+/*    public void naverProfile() { 
         String token = "YOUR_ACCESS_TOKEN";// 네이버 로그인 접근 토큰; 
         String header = "Bearer " + token; // Bearer 다음에 공백 추가 
         try { 
@@ -139,6 +137,6 @@ public class NaverLoginBO {
         		System.out.println(e); 
         		} 
         }
-      
+      */
 
 }
