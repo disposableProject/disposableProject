@@ -20,4 +20,8 @@ public interface userDao {
 	public Integer setNaverConnection (Map<String, Object> paramMap) throws SQLException;
 	public Integer userNaverRegisterPro (Map<String, Object> paramMap) throws SQLException;
 	public Map<String, Object> userNaverLoginPro (Map<String, Object> apiJson) throws SQLException;
+	public Map<String, Object> kakaoConnectionCheck (Map<String, Object> apiJson) throws SQLException;
+	public Integer setKakaoConnection (Map<String, Object> apiJson) throws SQLException;
+	public Map<String, Object> userKakaoLoginPro (Map<String, Object> apiJson) throws SQLException;
+	public Integer userKakaoRegisterPro (Map<String, Object> paramMap) throws SQLException;
 }

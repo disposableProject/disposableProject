@@ -49,11 +49,25 @@
 		WHERE EMAIL = #{email}
 	</update>
 	<insert id="userNaverRegisterPro" parameterType="java.util.Map">
-		INSERT 
-		INTO MEMBERS VALUES (#{email},#{nickname},#{password},#{phone},'',#{id})
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,NAVERLOGIN) VALUES (#{email},#{nickname},#{password},#{phone},#{id})
 	</insert>
 	<select id="userNaverLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT EMAIL,NICKNAME FROM MEMBERS 
 		WHERE EMAIL = #{email} AND NAVERLOGIN = #{id}
 	</select>
+	<select id="kakaoConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,NAVERLOGIN,KAKAOLOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setKakaoConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET KAKAOLOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+		<select id="userKakaoLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND KAKAOLOGIN = #{id}
+	</select>
+	<insert id="userKakaoRegisterPro" parameterType="java.util.Map">
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,KAKAOLOGIN) VALUES  (#{email},#{nickname},#{password},#{phone},#{id})
+	</insert>
 </mapper>

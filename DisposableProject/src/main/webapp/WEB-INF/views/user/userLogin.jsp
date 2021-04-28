@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210423" /><!-- 버전 수정 -->
 
+<script src="/js/user/user.js?v=210421"></script>
 <form name="registerForm" id="registerForm" method = "post">
 	<table >
 		<thead>
@@ -30,10 +31,19 @@
 				<td><a href="${naverUrl}">naver Login</a></td>
 				<td class="btnTd"></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td><a href="javascript:kakaoLogin()">kakao Login</a></td>
+				<td class="btnTd"></td>
+			</tr>
 		</tbody>
 	</table>
 </form>
 
+<form name="kakaoForm" id="kakaoForm" method = "post" action="/user/setKakaoInfo.do">
+<input type="hidden" name="kakaoEmail" id="kakaoEmail" />
+<input type="hidden" name="kakaoId" id="kakaoId" />
+</form>
 <script>
 function Login(){
 	var registerData =common.serializeObject($("form[name=registerForm]"));
@@ -67,5 +77,9 @@ function Login(){
 		}
 	});
 }
+
+
+
+
 
 </script>

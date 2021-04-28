@@ -135,4 +135,16 @@ public class userController {
 		session.invalidate();
 		return "user/user";
 	}
+	/**
+	 * @author 손호일
+	 * @description 카카오 회원가입 추가 정보 입력
+	 */
+	@RequestMapping(value="setKakaoInfo.do")
+	public String setKakaoInfo(Model model,HttpSession session,@RequestParam Map<String,Object> paramMap) {
+		System.out.println("setKakaoInfo");	
+		System.out.println("param ==>"+paramMap);
+		model.addAttribute("email",paramMap.get("kakaoEmail"));
+		model.addAttribute("password",paramMap.get("kakaoId"));
+		return "user/setKakaoInfo";
+	}
 }

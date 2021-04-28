@@ -236,5 +236,58 @@ public class userRestController {
 		}
 		return resultMap;
 	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 유저 카카오 로그인
+	 */
+	@RequestMapping(value="/kakaoLoginPro.do", method=RequestMethod.POST)
+	public Map<String, Object> kakaoLoginPro(@RequestParam Map<String,Object> paramMap,HttpSession session) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		
+		Map<String, Object> kakaoConnectionCheck = userservice.kakaoConnectionCheck(paramMap);
+		if(kakaoConnectionCheck == null) { //일치하는 이메일 없으면 가입
+			resultMap.put("JavaData", "register");
+		}else if(kakaoConnectionCheck.get("KAKAOLOGIN") == null && kakaoConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 카카오 연동 안되어 있을시
+			userservice.setKakaoConnection(paramMap);
+			Map<String, Object> loginCheck = userservice.userKakaoLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			resultMap.put("JavaData", "YES");
+		}else{
+			Map<String, Object> loginCheck = userservice.userKakaoLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			resultMap.put("JavaData", "YES");
+		}
+		
+		return resultMap;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 유저 카카오 회원가입
+	 */
+	@RequestMapping(value="/userKakaoRegisterPro.do", method=RequestMethod.POST)
+	public Map<String, Object> userKakaoRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Integer registerCheck = userservice.userKakaoRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		
+		if(registerCheck != null && registerCheck > 0) {
+			Map<String, Object> loginCheck = userservice.userKakaoLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			resultMap.put("JavaData", "YES");
+		}else {
+			resultMap.put("JavaData", "NO");
+		}
+		return resultMap;
+	}
 
 }
