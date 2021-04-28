@@ -212,5 +212,29 @@ public class userRestController {
 		resultMap.put("JavaData", loginCheck);
 		return resultMap;
 	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 유저 네이버 회원가입
+	 */
+	@RequestMapping(value="/userNaverRegisterPro.do", method=RequestMethod.POST)
+	public Map<String, Object> userNaverRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Integer registerCheck = userservice.userNaverRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		
+		if(registerCheck != null && registerCheck > 0) {
+			Map<String, Object> loginCheck = userservice.userNaverLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			resultMap.put("JavaData", "YES");
+		}else {
+			resultMap.put("JavaData", "NO");
+		}
+		return resultMap;
+	}
 
 }
