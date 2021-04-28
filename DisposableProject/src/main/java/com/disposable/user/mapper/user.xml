@@ -50,7 +50,7 @@
 	</update>
 	<insert id="userNaverRegisterPro" parameterType="java.util.Map">
 		INSERT 
-		INTO MEMBERS VALUES (#{email},#{nickname},#{password},#{mobile},'',#{id})
+		INTO MEMBERS VALUES (#{email},#{nickname},#{password},#{phone},'',#{id})
 	</insert>
 	<select id="userNaverLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT EMAIL,NICKNAME FROM MEMBERS 

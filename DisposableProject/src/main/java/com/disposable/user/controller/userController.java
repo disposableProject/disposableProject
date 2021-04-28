@@ -99,14 +99,20 @@ public class userController {
 		Map<String, Object> naverConnectionCheck = userservice.naverConnectionCheck(apiJson);
 		
 		if(naverConnectionCheck == null) { //일치하는 이메일 없으면 가입
-			Integer registerCheck = userservice.userNaverRegisterPro(apiJson);
-			if(registerCheck == null || registerCheck < 1) {
+			//Integer registerCheck = userservice.userNaverRegisterPro(apiJson);
+			
+			
+			/*if(registerCheck == null || registerCheck < 1) {
 				model.addAttribute("error","loginFail");
 				return "user/userLogin";
 			}else {
 				Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
 				session.setAttribute("userInfo", loginCheck);
-			}
+			}*/
+			model.addAttribute("email",apiJson.get("email"));
+			model.addAttribute("password",apiJson.get("id"));
+			model.addAttribute("phone",apiJson.get("mobile"));
+			return "user/setNickname";
 		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
 			userservice.setNaverConnection(apiJson);
 			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
@@ -116,6 +122,16 @@ public class userController {
 			session.setAttribute("userInfo", loginCheck);
 		}
 
+		return "user/user";
+	}
+	/**
+	 * @author 손호일
+	 * @description 로그아웃
+	 */
+	@RequestMapping(value="logOut.do")
+	public String logOut(Model model,HttpSession session) {
+		System.out.println("logOut");	
+		session.invalidate();
 		return "user/user";
 	}
 }
