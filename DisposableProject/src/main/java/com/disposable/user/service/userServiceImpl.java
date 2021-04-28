@@ -188,4 +188,24 @@ public class userServiceImpl implements userService{
 		// TODO Auto-generated method stub
 		return userDao.userNaverLoginPro(paramMap);
 	}
+	@Override
+	public Map<String, Object> kakaoConnectionCheck(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.kakaoConnectionCheck(paramMap);
+	}
+	@Override
+	public Integer setKakaoConnection(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.setKakaoConnection(paramMap);
+	}
+	@Override
+	public Map<String, Object> userKakaoLoginPro(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.userKakaoLoginPro(paramMap);
+	}
+	@Override
+	public Integer userKakaoRegisterPro(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.userKakaoRegisterPro(paramMap);
+	}
 }
