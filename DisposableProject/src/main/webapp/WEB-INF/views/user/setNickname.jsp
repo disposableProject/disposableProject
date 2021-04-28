@@ -4,7 +4,7 @@
 	<input type="hidden"  id="email" name="email" value="${email}"/>
 	<input type="hidden"  id="password" name="password"  value="${password}">
 	<input type="hidden"  id="id" name="id"  value="${password}">
-	<input type="hidden"  id="phone" name="phone"  value="${mobile}">
+	<input type="hidden"  id="phone" name="phone"  value="${phone}">
 	<table>
 		<thead>
 			<tr>

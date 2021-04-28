@@ -14,6 +14,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 
 @SpringBootApplication
+@PropertySource("api.properties")
 public class DisposableProject1Application {
 	
 	public static void main(String[] args) {
