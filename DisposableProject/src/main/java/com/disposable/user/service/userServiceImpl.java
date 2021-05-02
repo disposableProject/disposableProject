@@ -2,6 +2,7 @@ package com.disposable.user.service;
 
 import java.security.MessageDigest;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -227,5 +228,10 @@ public class userServiceImpl implements userService{
 	public Integer userGoogleRegisterPro(Map<String, Object> paramMap) throws SQLException {
 		// TODO Auto-generated method stub
 		return userDao.userGoogleRegisterPro(paramMap);
+	}
+	@Override
+	public List<Map<String, Object>> test(Map<String, Object> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return userDao.test(paramMap);
 	}
 }

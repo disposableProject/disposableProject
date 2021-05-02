@@ -29,4 +29,5 @@ public interface userService {
 	Integer setGoogleConnection (Map<String, Object> paramMap) throws SQLException;
 	Map<String, Object> userGoogleLoginPro (Map<String, Object> paramMap) throws SQLException;
 	Integer userGoogleRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	List<Map<String, Object>> test (Map<String, Object> paramMap) throws SQLException;
 }

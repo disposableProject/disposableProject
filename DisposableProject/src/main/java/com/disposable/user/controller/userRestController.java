@@ -2,6 +2,7 @@ package com.disposable.user.controller;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,27 @@ public class userRestController {
 	
 	@Autowired
 	HttpServletRequest request;
+	
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 테스트
+	 */
+	@RequestMapping(value="/test.do", method=RequestMethod.POST)
+	public Map<String, Object> test(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		List<Map<String, Object>> registerCheck = userservice.test(paramMap);
+		//Map <String, Object> 
+		System.out.println(registerCheck);
+		resultMap.put("JavaData", registerCheck);
+		return resultMap;
+	}
+	
+	
 	/**
 	 * @author 손호일
 	 * @param paramMap
@@ -72,7 +95,7 @@ public class userRestController {
 	 * @description  사장님 이메일 중복 체크
 	 */
 	@RequestMapping(value="/checkEmail.do", method=RequestMethod.POST)
-	public Map<String, Object> checkEmail(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+	public Map<String, Object> checkEmail(@RequestBody Map<String,Object> paramMap) throws SQLException, Exception {
 		System.out.println(paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		int emailCheck = userservice.checkEmail(paramMap);

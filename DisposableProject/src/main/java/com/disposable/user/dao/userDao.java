@@ -28,4 +28,5 @@ public interface userDao {
 	public Integer setGoogleConnection (Map<String, Object> paramMap) throws SQLException;
 	public Map<String, Object> userGoogleLoginPro (Map<String, Object> paramMap) throws SQLException;
 	public Integer userGoogleRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	public List<Map<String, Object>> test (Map<String, Object> paramMap) throws SQLException;
 }
