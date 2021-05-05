@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 	@Value("${KAKAO.JS}")
 	String kakaoApi;
+	
+	@Value("${GOOGLE.CLIENT}")
+	String googleKey;
 	/**
 	 * @author 손호일
 	 * @param paramMap
@@ -29,5 +32,18 @@ public class ApiController {
 	public String getKakaoApi() throws SQLException, Exception {
 		System.out.println("getKakaoApi");
 		return kakaoApi;
+	}
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 구글 api 키 전달
+	 */
+	@RequestMapping(value="/getGoogleApi.do", method=RequestMethod.POST)
+	public String getGoogleApi() throws SQLException, Exception {
+		System.out.println("getGoogleApi");
+		return googleKey;
 	}
 }

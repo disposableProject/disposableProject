@@ -11,10 +11,20 @@ $( document ).ready(function() {
 			alert("API 등록에 실패했습니다."+error);
 		}
 	});
-
-});
-function Logout() {
 	
+});
+function googleInit(data) {
+	gapi.load('auth2', function() { 
+	var gauth = gapi.auth2.init({
+		client_id: data
+	});
+                    
+	gauth.then(function(){
+		console.log('init success');
+	 }, function(){
+		 console.error('init fail');
+	 })
+	 });
 }
 
 function onSignIn(){
