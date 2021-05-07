@@ -26,6 +26,7 @@ box-shadow: 2px 6px 11px -2px rgba(0,0,0,0.05);
 <c:out value="${userInfo.NICKNAME}"></c:out>
 <c:if test="${userInfo != null && userInfo != ''}">
 	<a href="/management/managementMain.do">${userInfo.STORENAME}</a>
+	<a href="#">${userInfo.STORENUM}</a>
 	<a href="javascript:signOut();">로그아웃</a>
 </c:if>
 </nav>

@@ -1,5 +1,12 @@
 package com.disposable.management.service;
 
-public interface managementService {
+import java.sql.SQLException;
+import java.util.Map;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.stereotype.Service;
+
+public interface managementService {
+	public Integer foodMainInsert(Map<String, Object> paramMap) throws SQLException;
+	
 }
