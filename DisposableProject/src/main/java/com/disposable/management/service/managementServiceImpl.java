@@ -1,6 +1,7 @@
 package com.disposable.management.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -20,5 +21,11 @@ public class managementServiceImpl implements managementService{
 	@Override
 	public Integer foodMainInsert(Map<String, Object> paramMap) throws SQLException {
 		return managementDao.foodMainInsert(paramMap);
+	}
+	
+	@Override
+	public Integer foodOptionInsert(List<String> paramMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return managementDao.foodOptionInsert(paramMap);
 	}
 }

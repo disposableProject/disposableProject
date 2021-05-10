@@ -97,7 +97,6 @@ height: 27px !important;
 				<td style="width: 280px">옵션 그룹 명: <input type="text" id="optionName" /></td>
 				<td><button type="button" onclick="addOption()">옵션 추가하기</button></td>
 			</tr>
-		
 		</tbody>
 	</table>
 	</form>
@@ -172,15 +171,18 @@ function addFood(){
 				multiple: multiple
 		}
 		foodOptions.push(foodOptionInfo)
+		//$("#foodOptions").val(foodOptions)
 	})
 	
 	var foodData =common.serializeObject($("form[name=foodForm]"));
-	foodData.foodOptions = foodOptions
-	console.log(foodData)
+	
 	$.ajax({
 		type : 'POST',
 		url : '/management/foodInsertPro.do',
-		data : foodData,
+		data : {
+			foodData:foodData,
+			foodOptionInfo:foodOptions
+		},
 		dataType : 'json',
 		success : function(json){
 			alert("등록되었습니다.");
