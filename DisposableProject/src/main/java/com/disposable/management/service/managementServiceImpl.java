@@ -24,8 +24,11 @@ public class managementServiceImpl implements managementService{
 	}
 	
 	@Override
-	public Integer foodOptionInsert(List<String> paramMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return managementDao.foodOptionInsert(paramMap);
+	public Integer foodOptionInsert(List<Object> paramMap) throws SQLException {
+		Integer check = null;
+			for(int i=0;i<paramMap.size();i++) {
+				check = 	managementDao.foodOptionInsert((Map<String, Object>)paramMap.get(i));
+			}
+		return check;
 	}
 }

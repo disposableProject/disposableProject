@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
 
 public interface managementService {
 	public Integer foodMainInsert(Map<String, Object> paramMap) throws SQLException;
-	public Integer foodOptionInsert(List<String> paramMap) throws SQLException;
+	public Integer foodOptionInsert(List<Object> paramMap) throws SQLException;
 }

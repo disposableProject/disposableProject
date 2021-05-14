@@ -175,15 +175,27 @@ function addFood(){
 	})
 	
 	var foodData =common.serializeObject($("form[name=foodForm]"));
+	foodData.foodOptionInfo  = foodOptions
+	foodData = JSON.stringify(foodData);
+	console.log(foodData)
+	var foodImg = $('input[name="foodImg"]').get(0).files[0];
+	var formData = new FormData();
+	formData.append('foodImg', foodImg);
+	formData.append("foodData",foodData)
+	
+	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+
+
 	
 	$.ajax({
 		type : 'POST',
 		url : '/management/foodInsertPro.do',
-		data : {
-			foodData:foodData,
-			foodOptionInfo:foodOptions
-		},
-		dataType : 'json',
+		//contentType: 'application/json',
+		processData:false,
+		contentType: false,
+        data: formData,
+		//data : JSON.stringify(foodData),
+		//dataType : 'json',
 		success : function(json){
 			alert("등록되었습니다.");
 			location.href = '/management/managementMain.do'

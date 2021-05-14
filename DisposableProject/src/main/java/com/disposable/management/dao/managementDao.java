@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("managementDao")
 public interface managementDao {
 	public Integer foodMainInsert(Map<String, Object> paramMap) throws SQLException;
-	public Integer foodOptionInsert(List<String> paramMap) throws SQLException;
+	public Integer foodOptionInsert(Map<String, Object> paramMap) throws SQLException;
 }

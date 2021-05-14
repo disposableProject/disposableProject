@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210423" /><!-- 버전 수정 -->
 
-<script src="/js/user/user.js?v=210421"></script>
+<script src="/js/user/user.js?v=210425"></script>
 <form name="registerForm" id="registerForm" method = "post">
 	<table >
 		<thead>

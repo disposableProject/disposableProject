@@ -7,10 +7,8 @@
 			VALUES (FOOD_SEQ.NEXTVAL,#{storeNum},#{foodName},#{foodPrice},0,'','')
 	</insert>
 	
-	<insert id="foodOptionInsert" parameterType="java.util.List">
-		<foreach collection="list" item="item" separator=" , ">
-			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,PRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNEMA)
-			VALUES (FOOD_SEQ.CURRVAL,#{item.storeNum},#{item.optionNum},#{item.optionGroupNum},#{item.optionPrice},#{item.multiple},#{item.optionGroupName},#{item.optionName})
-		 </foreach>
+	<insert id="foodOptionInsert" parameterType="java.util.Map">
+			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,PRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNAME)
+			VALUES (FOOD_SEQ.CURRVAL,#{storeNum},#{optionNum},#{optionGroupNum},#{optionPrice},#{multiple},#{optionGroupName},#{optionName})
 	</insert>
 </mapper>
