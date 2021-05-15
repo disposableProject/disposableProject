@@ -1,6 +1,7 @@
 package com.disposable.management.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.disposable.management.service.managementService;
+import com.disposable.utils.FileManagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
@@ -24,6 +26,8 @@ public class managementRestController {
 	@Autowired
 	private managementService managementservice;
 	
+	@Autowired
+	private FileManagement filemanagement;
 	/**
 	 * @author 손호일
 	 * @param paramMap
@@ -34,9 +38,12 @@ public class managementRestController {
 	 */
 	@RequestMapping(value="/foodInsertPro.do", method=RequestMethod.POST)
 	public Map<String, Object> foodInsertPro(HttpServletRequest request,
-			@RequestParam(value="foodImg", required=false) MultipartFile file
+			@RequestParam(value="foodImg", required=false) MultipartFile[] files
 			,@RequestParam(value="foodData", required=false) String param) throws SQLException, Exception {
-		System.out.println("file ==>"+file);
+		System.out.println("files ==>"+files[0]);
+		ArrayList fileNames = filemanagement.FileUploader(files);
+		
+		System.out.println("fileNames =>"+fileNames);
 		System.out.println("param:" + param);
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> paramMap = mapper.readValue(param, Map.class);
