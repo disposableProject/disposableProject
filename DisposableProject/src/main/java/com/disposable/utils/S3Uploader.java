@@ -45,7 +45,7 @@ public class S3Uploader {
 	private AmazonS3 conn;
 
 	public S3Uploader() {
-		AWSCredentials credentials = new BasicAWSCredentials("AKIA2V6JOB3K6JWJKBO5", "/AX9KAU3HrF/k+oj8NP5nndODDloNLV5bWKRl8KP");
+		AWSCredentials credentials = new BasicAWSCredentials("accessKey", "secretKey");
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTP);
 		this.conn = new AmazonS3Client(credentials, clientConfig);
