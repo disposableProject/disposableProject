@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,8 +24,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Service
+@Component
 public class S3Uploader {
 
 	
@@ -34,18 +34,20 @@ public class S3Uploader {
 	
 	@Value("${aws.secretKey}")
 	public void setSecret(String value) {
-		accessKey = value;
+		secretKey = value;
 	}
 	@Value("${aws.accessKey}")
 	public void setClient(String value) {
-		secretKey = value;
+		accessKey = value;
 	}
     
     
 	private AmazonS3 conn;
 
-	public S3Uploader() {
-		AWSCredentials credentials = new BasicAWSCredentials("accessKey", "secretKey");
+	public void S3Uploader() {
+		System.out.println("accessKey ==>"+accessKey);
+		System.out.println("secretKey ==>"+secretKey);
+		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTP);
 		this.conn = new AmazonS3Client(credentials, clientConfig);
@@ -66,10 +68,11 @@ public class S3Uploader {
 	public void createFolder(String bucketName, String folderName) {
 		conn.putObject(bucketName, folderName + "/", new ByteArrayInputStream(new byte[0]), new ObjectMetadata());
 	}
-
+	
 	// 파일 업로드
 	public void fileUpload(String bucketName, String fileName, MultipartFile file) throws IOException {
 		byte [] fileData=file.getBytes();
+		
 		String filePath = (fileName).replace(File.separatorChar, '/'); // 파일 구별자를 `/`로 설정(\->/) 이게 기존에 / 였어도 넘어오면서 \로 바뀌는 거같다.
 		ObjectMetadata metaData = new ObjectMetadata();
 
@@ -77,7 +80,7 @@ public class S3Uploader {
 	    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData); //파일 넣음
 
 		conn.putObject(bucketName, filePath, byteArrayInputStream, metaData);
-
+		
 	}
 	// 파일 업로드
 	public void fileUpload(String bucketName, String fileName, byte[] fileData) throws FileNotFoundException {
