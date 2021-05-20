@@ -53,7 +53,7 @@ height: 27px !important;
 			<tr class="imageTr">
 				<td class="titleTd">음식 이미지</td>
 				<td colspan="3">
-					<input type="file" name="foodImg" >
+					<input type="file" name="foodImg" multiple="multiple">
 				</td>
 				
 			</tr>
@@ -68,6 +68,13 @@ height: 27px !important;
 				<td class="titleTd">가격</td>
 				<td colspan="3">
 					<input type="text" name="foodPrice" >
+				</td>
+				
+			</tr>
+			<tr>
+				<td class="titleTd">소요시간</td>
+				<td colspan="3">
+					<input type="text" name="waitTime" >
 				</td>
 				
 			</tr>
@@ -174,13 +181,16 @@ function addFood(){
 		//$("#foodOptions").val(foodOptions)
 	})
 	
-	var foodData =common.serializeObject($("form[name=foodForm]"));
+	var foodData = common.serializeObject($("form[name=foodForm]"));
 	foodData.foodOptionInfo  = foodOptions
 	foodData = JSON.stringify(foodData);
 	console.log(foodData)
-	var foodImg = $('input[name="foodImg"]').get(0).files[0];
+	var foodImg = $('input[name="foodImg"]').get(0).files;
 	var formData = new FormData();
-	formData.append('foodImg', foodImg);
+	for(var i=0;i<foodImg.length;i++){
+		formData.append('foodImg', foodImg[i]);
+	}
+	
 	formData.append("foodData",foodData)
 	
 	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }

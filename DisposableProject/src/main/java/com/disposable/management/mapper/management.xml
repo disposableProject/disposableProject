@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.disposable.management.dao.managementDao">
-
 	<insert id="foodMainInsert" parameterType="java.util.Map">
 			INSERT INTO FOOD (FOODNUM,STORENUM,FOODNAME,PRICE,WAITTIME,FOODPHOTO,FOOTTEXT)
-			VALUES (FOOD_SEQ.NEXTVAL,#{storeNum},#{foodName},#{foodPrice},0,'','')
+			VALUES (FOOD_SEQ.NEXTVAL,#{storeNum},#{foodName},#{foodPrice},#{waitTime},'','')
 	</insert>
-	
 	<insert id="foodOptionInsert" parameterType="java.util.Map">
 			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,PRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNAME)
 			VALUES (FOOD_SEQ.CURRVAL,#{storeNum},#{optionNum},#{optionGroupNum},#{optionPrice},#{multiple},#{optionGroupName},#{optionName})
 	</insert>
+	<insert id="foodImageInsert" parameterType="String">
+			 INSERT INTO IMAGEBOX (IMGNUM,BOARDNUM,IMGNAME,CLASSIFY)
+			VALUES (IMAGEBOX_SEQ.NEXTVAL,FOOD_SEQ.CURRVAL,#{value},'SHOP')
+	</insert>
+	<select id="storeFoodListGet" parameterType="String" resultType="java.util.Map">
+			SELECT FD.*,IB.IMGNAME
+			FROM SHOP SP
+			INNER JOIN FOOD FD
+			ON SP.STORENUM = FD.STORENUM
+			LEFT JOIN (SELECT IMGNAME,BOARDNUM FROM IMAGEBOX WHERE CLASSIFY='SHOP' AND 1 >= ROWNUM) IB
+			ON FD.FOODNUM = IB.BOARDNUM
+			WHERE SP.STORENUM = #{value}
+	</select>
 </mapper>
