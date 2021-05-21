@@ -14,12 +14,18 @@
 			VALUES (IMAGEBOX_SEQ.NEXTVAL,FOOD_SEQ.CURRVAL,#{value},'SHOP')
 	</insert>
 	<select id="storeFoodListGet" parameterType="String" resultType="java.util.Map">
-			SELECT FD.*,IB.IMGNAME
+		SELECT *
+			 FROM
+			(
+			SELECT FD.*,IB.IMGNAME,ROWNUM as RM
 			FROM SHOP SP
 			INNER JOIN FOOD FD
 			ON SP.STORENUM = FD.STORENUM
 			LEFT JOIN (SELECT IMGNAME,BOARDNUM FROM IMAGEBOX WHERE CLASSIFY='SHOP' AND 1 >= ROWNUM) IB
 			ON FD.FOODNUM = IB.BOARDNUM
 			WHERE SP.STORENUM = #{value}
+			) MT
+			WHERE
+			12 >= MT.RM 
 	</select>
 </mapper>

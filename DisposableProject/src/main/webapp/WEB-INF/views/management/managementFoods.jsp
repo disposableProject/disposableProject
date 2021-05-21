@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .ManagementFoodsContainer{
-width: 700px;height: 800px;margin: auto;overflow: auto;-ms-overflow-style: none;
+width: 1200px;height: 800px;margin: auto;overflow: auto;-ms-overflow-style: none;
 }
 .ManagementFoodsContainer::-webkit-scrollbar { display: none; }
 
@@ -13,7 +13,7 @@ width: 100%;border-collapse: collapse;margin: auto;margin-top: 10px;border: 1px 
 border: 1px solid #1f9401;cursor: pointer;
 }
 .ManagementFoodsContainer table tr{
-height: 160px;
+height: 110px;
 }
 .ManagementFoodsContainer .InnerHeader{
 display: flex; justify-content: space-between;margin-top: 10px;align-items: center;
@@ -31,11 +31,30 @@ display: inline-block;width: 171px;height: 45px;line-height: 45px;border: 1px so
 background: #B6CBA3; color: #fff; cursor: pointer;
 }
 .foodImg{
-border-right: 1px solid #d5d5d5;
-width: 40%
+width: 100%;
+height: 70%;
+border-bottom: 1px solid #d5d5d5;
 }
 .foodInfo{
-padding: 10px
+padding: 10px;
+
+}
+.gridContainer{
+ display: grid;
+  grid-template-rows: repeat(3, 220px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 10px;
+  }
+.gridItem:nth-child(3){
+grid-row: 3 / 4;
+
+}
+.gridItem{
+border: 1px solid #d5d5d5;
+}
+
+.gridItem:hover{
+border: 1px solid #1f9401;cursor: pointer;
 }
 </style>
 
@@ -45,13 +64,15 @@ padding: 10px
 		<h2>음식 관리</h2>
 		<a href="foodInsert.do">등록하기</a>
 	</div>
+	
+	<div class="gridContainer">
 	<c:forEach items="${foodList}" var="foodInfo">
-	<table>
+	<%-- <table>
 		<thead></thead>
 		<tbody>
 			<tr>
 				<td class="foodImg">
-				<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;"> 
+				<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100px"> 
 				</td>
 				<td class="foodInfo">
 					<h2>${foodInfo.FOODNAME}</h2>
@@ -60,9 +81,18 @@ padding: 10px
 				</td>
 			</tr>
 		</tbody>
-	</table>	
+	</table> --%>	
+	
+	<div class="gridItem">
+		<div class="foodImg">
+			<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
+		</div>
+		<div>${foodInfo.FOODNAME}</div>
+		<div>${foodInfo.PRICE}원</div>
+	</div>
+	
 	</c:forEach>
-
+</div>
 	
 
 
