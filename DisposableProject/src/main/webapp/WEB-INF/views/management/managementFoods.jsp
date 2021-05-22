@@ -98,8 +98,39 @@ border: 1px solid #1f9401;cursor: pointer;
 
 
 	<div class="bottomBtn">
-		<span>1234 > >></span>
-		<!-- <a>더보기</a> -->
+		<ul>
+			<c:if test="${1 < pageGroupNum}">
+		<li aria-label="Previous"
+			onclick="pageGroupMove('${pageGroupNum - 1}','${boardNum}')">&laquo;</li>
+		</c:if>
+		<c:if test="${pageGroupNum < pageGroupCnt}">
+		<c:forEach var="p" begin="${startPage}" end="${startPage + 4}">
+			<li onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+		</c:forEach>
+		</c:if>
+		<c:if test="${pageGroupNum == pageGroupCnt}">
+		<c:forEach var="p" begin="${startPage}" end="${totalPageCnt}">
+			<li onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+		</c:forEach>
+		</c:if>
+
+	<!-- next -->
+		<c:if test="${pageGroupNum < pageGroupCnt}">
+		<li aria-label="Next"
+			onclick="pageGroupMove('${pageGroupNum + 1}','${boardNum}')">&raquo;</li>
+		</c:if>
+		</ul>
 	</div>
 	
 </div>
+
+<script>
+function pageMove(pagenum, boardnum){
+	location.href = "/management/managementFoods.do?pagenum="+pagenum+"&boardnum="+boardnum
+	
+}
+function pageGroupMove(pageGroupNum, boardnum){
+	var pagenum = (pageGroupNum - 1) * 5 + 1;
+	location.href = "/management/managementFoods.do?pagenum="+pagenum+"&boardnum="+boardnum
+}
+</script>

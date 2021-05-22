@@ -13,19 +13,32 @@
 			 INSERT INTO IMAGEBOX (IMGNUM,BOARDNUM,IMGNAME,CLASSIFY)
 			VALUES (IMAGEBOX_SEQ.NEXTVAL,FOOD_SEQ.CURRVAL,#{value},'SHOP')
 	</insert>
-	<select id="storeFoodListGet" parameterType="String" resultType="java.util.Map">
-		SELECT *
-			 FROM
-			(
-			SELECT FD.*,IB.IMGNAME,ROWNUM as RM
+	<select id="storeFoodListGet" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT MT.*,
+		(SELECT COUNT(*)
+			
 			FROM SHOP SP
 			INNER JOIN FOOD FD
 			ON SP.STORENUM = FD.STORENUM
 			LEFT JOIN (SELECT IMGNAME,BOARDNUM FROM IMAGEBOX WHERE CLASSIFY='SHOP' AND 1 >= ROWNUM) IB
 			ON FD.FOODNUM = IB.BOARDNUM
-			WHERE SP.STORENUM = #{value}
+			WHERE SP.STORENUM = '3') as TOTALCNT
+		
+		
+			 FROM
+			(
+			SELECT FD.*,
+			IB.IMGNAME,
+			ROWNUM as RM
+			FROM SHOP SP
+			INNER JOIN FOOD FD
+			ON SP.STORENUM = FD.STORENUM
+			LEFT JOIN (SELECT IMGNAME,BOARDNUM FROM IMAGEBOX WHERE CLASSIFY='SHOP' AND 1 >= ROWNUM) IB
+			ON FD.FOODNUM = IB.BOARDNUM
+			WHERE SP.STORENUM = #{storenum}
+			
 			) MT
 			WHERE
-			12 >= MT.RM 
+			MT.RM > #{startpagenum}  AND  #{endpagenum} >= MT.RM
 	</select>
 </mapper>

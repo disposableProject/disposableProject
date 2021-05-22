@@ -42,8 +42,8 @@ public class managementServiceImpl implements managementService{
 		return check;
 	}
 	@Override
-	public List<Map<String, Object>> storeFoodListGet(String storeNum) {
+	public List<Map<String, Object>> storeFoodListGet(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return managementDao.storeFoodListGet(storeNum);
+		return managementDao.storeFoodListGet(paramMap);
 	}
 }

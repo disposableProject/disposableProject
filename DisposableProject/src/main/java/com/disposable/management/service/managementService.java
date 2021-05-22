@@ -9,5 +9,5 @@ public interface managementService {
 	public Integer foodMainInsert(Map<String, Object> paramMap) throws SQLException;
 	public Integer foodOptionInsert(List<Object> paramMap) throws SQLException;
 	public Integer foodImageInsert(ArrayList paramMap) throws SQLException;
-	public List<Map<String,Object>> storeFoodListGet(String storeNum);
+	public List<Map<String,Object>> storeFoodListGet(Map<String, Object> paramMap);
 }

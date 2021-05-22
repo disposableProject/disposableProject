@@ -17,7 +17,7 @@ color:#fff;text-decoration: none;
 	<ul>
 		<li><a href="managementMain.do">가게 관리 메인</a></li>
 		<li><a href="shopInfo.do">가게 정보 관리</a></li>
-		<li><a href="managementFoods.do">음식 등록 및 수정</a></li>
+		<li><a href="managementFoods.do?pagenum=1">음식 등록 및 수정</a></li>
 		<li><a href="managementOrders.do">주문관리</a></li>
 	</ul>
 </nav>
