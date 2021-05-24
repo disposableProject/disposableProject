@@ -28,7 +28,7 @@
 			IB.IMGNAME,
 			ROWNUM as RM
 			FROM SHOP SP
-			INNER JOIN FOOD FD
+			INNER JOIN (SELECT * FROM FOOD ORDER BY FOODNUM DESC) FD
 			ON SP.STORENUM = FD.STORENUM
 			LEFT JOIN (
 			SELECT B.* FROM
@@ -41,6 +41,6 @@
 			) MT
 			WHERE
 			MT.RM > #{startpagenum}  AND  #{endpagenum} >= MT.RM
-			ORDER BY MT.FOODNUM DESC
+			
 	</select>
 </mapper>

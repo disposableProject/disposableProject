@@ -59,8 +59,8 @@ public class managementController {
 		int pageGroupNum = (int) Math.floor((pageNum - 1) / 5 + 1);
 		int startPage = (pageGroupNum - 1) * 5 + 1;
 		int totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
-		int totalPageCnt = (int) Math.round(totalCmtCnt / 12);
-		if (totalCmtCnt % 5 > 0) {
+		int totalPageCnt = (int) Math.floor(totalCmtCnt / 12);
+		if (totalCmtCnt % 12 > 0) {
 			totalPageCnt++;
 		}
 		int pageGroupCnt = (int) Math.floor(totalPageCnt / 5);
