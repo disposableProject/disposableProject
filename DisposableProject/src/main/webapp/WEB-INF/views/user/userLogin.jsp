@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210423" /><!-- 버전 수정 -->
 
-<script src="/js/user/user.js?v=210425"></script>
+<script src="/js/user/user.js?v=210427"></script>
 <form name="registerForm" id="registerForm" method = "post">
 	<table >
 		<thead>
@@ -78,7 +78,7 @@ function Login(){
 			console.log(data)
 			if(data.JavaData != null && data.JavaData != ""){
 				alert("로그인되었습니다.");
-				location.href = '/user/usermain.do'
+				location.href = '/'
 			}else{
 				alert("로그인 정보가 다릅니다.");
 			}
@@ -99,7 +99,7 @@ function googleLoginPro(profile){
 		dataType : 'json',
 		success : function(data){
 			if(data.JavaData == "YES"){
-				location.href = '/user/usermain.do'
+				location.href = '/'
 			}else if(data.JavaData == "register"){
 				console.log(profile.getEmail())
 				$("#googleEmail").val(profile.getEmail());

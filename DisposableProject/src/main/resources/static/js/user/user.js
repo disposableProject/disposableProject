@@ -32,7 +32,7 @@ function kakaoLoginPro(response){
 			console.log(data)
 			if(data.JavaData == "YES"){
 				alert("로그인되었습니다.");
-				location.href = '/user/usermain.do'
+				location.href = '/'
 			}else if(data.JavaData == "register"){
 				$("#kakaoEmail").val(response.kakao_account.email);
 				$("#kakaoId").val(response.id);
