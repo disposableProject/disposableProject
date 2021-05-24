@@ -59,7 +59,7 @@ public class managementController {
 		int pageGroupNum = (int) Math.floor((pageNum - 1) / 5 + 1);
 		int startPage = (pageGroupNum - 1) * 5 + 1;
 		int totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
-		int totalPageCnt = (int) Math.floor(totalCmtCnt / 12);
+		int totalPageCnt = (int) Math.round(totalCmtCnt / 12);
 		if (totalCmtCnt % 5 > 0) {
 			totalPageCnt++;
 		}
@@ -71,11 +71,13 @@ public class managementController {
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("pageGroupNum", pageGroupNum);
 		model.addAttribute("startPage", startPage);
+		model.addAttribute("totalCmtCnt", totalCmtCnt);
 		model.addAttribute("totalPageCnt", totalPageCnt);
 		model.addAttribute("pageGroupCnt", pageGroupCnt);
 		System.out.println("pageNum =>"+pageNum);
 		System.out.println("pageGroupNum =>"+pageGroupNum);
 		System.out.println("startPage =>"+startPage);
+		System.out.println("totalCmtCnt =>"+totalCmtCnt);
 		System.out.println("totalPageCnt =>"+totalPageCnt);
 		System.out.println("pageGroupCnt =>"+pageGroupCnt);
 		return "management/managementFoods";
