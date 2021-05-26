@@ -124,7 +124,7 @@ public class userController {
 			session.setAttribute("userInfo", loginCheck);
 		}
 
-		return "redirect:usermain.do";
+		return "redirect:/";
 	}
 	/**
 	 * @author 손호일
