@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.disposable.user.dao.userDao">
+	<select id="test" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT * FROM MEMBERS
+	</select>
+	<select id="ceoRegisterPro" resultType="int" parameterType="java.util.Map">
+		INSERT ALL 
+		INTO SHOP VALUES (SHOP_SEQ.NEXTVAL,#{storename},#{address},#{notice},#{phone})
+		INTO CEOMEMBERS VALUES (#{userid},#{email},#{password},SHOP_SEQ.CURRVAL)
+		SELECT count(*) FROM CEOMEMBERS WHERE USERID = #{userid} AND EMAIL = #{email}
+	</select>
+	<select id="checkUserId" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM CEOMEMBERS WHERE USERID = #{userId}
+	</select>
+	<select id="checkEmail" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM CEOMEMBERS WHERE EMAIL = #{email}
+	</select>
+	<select id="loginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT userid FROM CEOMEMBERS WHERE USERID = #{userid} AND EMAIL = #{email} AND PASSWORD = #{password}
+	</select>
+</mapper>

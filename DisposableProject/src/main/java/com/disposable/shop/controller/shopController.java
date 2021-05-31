@@ -11,4 +11,5 @@ public class shopController {
 		System.out.println("user");
 		return "shop/shop";
 	}
+	
 }

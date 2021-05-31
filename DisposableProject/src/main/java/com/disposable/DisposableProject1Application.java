@@ -8,12 +8,15 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-@SpringBootApplication
-public class DisposableProject1Application {
 
+@SpringBootApplication
+@PropertySource("api.properties")
+public class DisposableProject1Application {
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DisposableProject1Application.class, args);
 	}

@@ -12,4 +12,21 @@ public interface userDao {
 	public int checkUserId (Map<String, Object> paramMap) throws SQLException;
 	public int checkEmail (Map<String, Object> paramMap) throws SQLException;
 	public Map<String, Object> loginPro (Map<String, Object> paramMap) throws SQLException;
+	public int checkUserEmail (Map<String, Object> paramMap) throws SQLException;
+	public Integer userRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	public int checkNickname (Map<String, Object> paramMap) throws SQLException;
+	public Map<String, Object> userLoginPro (Map<String, Object> paramMap) throws SQLException;
+	public Map<String, Object> naverConnectionCheck (Map<String, Object> apiJson) throws SQLException;
+	public Integer setNaverConnection (Map<String, Object> paramMap) throws SQLException;
+	public Integer userNaverRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	public Map<String, Object> userNaverLoginPro (Map<String, Object> apiJson) throws SQLException;
+	public Map<String, Object> kakaoConnectionCheck (Map<String, Object> apiJson) throws SQLException;
+	public Integer setKakaoConnection (Map<String, Object> apiJson) throws SQLException;
+	public Map<String, Object> userKakaoLoginPro (Map<String, Object> apiJson) throws SQLException;
+	public Integer userKakaoRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	public Map<String, Object> googleConnectionCheck (Map<String, Object> paramMap) throws SQLException;
+	public Integer setGoogleConnection (Map<String, Object> paramMap) throws SQLException;
+	public Map<String, Object> userGoogleLoginPro (Map<String, Object> paramMap) throws SQLException;
+	public Integer userGoogleRegisterPro (Map<String, Object> paramMap) throws SQLException;
+	public List<Map<String, Object>> test (Map<String, Object> paramMap) throws SQLException;
 }

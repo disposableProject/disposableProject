@@ -17,6 +17,72 @@
 		SELECT COUNT(*) FROM CEOMEMBERS WHERE EMAIL = #{email}
 	</select>
 	<select id="loginPro" resultType="java.util.Map" parameterType="java.util.Map">
-		SELECT userid FROM CEOMEMBERS WHERE USERID = #{userid} AND EMAIL = #{email} AND PASSWORD = #{password}
+		SELECT 
+		CMS.USERID,
+		CMS.STORENUM,
+		SP.STORENAME 
+		FROM CEOMEMBERS CMS
+		INNER JOIN SHOP SP
+		ON CMS.STORENUM = SP.STORENUM
+		WHERE CMS.USERID = #{userid} AND CMS.EMAIL = #{email} AND CMS.PASSWORD = #{password}
 	</select>
+	<select id="checkUserEmail" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM MEMBERS WHERE EMAIL = #{email}
+	</select>
+	<insert id="userRegisterPro" parameterType="java.util.Map">
+		INSERT 
+		INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE) VALUES (#{email},#{nickname},#{password},#{phone})
+	</insert>
+	<select id="checkNickname" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM MEMBERS WHERE NICKNAME = #{nickname}
+	</select>
+	<select id="userLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND PASSWORD = #{password}
+	</select>
+	<select id="naverConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,NAVERLOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setNaverConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET NAVERLOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+	<insert id="userNaverRegisterPro" parameterType="java.util.Map">
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,NAVERLOGIN) VALUES (#{email},#{nickname},#{password},#{phone},#{id})
+	</insert>
+	<select id="userNaverLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND NAVERLOGIN = #{id}
+	</select>
+	<select id="kakaoConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,NAVERLOGIN,KAKAOLOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setKakaoConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET KAKAOLOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+	<select id="userKakaoLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND KAKAOLOGIN = #{id}
+	</select>
+	<insert id="userKakaoRegisterPro" parameterType="java.util.Map">
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,KAKAOLOGIN) VALUES  (#{email},#{nickname},#{password},#{phone},#{id})
+	</insert>
+	<select id="googleConnectionCheck" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME,GOOGLELOGIN FROM MEMBERS 
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="setGoogleConnection" parameterType="java.util.Map">
+		UPDATE MEMBERS SET GOOGLELOGIN = #{id}
+		WHERE EMAIL = #{email}
+	</update>
+	<select id="userGoogleLoginPro" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT EMAIL,NICKNAME FROM MEMBERS 
+		WHERE EMAIL = #{email} AND GOOGLELOGIN = #{id}
+	</select>
+	<insert id="userGoogleRegisterPro" parameterType="java.util.Map">
+		INSERT INTO MEMBERS (EMAIL,NICKNAME,PASSWORD,PHONE,GOOGLELOGIN) VALUES  (#{email},#{nickname},#{password},#{phone},#{id})
+	</insert>
 </mapper>
