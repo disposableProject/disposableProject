@@ -39,6 +39,11 @@
 				<td class="btnTd"></td>
 			</tr>
 			<tr>
+				<td class="text">대표음식사진 등록</td>
+				<td><input id="foodImg" name="foodImg" type="file"></td>
+				<td class="btnTd"></td>
+			</tr>
+			<tr>
 				<td class="text">주소</td>
 				<td><input id="address" name="address" readonly="readonly"></td>
 				<td class="btnTd"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
@@ -118,11 +123,12 @@ function checkEmail(){
 		return false;
 	}
 	//로딩 프로그레스 추가하기
+	console.log(emailCheck)
 	common.progressOn('메일을 전송중 입니다.','GreenProgress')
 	$.ajax({
 		type : 'POST',
 		url : '/user/checkEmail.do',
-		data : {email: emailCheck},
+		data : {email:emailCheck},
 		dataType : 'json',
 		success : function(data){
 			common.progressOff('GreenProgress');
@@ -207,11 +213,20 @@ function register(){
 		alert("올바른 번호 형식을 입력하세요");
 		return false;
 	}
+	
+	var formData = new FormData();
+	formData.append("registerData",JSON.stringify(registerData));
+	var foodImg = $('input[name="foodImg"]').get(0).files;
+	for(var i=0;i<foodImg.length;i++){
+		formData.append('foodImg', foodImg[i]);
+	}
 	$.ajax({
 		type : 'POST',
 		url : '/user/ceoRegisterPro.do',
-		data : registerData,
-		dataType : 'json',
+		processData:false,
+		contentType: false,
+		data: formData,
+		/* dataType : 'json', */
 		success : function(json){
 			alert("가입되었습니다.");
 			location.href = '/user/usermain.do'

@@ -6,7 +6,7 @@
 	</select>
 	<select id="ceoRegisterPro" resultType="int" parameterType="java.util.Map">
 		INSERT ALL 
-		INTO SHOP VALUES (SHOP_SEQ.NEXTVAL,#{storename},#{address},#{notice},#{phone})
+		INTO SHOP VALUES (SHOP_SEQ.NEXTVAL,#{storename},#{address},#{notice},#{phone},#{PHOTO})
 		INTO CEOMEMBERS VALUES (#{userid},#{email},#{password},SHOP_SEQ.CURRVAL)
 		SELECT count(*) FROM CEOMEMBERS WHERE USERID = #{userid} AND EMAIL = #{email}
 	</select>
