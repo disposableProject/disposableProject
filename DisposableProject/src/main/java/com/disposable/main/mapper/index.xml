@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.disposable.user.dao.indexdao">
-
+<mapper namespace="com.disposable.main.dao.indexdao">
+	<select id="storeList" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT SP.* 
+	,(SELECT COUNT(*) FROM SHOP) AS TOTALCNT
+	FROM(
+		SELECT STORENUM,STORENAME,PHOTO,ROWNUM as RM FROM SHOP
+		) SP
+		WHERE SP.RM > #{startPage} AND #{endPage} > SP.RM 
+	</select>
 	
 </mapper>

@@ -41,16 +41,14 @@ padding: 10px;
 }
 .gridContainer{
  display: grid;
-  grid-template-rows: repeat(3, 220px);
-  grid-template-columns: repeat(4, 1fr);
+ grid-template-columns: 290px 290px 290px 290px;
+grid-template-rows: 300px;
   gap: 20px 10px;
   }
-.gridItem:nth-child(3){
-grid-row: 3 / 4;
 
-}
 .gridItem{
 border: 1px solid #d5d5d5;
+height: 300px;
 }
 
 .gridItem:hover{

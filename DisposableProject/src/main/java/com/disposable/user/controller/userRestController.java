@@ -1,6 +1,7 @@
 package com.disposable.user.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.disposable.common.NaverLoginBO;
 import com.disposable.user.service.userService;
+import com.disposable.utils.FileManagement;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/user")
@@ -28,6 +32,9 @@ public class userRestController {
 	
 	@Autowired
 	private NaverLoginBO naverloginbo;
+	
+	@Autowired
+	private FileManagement filemanagement;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -61,8 +68,19 @@ public class userRestController {
 	 * @description 사장님 회원가입
 	 */
 	@RequestMapping(value="/ceoRegisterPro.do", method=RequestMethod.POST)
-	public Map<String, Object> ceoRegisterPro(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
-		System.out.println("paramMap:" + paramMap);
+	public Map<String, Object> ceoRegisterPro(
+			@RequestParam(value="foodImg", required=false) MultipartFile[] files
+			,@RequestParam(value="registerData", required=false) String param) throws SQLException, Exception {
+		System.out.println("paramMap:" + param);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> paramMap = mapper.readValue(param, Map.class);
+		
+		ArrayList fileNames = null;
+		if(files.length > 0) {
+			fileNames = filemanagement.FileUploader(files);
+		}
+		paramMap.put("PHOTO", fileNames.get(0));
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		Integer registerCheck = userservice.ceoRegisterPro(paramMap);
 		System.out.println(registerCheck);
@@ -95,7 +113,7 @@ public class userRestController {
 	 * @description  사장님 이메일 중복 체크
 	 */
 	@RequestMapping(value="/checkEmail.do", method=RequestMethod.POST)
-	public Map<String, Object> checkEmail(@RequestBody Map<String,Object> paramMap) throws SQLException, Exception {
+	public Map<String, Object> checkEmail(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
 		System.out.println(paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		int emailCheck = userservice.checkEmail(paramMap);
@@ -121,6 +139,8 @@ public class userRestController {
 	@RequestMapping(value="/emailAuth.do", method=RequestMethod.POST)
 	public Map<String, Object> emailAuth(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
 		System.out.println(paramMap);
+		
+		
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		String authNum = (String) paramMap.get("authNum");
 		HttpSession session = request.getSession();	
