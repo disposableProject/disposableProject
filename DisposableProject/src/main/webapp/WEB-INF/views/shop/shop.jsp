@@ -1,26 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:if test="${fn:length(StoreFoodList) < 1}">
-등록된 음식이 없습니다.
-</c:if>
-<div style="display: flex;">
-	<div>
-	<c:forEach items="${StoreFoodList}" var="foodInfo">
-		<div onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
-			<span>${foodInfo.FOODNAME} -> </span>
-			<span>${foodInfo.PRICE}원</span>
+<style>
+*{
+	box-sizing: border-box;
+}
+.container{
+	width: 1240px;
+	display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+.leftSection{
+	width: 880px;
+	position: relative;
+	
+}
+.rightSection{
+	width: 360px;
+	height: 100%;
+	position: fixed;
+	left: 65%;
+	border: 1px solid black;
+}
+.topBox{
+	border: 1px solid black;
+}
+.storeInfo{
+	display: flex;
+}
+.storeImg{
+	border: 1px solid black;
+}
+.middleBox{
+	border: 1px solid black;
+}
+.bottomBox{
+	border: 1px solid black;
+}
+.selectMenu{
+	border: 1px solid #c4c4c4;
+	height: 100px;
+}
+.foodBox{
+	border: 1px solid;
+    width: 280px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.items{
+	display: grid;
+    grid-template-columns: 280px 280px 280px;
+    grid-template-rows: 300px;
+    gap: 20px 20px;
+}
+</style>
+
+
+<div class="container">
+	<div class="leftSection">
+		<div class="topBox">
+			<div class="storeInfo">
+				<div class="leftInfo">	
+					<img class="storeImg" alt="" src="" style="width: 400px; height: 500px;"/>
+				</div>
+				<div class="rightInfo">
+					<p>가게이름</p>
+					<p>가게주소</p>
+					<p>공지사항</p>
+				</div>
+			</div>
 		</div>
-	</c:forEach>
+		
+		<hr style="border: solid 1px #c4c4c4;" align="center;">
+		
+		<div class="middleBox">
+			<div class="items">
+				<c:forEach items="${StoreFoodList}" var="foodInfo">
+					<div class="foodBox" onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
+						<span>${foodInfo.FOODNAME} -> </span>
+						<span>${foodInfo.PRICE}원</span>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+		
+		<hr style="border: solid 1px #c4c4c4;" align="center;">
+		
+		<div class="bottomBox">
+			<div class="reviewBox">
+				리뷰 들어갈거임
+			</div>
+		</div>
 	</div>
-	<div>
+	
+	<!-- 고정 + 주문하기 -->
+	<div class="rightSection">
 		<div id="optionList"></div>
 		<div id="totalPrice"></div>
+		<!-- 최종 장바구니 + 최종 결제 금액 -->
+		<div class="selectMenu"></div>
+		<div id="totalPayment"></div>
+		<button type="button">주문하기</button>
 	</div>
 </div>
+
 <script>
 function getFoodOption(storenum,foodnum,foodname,foodprice){
-	$("#totalPrice").html("선택 가격: "+foodprice+"원 <button>장바구니담기</button>")
+	$("#totalPrice").html("선택 가격: "+foodprice+"원 <br><button>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',
 		url : '/shop/getFoodOption.do',
@@ -35,7 +123,7 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 				html += "<div>추가옵션</div>"
 				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"</div>"
 				for(var i=0;i<json.length;i++){
-					
+					console.log()
 					if(json[i].OPTIONGROUP != optionGroupNum){
 						optionGroupNum = json[i].OPTIONGROUP
 						html += "</div><div> <div>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
@@ -67,6 +155,6 @@ function setFoodPrice(foodPrice){
 		var value = $(this).val();
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
-	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <button>장바구니담기</button>")
+	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button>메뉴담기</button>")
 }
 </script>

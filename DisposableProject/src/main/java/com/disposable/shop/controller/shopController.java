@@ -24,8 +24,10 @@ public class shopController {
 		System.out.println("user");
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		List<Map<String,Object>> resultMap = shopservice.shopMain(shopnum);
+		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap);
 		model.addAttribute("StoreFoodList", resultMap);
 		return "shop/shop";
 	}
+	
 	
 }
