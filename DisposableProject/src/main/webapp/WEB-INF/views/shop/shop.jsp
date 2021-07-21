@@ -40,7 +40,7 @@
 }
 .selectMenu{
 	border: 1px solid #c4c4c4;
-	height: 100px;
+	min-height: 100px;
 }
 .foodBox{
 	border: 1px solid;
@@ -63,10 +63,10 @@
 		<div class="topBox">
 			<div class="storeInfo">
 				<div class="leftInfo">	
-					<img class="storeImg" alt="" src="" style="width: 400px; height: 500px;"/>
+					<img class="storeImg" alt="" src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${getStoreInfo[0].PHOTO}" style="width: 400px; height: 500px;"/>
 				</div>
 				<div class="rightInfo">
-					<p>가게이름</p>
+					<p>${getStoreInfo[0].STORENAME}</p>
 					<p>가게주소</p>
 					<p>공지사항</p>
 				</div>
@@ -102,13 +102,15 @@
 		<!-- 최종 장바구니 + 최종 결제 금액 -->
 		<div class="selectMenu"></div>
 		<div id="totalPayment"></div>
-		<button type="button">주문하기</button>
+		<input type="button" onclick="orderInsert()" value="주문하기">
 	</div>
 </div>
 
 <script>
+var totalPrice = 0;
+
 function getFoodOption(storenum,foodnum,foodname,foodprice){
-	$("#totalPrice").html("선택 가격: "+foodprice+"원 <br><button>메뉴 담기</button>")
+	$("#totalPrice").html("선택 가격: "+foodprice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',
 		url : '/shop/getFoodOption.do',
@@ -129,9 +131,9 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 						html += "</div><div> <div>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
 					}
 					if(json[i].CHECKFLAG == "N"){
-						html += "<input type='radio' onclick='setFoodPrice("+foodprice+")'  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].PRICE+"' /><div>"+json[i].OPTIONNAME+": "+json[i].PRICE+"</div>"
+						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].PRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].PRICE+"</div>"
 					}else{
-						html += "<input type='checkbox' onclick='setFoodPrice("+foodprice+")' class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].PRICE+"' /><div>"+json[i].OPTIONNAME+": "+json[i].PRICE+"</div>"
+						html += "<input type='checkbox' onclick=setFoodPrice("+foodprice+","+foodname+") class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].PRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].PRICE+"</div>"
 					}
 					
 				}
@@ -148,13 +150,51 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 	});
 }
 
-function setFoodPrice(foodPrice){
+function setFoodPrice(foodPrice,foodname){
 	var optionPrice = foodPrice;
 	$('.foodoptions:checked').each(function() {
 		
 		var value = $(this).val();
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
-	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button>메뉴담기</button>")
+	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+optionPrice+"')>메뉴담기</button>")
+}
+
+// 메뉴 선택 정보를 가져옴
+function getOrderInfo(foodname, foodprice){
+	var foodOption = document.querySelectorAll(".foodoptions");
+	console.log('fffff'+foodname);
+	console.log(foodOption);
+	var result = '';
+	var j = 0
+	for(var i=0; i<foodOption.length; i++){
+		  if(foodOption[i].checked)  {
+			  j++
+			  console.log(foodOption[i].value.split("/"))
+		    result += " 옵션"+j+": "+foodOption[i].value.split("/")[1];
+		  }
+	}
+	console.log("너 무슨 값인데?")
+	console.log(result)
+	var selectMenuText = document.querySelector(".selectMenu");
+	$(selectMenuText).append("<div class='selectFood'>"+foodname+"<br>"+result+"  <button type='button' onclick=menuDelete(this,'"+foodprice+"')>삭제하기</button></div>");
+	totalPrice = parseInt(totalPrice)+parseInt(foodprice)
+	$("#totalPayment").text(totalPrice)
+}
+
+function menuDelete(ths,price){
+	console.log(totalPrice)
+	console.log(parseInt(price))
+	var ths = $(ths);
+	ths.parent("div").empty();
+	totalPrice = parseInt(totalPrice)-parseInt(price)
+	$("#totalPayment").text(totalPrice)
+	
+}
+
+//주문서 생성
+function orderInsert(){
+	
+	
 }
 </script>

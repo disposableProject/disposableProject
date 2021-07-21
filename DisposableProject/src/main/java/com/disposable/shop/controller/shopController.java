@@ -22,10 +22,12 @@ public class shopController {
 	@RequestMapping(value="shopMain.do")
 	public String usermain(Model model,@RequestParam("shopnum") String shopnum) {
 		System.out.println("user");
-		Map<String, Object> paramMap = new HashMap<String, Object>();
 		List<Map<String,Object>> resultMap = shopservice.shopMain(shopnum);
+		List<Map<String,Object>> resultMap2 = shopservice.getStoreInfo(shopnum);
 		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap);
+		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap2);
 		model.addAttribute("StoreFoodList", resultMap);
+		model.addAttribute("getStoreInfo", resultMap2);
 		return "shop/shop";
 	}
 	

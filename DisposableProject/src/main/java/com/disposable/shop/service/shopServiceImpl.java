@@ -27,4 +27,9 @@ public class shopServiceImpl implements shopService{
 		// TODO Auto-generated method stub
 		return shopDao.getFoodOption(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> getStoreInfo(String shopnum) {
+		// TODO Auto-generated method stub
+		return shopDao.getStoreInfo(shopnum);
+	}
 }
