@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.structure.css">
  <link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.theme.css">
  
+
  <style>
 .ui-jqgrid .ui-jqgrid-htable .ui-th-div {
     height: 19px;
