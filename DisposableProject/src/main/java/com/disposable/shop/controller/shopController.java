@@ -20,12 +20,23 @@ public class shopController {
 	private shopService shopservice;
 	
 	@RequestMapping(value="shopMain.do")
-	public String usermain(Model model,@RequestParam("shopnum") String shopnum) {
+	public String usermain(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("device") String device) {
 		System.out.println("user");
-		Map<String, Object> paramMap = new HashMap<String, Object>();
 		List<Map<String,Object>> resultMap = shopservice.shopMain(shopnum);
+		List<Map<String,Object>> resultMap2 = shopservice.getStoreInfo(shopnum);
+		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap);
+		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap2);
 		model.addAttribute("StoreFoodList", resultMap);
-		return "shop/shop";
+		model.addAttribute("getStoreInfo", resultMap2);
+		System.out.println("device ==>"+device);
+		if(device.equals("mobile")) {
+			System.out.println("check1");
+			return "mobile/shop/shop";
+		}else {
+			return "shop/shop";
+		}
+		
 	}
+	
 	
 }
