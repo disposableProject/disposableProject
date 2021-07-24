@@ -26,6 +26,30 @@
 		 <put-attribute name="body"  expression="/WEB-INF/views/include/main.jsp" />
 		 <put-attribute name="left"  expression="/WEB-INF/views/include/none.jsp" />
 	</definition>
+	
+	<!--// mobile layout -->
+	<definition name="mobileTiles"  template="/WEB-INF/mobile/index.jsp">
+		<put-attribute name="header" value="/WEB-INF/mobile/include/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="left" value="" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/footer.jsp" />
+	</definition>
+	<!-- 기본 메인-->
+	<definition name="mobile" extends="mobileTiles">
+		 <put-attribute name="body"  expression="/WEB-INF/mobile/include/main.jsp" />
+		 <put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+	</definition>
+	
+	
+	<definition name="mobile/*/*" extends="mobileTiles">
+		<put-attribute name="body"  expression="/WEB-INF/mobile/{1}/{2}.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+	</definition>
+	<definition name="mobile/*" extends="mobileTiles" >
+		<put-attribute name="body"  expression="/WEB-INF/mobile/{1}.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+	</definition>
+	
 	<!-- 회원
 	<definition name="user/*" extends="mainTiles">
 		 <put-attribute name="body"  expression="/WEB-INF/views/user/user.jsp" />
