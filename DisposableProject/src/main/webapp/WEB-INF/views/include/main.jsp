@@ -155,9 +155,9 @@ function getShopList(now,flag){
 			var html = ""
 			for(var i=0;i<json.length;i++){
 				if(json[i].PHOTO){
-				html += "<div onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"\"' class='box'><img src='https://cookingcoding.s3.ap-northeast-2.amazonaws.com/"+json[i].PHOTO+"' style='width:100%;height:100%'></div>"
+				html += "<div onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"&device=web\"' class='box'><img src='https://cookingcoding.s3.ap-northeast-2.amazonaws.com/"+json[i].PHOTO+"' style='width:100%;height:100%'></div>"
 				}else{
-					html += "<div onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"\"' class='box'>"+json[i].STORENAME+"</div>"	
+					html += "<div onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"&device=web\"' class='box'>"+json[i].STORENAME+"</div>"	
 				}
 			}
 			$(".shopListBox").html(html)
