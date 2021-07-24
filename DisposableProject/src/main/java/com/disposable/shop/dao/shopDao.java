@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration("shopDao")
 public interface shopDao {
-	public List<Map<String,Object>> shopMain(String shopnum);
+	public List<Map<String,Object>> shopMain(Map<String,Object> paramMap);
 	public List<Map<String,Object>> getFoodOption(Map<String, Object> paramMap);
 	public List<Map<String,Object>> getStoreInfo(String shopnum);
 }

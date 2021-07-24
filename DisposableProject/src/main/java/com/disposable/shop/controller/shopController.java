@@ -20,9 +20,11 @@ public class shopController {
 	private shopService shopservice;
 	
 	@RequestMapping(value="shopMain.do")
-	public String usermain(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("device") String device) {
+	public String shopMain(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("device") String device) {
 		System.out.println("user");
-		List<Map<String,Object>> resultMap = shopservice.shopMain(shopnum);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum", shopnum);
+		List<Map<String,Object>> resultMap = shopservice.shopMain(paramMap);
 		List<Map<String,Object>> resultMap2 = shopservice.getStoreInfo(shopnum);
 		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap);
 		System.out.println("resultMap>>>>>>>>>>>>>>>>>>>>" + resultMap2);
@@ -37,6 +39,20 @@ public class shopController {
 		}
 		
 	}
-	
+	@RequestMapping(value="MobileOptionSelect.do")
+	public String MobileOptionSelect(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("foodnum") String foodnum) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum", shopnum);
+		paramMap.put("foodnum", foodnum);
+		List<Map<String,Object>> resultMap = shopservice.getFoodOption(paramMap);
+		List<Map<String,Object>> resultMap2 = shopservice.getStoreInfo(shopnum);
+		List<Map<String,Object>> resultMap3 = shopservice.shopMain(paramMap);
+		model.addAttribute("FoodOptionList", resultMap);
+		model.addAttribute("getStoreInfo", resultMap2);
+		model.addAttribute("getFoodInfo", resultMap3);
+		return "mobile/shop/MobileOptionSelect";
+		
+		
+	}
 	
 }

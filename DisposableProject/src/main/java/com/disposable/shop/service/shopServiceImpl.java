@@ -18,9 +18,9 @@ public class shopServiceImpl implements shopService{
 	private shopDao shopDao;
 	
 	@Override
-	public List<Map<String, Object>> shopMain(String shopnum) {
+	public List<Map<String, Object>> shopMain(Map<String,Object> paramMap) {
 		// TODO Auto-generated method stub
-		return shopDao.shopMain(shopnum);
+		return shopDao.shopMain(paramMap);
 	}
 	@Override
 	public List<Map<String, Object>> getFoodOption(Map<String, Object> paramMap) {
