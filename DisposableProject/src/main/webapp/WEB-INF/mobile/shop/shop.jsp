@@ -8,16 +8,16 @@
 <h2>${getStoreInfo[0].STORENAME}</h2>
 </div>
 <div style="width: 90%;margin: auto;">
-	<h2>${getStoreInfo[0].ADDRESS}</h4>
-	<h3>${getStoreInfo[0].NOTICE}</h5>
-	<h4>${getStoreInfo[0].PHONE}</h6>
+	<h2>${getStoreInfo[0].ADDRESS}</h2>
+	<h3>${getStoreInfo[0].NOTICE}</h3>
+	<h4>${getStoreInfo[0].PHONE}</h4>
 </div>
 <div style="width: 80%;margin: auto;">
 리뷰
 </div>
 <div class="FoodContainer" style="width: 100%;margin-top: 30px">
 	<c:forEach items="${StoreFoodList}" var="StoreFoodList">
-	<div style="border-bottom: 1px solid #f2f2f2;display: flex;justify-content: space-between;width: 90%;margin: auto;height: 60px;align-items: center;">
+	<div onclick="location.href='/shop/MobileOptionSelect.do?shopnum=${StoreFoodList.STORENUM}&foodnum=${StoreFoodList.FOODNUM}'" style="border-bottom: 1px solid #f2f2f2;display: flex;justify-content: space-between;width: 90%;margin: auto;height: 60px;align-items: center;">
 		<div>
 			<div>
 			${StoreFoodList.FOODNAME }
