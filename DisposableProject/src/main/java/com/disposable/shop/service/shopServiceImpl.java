@@ -32,4 +32,9 @@ public class shopServiceImpl implements shopService{
 		// TODO Auto-generated method stub
 		return shopDao.getStoreInfo(shopnum);
 	}
+	@Override
+	public int orderInsert(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return shopDao.orderInsert(map);
+	}
 }
