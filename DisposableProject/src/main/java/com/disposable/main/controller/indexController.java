@@ -21,4 +21,10 @@ public class indexController {
 		System.out.println("index");
 		return "index";
 	}
+	
+	@RequestMapping(value="/mobile")
+		public String mobile(Model model) {
+		System.out.println("mobile");
+		return "mobile";
+	}
 }
