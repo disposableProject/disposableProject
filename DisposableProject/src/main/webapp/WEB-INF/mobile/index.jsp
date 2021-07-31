@@ -273,7 +273,7 @@ html,body  {
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="height: 60px;width:100%;display: flex; justify-content: center;align-items: center;background:#b2cfbe;position: fixed; ;z-index: 1000">
+	<div style="height: 60px;width:100%;display: flex; justify-content: center;align-items: center;background:#fff;position: fixed; ;z-index: 1000;border-bottom: 1px solid  #f2f2f2;">
 		<tiles:insertAttribute name="header" />
 	</div>
 	<button id="burger" class="open-main-nav" style="position: fixed;">

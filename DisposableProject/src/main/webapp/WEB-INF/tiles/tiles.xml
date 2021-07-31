@@ -32,22 +32,38 @@
 		<put-attribute name="header" value="/WEB-INF/mobile/include/header.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="left" value="" />
-		<put-attribute name="footer" value="/WEB-INF/mobile/include/footer.jsp" />
+		<put-attribute name="footer" value="" />
 	</definition>
 	<!-- 기본 메인-->
 	<definition name="mobile" extends="mobileTiles">
 		 <put-attribute name="body"  expression="/WEB-INF/mobile/include/main.jsp" />
 		 <put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		 <put-attribute name="footer" value="/WEB-INF/mobile/include/footer.jsp" />
 	</definition>
-	
-	
+	<definition name="mobile/shop/shop" extends="mobileTiles">
+		<put-attribute name="body"  expression="/WEB-INF/mobile/shop/shop.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/shopMainfooter.jsp" />
+	</definition>
+	<definition name="mobile/shop/MobileOptionSelect" extends="mobileTiles">
+		<put-attribute name="body"  expression="/WEB-INF/mobile/shop/MobileOptionSelect.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/shopfooter.jsp" />
+	</definition>
+		<definition name="mobile/shop/foodCart" extends="mobileTiles">
+		<put-attribute name="body"  expression="/WEB-INF/mobile/shop/foodCart.jsp" />
+		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/shopOrderFooter.jsp" />
+	</definition>
 	<definition name="mobile/*/*" extends="mobileTiles">
 		<put-attribute name="body"  expression="/WEB-INF/mobile/{1}/{2}.jsp" />
 		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/footer.jsp" />
 	</definition>
 	<definition name="mobile/*" extends="mobileTiles" >
 		<put-attribute name="body"  expression="/WEB-INF/mobile/{1}.jsp" />
 		<put-attribute name="left"  expression="/WEB-INF/mobile/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/mobile/include/footer.jsp" />
 	</definition>
 	
 	<!-- 회원

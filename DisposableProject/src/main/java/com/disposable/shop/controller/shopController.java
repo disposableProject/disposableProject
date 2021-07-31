@@ -51,8 +51,17 @@ public class shopController {
 		model.addAttribute("getStoreInfo", resultMap2);
 		model.addAttribute("getFoodInfo", resultMap3);
 		return "mobile/shop/MobileOptionSelect";
-		
-		
 	}
+	@RequestMapping(value="foodCart.do")
+	public String foodCart(Model model,@RequestParam("shopNum") String shopnum) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum", shopnum);
 	
+		List<Map<String,Object>> resultMap = shopservice.getStoreInfo(shopnum);
+
+
+		model.addAttribute("getStoreInfo", resultMap);
+		
+		return "mobile/shop/foodCart";
+	}
 }

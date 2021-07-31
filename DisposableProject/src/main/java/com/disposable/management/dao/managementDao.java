@@ -13,4 +13,5 @@ public interface managementDao {
 	public Integer foodOptionInsert(Map<String, Object> paramMap) throws SQLException;
 	public Integer foodImageInsert(String paramMap) throws SQLException;
 	public List<Map<String,Object>> storeFoodListGet(Map<String, Object> paramMap);
+	public List<Map<String,Object>> storeOrderList(String storenum);
 }

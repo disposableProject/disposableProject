@@ -48,6 +48,7 @@ public class shopRestController {
 		List<Map<String, Object>> readValue = null;
 		Uuid uuid = new Uuid();
 		String orderCode = uuid.uuid();
+		String result = "";
         try {
            readValue = objectMapper.readValue(jsondata,
                     new TypeReference<List<Map<String, Object>>>() {
