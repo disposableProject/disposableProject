@@ -7,11 +7,6 @@
 		<if test="foodnum != '' and foodnum != null">
 		AND FOODNUM = #{foodnum}
 		</if>
-		<!-- SELECT *
-		FROM FOOD F
-		INNER JOIN SHOP S
-		ON F.STORENUM = S.STORENUM
-		WHERE F.STORENUM = #{storenum} -->
 	</select>
 	
 	<select id="getFoodOption" parameterType="java.util.Map" resultType="java.util.Map">
@@ -26,9 +21,22 @@
 		SELECT * FROM SHOP WHERE STORENUM = #{storenum}
 	</select>
 	
+	<!-- 주문서 생성 -->
 	<insert id="orderInsert" parameterType="java.util.Map">
 		INSERT INTO ORDERFOOD (ORDERNUM, STORENUM, FOODNUM, PRICE, EMAIL, ORDERCODE, OPTIONS)
 		VALUES (ORDER_SEQ.NEXTVAL, #{storenum}, #{foodnum}, #{price}, #{email}, #{ordercode}, #{options})
+	</insert>
+	
+	<!-- 주문 정보 -->
+	<select id="orderPayment" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM ORDERFOOD
+		WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="writeReview" parameterType="java.util.Map">
+		INSERT INTO REVIEW (REVIEWNUM, FOODNUM, STORENUM, NICKNAME, EMAIL, REVIEW, PHOTO, WDATE)
+		VALUES (REVIEW_SEQ.NEXTVAL, #{foodnum}, #{storenum}, #{nickname}, #{email}, #{review}, #{photo}, CURRENT_DATE)
 	</insert>
 	
 </mapper>
