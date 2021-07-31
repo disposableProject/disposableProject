@@ -46,6 +46,8 @@ public class shopRestController {
 		System.out.println("jsondata ==>"+jsondata);
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Map<String, Object>> readValue = null;
+		
+		// util에서 클래스 가져옴
 		Uuid uuid = new Uuid();
 		String orderCode = uuid.uuid();
         try {

@@ -37,4 +37,9 @@ public class shopServiceImpl implements shopService{
 		// TODO Auto-generated method stub
 		return shopDao.orderInsert(map);
 	}
+	@Override
+	public List<Map<String, Object>> orderPayment(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return shopDao.orderPayment(paramMap);
+	}
 }

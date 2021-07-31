@@ -4,6 +4,7 @@
 <style>
 *{
 	box-sizing: border-box;
+	letter-spacing: 0.1rem;
 }
 .container{
 	width: 1240px;
@@ -35,9 +36,6 @@
 .middleBox{
 	border: 1px solid black;
 }
-.bottomBox{
-	border: 1px solid black;
-}
 .selectMenu{
 	border: 1px solid #c4c4c4;
 	min-height: 100px;
@@ -55,7 +53,32 @@
     grid-template-rows: 300px;
     gap: 20px 20px;
 }
-@media screen and (max-width: 768px){
+.selectBox{
+	display: flex;
+    flex-direction: row-reverse;
+    padding-top: 20px;
+}
+.reviewSelect{
+	border: 1px solid #bfbfbf;
+    height: 45px;
+    width: 125px;
+    font-size: 16px;
+    line-height: 45px;
+    padding: 0 0 0 7px;
+}
+.reviewText{
+	text-align: left;
+}
+.sortBox{
+	margin-bottom: 10px;
+}
+.reviewNum, .reviewPhoto, .reviewName, .reviewDate{
+	text-align: center;
+}
+.writeReview{
+	display: flex; flex-direction: row-reverse;
+}
+/* @media screen and (max-width: 768px){
 	.rightSection{
 		display: none;
 	}
@@ -69,7 +92,7 @@
 	    grid-template-rows: 300px;
 	    gap: 20px 20px;
 	}
-}
+} */
 </style>
 
 
@@ -105,8 +128,53 @@
 		
 		<div class="bottomBox">
 			<div class="reviewBox">
-				리뷰 들어갈거임
+				<h2 style="margin: 0; color: #666;">REVIEW</h2>
+				<div class="sortBox">
+					<div class="guideBox">
+						<ul style="margin: 0; padding:0; color: #666; list-style: none;">
+							<li>주문 음식에 대한 소중한 리뷰를 남겨주세요.</li>
+							<li>해당 게시판의 성격과 다른 글은 사전동의 없이 삭제될 수 있습니다.</li>
+						</ul>
+					</div>
+					<div class="selectBox">
+						<select name="reviewSelect" class="reviewSelect">
+							<option value="newReview">최근등록순</option>
+							<option value="oldReview">오래등록순</option>
+						</select>
+					</div>
+				</div>
+				<table style="width: 100%; border: 0; border-top: 3px solid #7ea155; border-bottom: 3px solid #7ea155;">
+					<colgroup>
+						<col style="width:50px;">
+						<col style="width:200px;">
+						<col style="width:autopx;">
+						<col style="width:100px;">
+						<col style="width:100px;">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>번호</th>
+							<th>photo</th>
+							<th>review</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+						<tr class="userReview">
+							<td class="reviewNum">1</td>
+							<td class="reviewPhoto">2</td>
+							<td class="reviewText">3</td>
+							<td class="reviewName">4</td>
+							<td class="reviewDate">5</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+			<!-- 리뷰 작성은 마이페이지 구매 내역으로 / 로그인 안한 사람은 로그인 화면으로 / 구매하지 않은 사람은 alert+현재페이지에-->
+			<p class="writeReview">
+				<a href="#none">
+					<span>후기쓰기</span>
+				</a>
+			</p>
 		</div>
 	</div>
 	
@@ -194,6 +262,7 @@ function getOrderInfo(foodname, foodprice,foodnum){
 	console.log("너 무슨 값인데?")
 	console.log(result)
 	var selectMenuText = document.querySelector(".selectMenu");
+	//selectFood 내 foodnum과 food옵션 가져오기
 	$(selectMenuText).append("<div class='selectFood' name='"+foodnum+"'><input type='hidden' class='foodnum' value='"+foodnum+"'><input type='hidden' class='optionName' value='"+optionName+"'>"+foodname+"<br><span class='selectfoodoption'>"+result+"</span>  <button type='button' onclick=menuDelete(this,'"+foodprice+"')>삭제하기</button></div>");
 	totalPrice = parseInt(totalPrice)+parseInt(foodprice)
 	$("#totalPayment").text(totalPrice)
@@ -210,25 +279,46 @@ function menuDelete(ths,price){
 }
 
 //주문서 생성
+//비회원이 주문서 생성할 때 로그인 하라고 알람 주기
 function orderInsert(){
-	var orderArray = []
-	var selectFoodList = $(".selectFood")
-	var foodnum = $(".selectFood .foodnum")
-	var optionName = $(".selectFood .optionName")
-	for(var i=0; i< selectFoodList.length;i++){
-
-		var orderInfo ={
-				storenum : '${getStoreInfo[0].STORENUM}',
-				foodnum : foodnum[i].value,
-				price : $('#totalPayment').text(),
-				email : '${userInfo.EMAIL}',
-				options : optionName[i].value
+	var userInfo = '${userInfo.EMAIL}';
+	if(userInfo == null || userInfo == ''){
+		alert("주문 시 로그인 필수");
+		window.location.replace("http://localhost:8110/user/userLogin.do");
+	}else{
+		var orderArray = []
+		var selectFoodList = $(".selectFood")
+		var foodnum = $(".selectFood .foodnum")
+		var optionName = $(".selectFood .optionName")
+		for(var i=0; i< selectFoodList.length;i++){
+	
+			var orderInfo ={
+					storenum : '${getStoreInfo[0].STORENUM}',
+					foodnum : foodnum[i].value,
+					price : $('#totalPayment').text(),
+					email : '${userInfo.EMAIL}',
+					options : optionName[i].value
+				}
+			orderArray.push(orderInfo)
+		}
+		console.log("오더 옵션")
+		console.log(orderArray)
+		
+		var jsonData = JSON.stringify(orderArray);
+		
+		$.ajax({
+			type : 'POST',
+			url : '/shop/orderInsert.do',
+			data : {'jsondata':jsonData},
+			dataType : 'json',
+			success : function(json){
+				alert("주문서 생성 성공");
+				location.href="orderPayment.do";
+			},
+			error: function(xhr, status, error){
+				alert("주문서를 생성하지 못했습니다."+error);
 			}
-		orderArray.push(orderInfo)
+		});
 	}
-	
-	
-	console.log("오더 옵션")
-	console.log(orderArray)
 }
 </script>
