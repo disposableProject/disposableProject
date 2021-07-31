@@ -46,4 +46,9 @@ public class managementServiceImpl implements managementService{
 		// TODO Auto-generated method stub
 		return managementDao.storeFoodListGet(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> storeOrderList(String storenum) {
+		// TODO Auto-generated method stub
+		return managementDao.storeOrderList(storenum);
+	}
 }

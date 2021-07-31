@@ -50,6 +50,7 @@ public class shopRestController {
 		// util에서 클래스 가져옴
 		Uuid uuid = new Uuid();
 		String orderCode = uuid.uuid();
+		String result = "";
         try {
            readValue = objectMapper.readValue(jsondata,
                     new TypeReference<List<Map<String, Object>>>() {

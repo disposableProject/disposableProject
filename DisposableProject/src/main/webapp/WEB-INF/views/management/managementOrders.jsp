@@ -22,7 +22,6 @@
 <div id="gridpager"></div>
 
 <script>
-
 var dataArr = 
 	[
 		{CODE:"a132ihhuw",FOODNAME:"마라탕",OPTION:"맵기: 덜맵게/소스포함",MEMO:"찾으러 갈게요",STATUS:"주문접수"}, 
@@ -43,41 +42,68 @@ var dataArr =
 		
 		
 		]; 
-		$("#jqGrid").jqGrid({ 
-			datatype: "local", 
-			data: dataArr, 
-			height: 600, 
-			autowidth : true,    
-			//width: 1500,
-			colNames : ['주문코드','음식명','옵션 사항','메모','상태'], 
-			colModel:[
-				//{name:"NO", index:"NO", width:15, align:'center', hidden:false },
-				{name : 'CODE', index : 'CODE', width :  "10%", align : 'left', hidden:false, }, 
-				{name : 'FOODNAME', index : 'FOODNAME', width :  "20%", align : 'center', hidden:false },
-				{name : 'OPTION', index : 'OPTION', width :  "20%", resizable : true, align : 'right', hidden:false },
-				{name : 'MEMO', index : 'MEMO', width :  "20%", resizable : true, align : 'right', hidden:false },
-				{name : 'STATUS', index : 'STATUS', width : "5%", resizable : true, align : 'right', hidden:false }
-				
-				],
-				loadtext: "로딩중일때 표시되는 텍스트!", 
-				caption:"주문관리", 
-				pager:"#gridpager", 
-				rowNum:20,
-	//rownumbers:true, 
-	multiselect : true,
-	//shrinkToFit: true,
-	scrollOffset:'10'
+		
+$(document).ready(function(){
+	storeOrderList();
 	
-//	viewrecords:true, 
-//	pgbuttons:true, 
-//	pginput:true, 
-	//shrinkToFit:true,
-	//sortable: false, 
-	//loadComplete:function(data){}, 
-	//scroll:true, 
-	//loadonce:false, 
-	//hidegrid:true
-	});
+})
+
+
+		function storeOrderList(){
+			$.ajax({
+				type : 'POST',
+				url : 'storeOrderList.do',
+				data : {},
+				dataType : 'json',
+				success : function(json){
+					dataArr = json
+					console.log(dataArr)
+					$("#jqGrid").jqGrid({ 
+						datatype: "local", 
+						data: dataArr, 
+						height: 600, 
+						autowidth : true,    
+						//width: 1500,
+						colNames : ['주문코드','음식명','옵션 사항','메모'], 
+						grouping:true,
+					   	groupingView : {
+					   		groupField : ['ORDERCODE']
+					   	},
+					   	caption: "Grouping Array Data",
+						colModel:[
+							//{name:"NO", index:"NO", width:15, align:'center', hidden:false },
+							{name : 'ORDERCODE', index : 'ORDERCODE', width :  "10%", align : 'left', hidden:false, }, 
+							{name : 'FOODNUM', index : 'FOODNUM', width :  "20%", align : 'center', hidden:false },
+							{name : 'OPTIONS', index : 'OPTIONS', width :  "20%", resizable : true, align : 'right', hidden:false },
+							{name : 'PRICE', index : 'PRICE', width :  "20%", resizable : true, align : 'right', hidden:false },
+							
+							],
+							loadtext: "로딩중일때 표시되는 텍스트!", 
+							caption:"주문관리", 
+							pager:"#gridpager", 
+							rowNum:20,
+				//rownumbers:true, 
+				multiselect : true,
+				//shrinkToFit: true,
+				scrollOffset:'10'
+				
+//				viewrecords:true, 
+//				pgbuttons:true, 
+//				pginput:true, 
+				//shrinkToFit:true,
+				//sortable: false, 
+				//loadComplete:function(data){}, 
+				//scroll:true, 
+				//loadonce:false, 
+				//hidegrid:true
+				});
+				},
+				error: function(xhr, status, error){
+					alert("주문내역을 불러오는데 실패했습니다."+error);
+				}
+			});
+		}
+		
 		
 
 </script>

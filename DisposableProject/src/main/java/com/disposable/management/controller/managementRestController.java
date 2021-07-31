@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +65,11 @@ public class managementRestController {
 		resultMap.put("JavaData", foodInsertCheck);
 		return resultMap;
 	}
-	
+	@RequestMapping(value="/storeOrderList.do", method=RequestMethod.POST)
+	public List<Map<String,Object>> storeOrderList(HttpSession session,HttpServletRequest request) throws SQLException, Exception {
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storenum = String.valueOf(userInfo.get("STORENUM"));
+		List<Map<String,Object>> resultMap = managementservice.storeOrderList(storenum);
+		return resultMap;
+	}
 }
