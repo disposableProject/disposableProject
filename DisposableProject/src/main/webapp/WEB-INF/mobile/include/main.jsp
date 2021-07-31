@@ -8,7 +8,7 @@
 <style>
 .bigSlider{width: 100%;height: 20%;background: red}
 .evenBox{width:100%;background: white;min-height: 270px}
-.oddBox{width:100%;height: 37%;background: #f2f2f2}
+.oddBox{width:100%;background: #f2f2f2}
 .eventBox{height: 50%}
 .bannerBox{height: 70px;background: green;}
 .squares {
