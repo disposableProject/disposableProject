@@ -6,7 +6,7 @@
 					<a href="#">NEW</a>
 				</li>
 				<li>
-					<a href="#">BEST</a>
+					<a href="/shop/best.do">BEST</a>
 				</li>
 				<li>
 					<a href="#">AROUND</a>

@@ -42,5 +42,18 @@ public class indexRestController {
 		List<Map<String,Object>> resultMap = indexservice.storeList(paramMap);
 		return resultMap;
 	}
-	
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 주문 많은 식당목록
+	 */
+	@RequestMapping(value="/bestStoreList.do", method=RequestMethod.POST)
+	public List<Map<String,Object>> bestStoreList(@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		
+		List<Map<String,Object>> resultMap = indexservice.bestStoreList(paramMap);
+		return resultMap;
+	}
 }

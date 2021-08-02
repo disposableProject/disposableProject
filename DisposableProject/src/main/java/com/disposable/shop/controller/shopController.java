@@ -78,4 +78,10 @@ public class shopController {
 		model.addAttribute("getStoreInfo", resultMap);
 		return "mobile/shop/foodCart";
 	}
+	
+	@RequestMapping(value="best.do")
+	public String best() {
+		
+		return "mobile/shop/best";
+	}
 }

@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div>
-			<img  alt="" src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${StoreFoodList.FOODPHOTO }" style="width: 100%;height: 100%"/>
+			<img  alt="" src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${StoreFoodList.IMGNAME }" style="width: 100px;height: 60px"/>
 		</div>
 	</div>
 	</c:forEach>

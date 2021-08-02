@@ -9,5 +9,13 @@
 		) SP
 		WHERE SP.RM > #{startPage} AND #{endPage} > SP.RM 
 	</select>
-	
+	<select id="bestStoreList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT * FROM 
+	(SELECT AA.*,ROWNUM AS RM FROM
+	(SELECT *
+	FROM (SELECT STORENUM,COUNT(*) AS ORDERCNT FROM ORDERFOOD GROUP BY STORENUM ORDER BY ORDERCNT) OFD
+	INNER JOIN SHOP SH
+	ON OFD.STORENUM = SH.STORENUM)AA)BB
+	WHERE 11 > BB.rm
+	</select>
 </mapper>
