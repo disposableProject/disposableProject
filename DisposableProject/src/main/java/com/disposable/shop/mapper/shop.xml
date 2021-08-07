@@ -29,14 +29,26 @@
 	
 	<!-- 주문서 생성 -->
 	<insert id="orderInsert" parameterType="java.util.Map">
-		INSERT INTO ORDERFOOD (ORDERNUM, STORENUM, FOODNUM, PRICE, EMAIL, ORDERCODE, OPTIONS)
-		VALUES (ORDER_SEQ.NEXTVAL, #{storenum}, #{foodnum}, #{price}, #{email}, #{ordercode}, #{options})
+		INSERT INTO ORDERFOOD (ORDERNUM, STORENUM, FOODNUM, ALLPRICE, EMAIL, ORDERCODE, OPTIONS, OPTIONNUM, STATES)
+		VALUES (ORDER_SEQ.NEXTVAL, #{storenum}, #{foodnum}, #{price}, #{email}, #{ordercode}, #{options}, #{optionnum} ,'NEW')
 	</insert>
 	
 	<!-- 주문 정보 -->
 	<select id="orderPayment" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM ORDERFOOD
-		WHERE EMAIL = #{email}
+		SELECT ODF.*, FO.*, FOP.OPTIONPRICE, FOP.OPTIONNAME
+		FROM ORDERFOOD ODF, (SELECT FOODOPTION.* FROM FOODOPTION WHERE FOODOPTION.FOODNUM = #{foodnum} AND FOODOPTION.OPTIONNUM = #{optionnum}) FOP
+		INNER JOIN FOOD FO
+		ON FOP.STORENUM = FO.STORENUM
+		AND FOP.FOODNUM = FO.FOODNUM
+		WHERE ODF.EMAIL = #{email}
+		AND ODF.ORDERCODE = #{orderCode}
+		<!-- SELECT * 
+		FROM ORDERFOOD ODF
+		INNER JOIN FOOD FO
+		ON ODF.STORENUM = FO.STORENUM
+		AND ODF.FOODNUM = FO.FOODNUM
+		WHERE ODF.EMAIL = #{email}
+		AND ODF.ORDERCODE = #{orderCode} -->
 	</select>
 	
 	<!-- 댓글 작성 -->
