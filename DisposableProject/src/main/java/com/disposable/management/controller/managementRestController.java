@@ -3,12 +3,19 @@ package com.disposable.management.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,10 +73,32 @@ public class managementRestController {
 		return resultMap;
 	}
 	@RequestMapping(value="/storeOrderList.do", method=RequestMethod.POST)
-	public List<Map<String,Object>> storeOrderList(HttpSession session,HttpServletRequest request) throws SQLException, Exception {
+	public List<Map<String,Object>> storeOrderList(HttpSession session,HttpServletRequest request,@RequestParam(value="STATE", required=false) String state) throws SQLException, Exception {
 		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
 		String storenum = String.valueOf(userInfo.get("STORENUM"));
-		List<Map<String,Object>> resultMap = managementservice.storeOrderList(storenum);
+		Map <String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum",storenum);
+		paramMap.put("state",state);
+		List<Map<String,Object>> resultMap = managementservice.storeOrderList(paramMap);
 		return resultMap;
 	}
+	
+	@RequestMapping(value="/updateOrder.do", method=RequestMethod.POST)
+	public Map<String,Object> updateOrder(HttpSession session,HttpServletRequest request,@RequestParam(value="orderCodes", required=false) ArrayList orderCodes,@RequestParam(value="state", required=false) String state) throws SQLException, Exception {
+		System.out.println("updateOrder ============== ");
+		System.out.println(orderCodes);
+		System.out.println(state);
+		Map <String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("orderCodes",orderCodes);
+		paramMap.put("state",state);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Integer result = managementservice.updateOrder(paramMap);
+		if(result > 0) {
+			resultMap.put("JavaData", "update");
+		}
+		return resultMap;
+	}
+	
+	
+	
 }
