@@ -115,7 +115,10 @@
 				</div>
 			<!-- 결제 버튼(태그) -->
 			<div class="payArea">
-				<button type="button" class="payBtn">결제하기</button>
+				<form method="post" action="/shop/kakaoPay">
+					<input type="hidden" name="price" value="${orderPayment[0].ALLPRICE}"/>
+					<button type="submit" class="payBtn">결제하기</button>
+				</form>
 			</div>
 		</div>
 	</div>
