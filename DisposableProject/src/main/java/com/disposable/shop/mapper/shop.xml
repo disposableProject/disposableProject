@@ -29,8 +29,8 @@
 	
 	<!-- 주문서 생성 -->
 	<insert id="orderInsert" parameterType="java.util.Map">
-		INSERT INTO ORDERFOOD (ORDERNUM, STORENUM, FOODNUM, ALLPRICE, EMAIL, ORDERCODE, OPTIONS, OPTIONNUM, STATES)
-		VALUES (ORDER_SEQ.NEXTVAL, #{storenum}, #{foodnum}, #{price}, #{email}, #{ordercode}, #{options}, #{optionnum} ,'NEW')
+		INSERT INTO ORDERFOOD (ORDERNUM, STORENUM, FOODNUM, ALLPRICE, EMAIL, ORDERCODE, OPTIONS,OPTIONNUM,ORDERDATE,STATES)
+		VALUES (ORDER_SEQ.NEXTVAL, #{storenum}, #{foodnum}, #{price}, #{email}, #{ordercode}, #{options},#{optionnum},sysdate,'NEW')
 	</insert>
 	
 	<!-- 주문 정보 -->
