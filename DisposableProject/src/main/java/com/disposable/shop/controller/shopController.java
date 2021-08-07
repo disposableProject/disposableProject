@@ -96,4 +96,15 @@ public class shopController {
 		
 		return "mobile/shop/best";
 	}
+		@RequestMapping("/kakaoPay")
+	    public String kakaoPay(@RequestParam("price") String price) {
+	   
+	        return "redirect:" + kakaopay.kakaoPayReady(price);
+	    }
+	
+	@RequestMapping("/kakaoPaySuccess")
+   	 public String kakaoPaySuccess() {
+   
+        return "shop/kakaoPaySuccess";
+    	}
 }
