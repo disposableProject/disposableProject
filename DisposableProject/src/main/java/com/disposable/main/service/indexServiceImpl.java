@@ -21,4 +21,9 @@ public class indexServiceImpl implements indexService{
 		// TODO Auto-generated method stub
 		return indexdao.storeList(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> bestStoreList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return indexdao.bestStoreList(paramMap);
+	}
 }

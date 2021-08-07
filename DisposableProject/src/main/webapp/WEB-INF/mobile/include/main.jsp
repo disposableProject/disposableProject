@@ -8,7 +8,7 @@
 <style>
 .bigSlider{width: 100%;height: 20%;background: red}
 .evenBox{width:100%;background: white;min-height: 270px}
-.oddBox{width:100%;height: 37%;background: #f2f2f2}
+.oddBox{width:100%;background: #f2f2f2}
 .eventBox{height: 50%}
 .bannerBox{height: 70px;background: green;}
 .squares {
@@ -21,7 +21,7 @@
     }
 
 .squares .square {
-        width: 45%;
+        width: 190px;
 		margin-right:10px;
         text-align: center;
         height: 250px;
@@ -114,6 +114,7 @@ $(document).ready(function(){
 		
 		});
 	getShopList()
+	getBestShopList()
 })
 
 function getShopList(){
@@ -129,7 +130,28 @@ function getShopList(){
 				html += "<div style='width:100%;height:30%;margin-top:10px'><div style='width:100%;text-align:left;font-size:14px;font-weight:bold'>"+json[i].STORENAME+"</div><div style='width:100%;text-align:left;font-size:10px'>4.8(10) 1.2km</div></div></div>"
 			}
 			//html += "<div class='square' style='width: 20%'><img><div style='height:100%'></div></div>"
-			$(".squares").html(html)
+			$(".recommendShop").html(html)
+		},
+		error: function(xhr, status, error){
+			alert("가입에 실패했습니다."+error);
+		}
+	});
+}
+
+function getBestShopList(){
+	$.ajax({
+		type : 'POST',
+		url : '/bestStoreList.do',
+		data : {},
+		dataType : 'json',
+		success : function(json){
+			var html = ""
+			for(var i=0;i<json.length;i++){
+				html += "<div class='square' onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"&device=mobile\"' ><img src='https://cookingcoding.s3.ap-northeast-2.amazonaws.com/"+json[i].PHOTO+"' style='width:100%;height:70%;'>"
+				html += "<div style='width:100%;height:30%;margin-top:10px'><div style='width:100%;text-align:left;font-size:14px;font-weight:bold'>"+json[i].STORENAME+"</div><div style='width:100%;text-align:left;font-size:10px'>4.8(10) 1.2km</div></div></div>"
+			}
+			//html += "<div class='square' style='width: 20%'><img><div style='height:100%'></div></div>"
+			$(".BestShop").html(html)
 		},
 		error: function(xhr, status, error){
 			alert("가입에 실패했습니다."+error);
@@ -183,13 +205,13 @@ function getShopList(){
 	<div style="height: 40px;display: flex;align-items: center;padding-left: 10px;padding-top: 5px">
 		<span style="font-weight: bold">이 가게 어때요?</span>
 	</div>
-	<div class="squares"> </div>
+	<div class="squares recommendShop"> </div>
 </div>
 <div class="oddBox">
 	<div style="height: 40px;display: flex;align-items: center;padding-left: 10px;padding-top: 5px">
 		<span style="font-weight: bold">인기 프렌차이즈</span>
 	</div>
-	<div class="squares"> </div>
+	<div class="squares BestShop"> </div>
 </div>
 <div class="evenBox" style="min-height: 400px">
 	<div style="height: 40px;display: flex;align-items: center;padding-left: 10px;padding-top: 5px">

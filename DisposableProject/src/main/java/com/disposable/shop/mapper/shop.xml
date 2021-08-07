@@ -3,10 +3,16 @@
 <mapper namespace="com.disposable.shop.dao.shopDao">
 
 	<select id="shopMain" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM FOOD WHERE STORENUM = #{storenum}
-		<if test="foodnum != '' and foodnum != null">
-		AND FOODNUM = #{foodnum}
-		</if>
+		SELECT * 
+			FROM FOOD FD
+			LEFT JOIN ( SELECT B.* FROM (SELECT ROW_NUMBER() OVER(PARTITION BY A.BOARDNUM 
+			ORDER BY A.IMGNAME,A.BOARDNUM) AS ROW_NUM,A.* FROM IMAGEBOX A WHERE A.CLASSIFY='SHOP') B WHERE 
+			B.ROW_NUM = 1 ) IB
+			ON FD.FOODNUM = IB.BOARDNUM
+			 WHERE FD.STORENUM = #{storenum}
+			 <if test="foodnum != '' and foodnum != null">
+			AND FD.FOODNUM = #{foodnum}
+			</if>
 	</select>
 	
 	<select id="getFoodOption" parameterType="java.util.Map" resultType="java.util.Map">

@@ -22,7 +22,7 @@ font-size: 18px;
 
 
 <div style="width: 100%;height: 250px">
-<img class="storeImg" alt="" src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${getStoreInfo[0].PHOTO}" style="width: 100%;height: 100%"/>
+<img class="storeImg" alt="" src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${getFoodInfo[0].IMGNAME}" style="width: 100%;height: 100%"/>
 </div>
 <div style="width: 92%;height: 100px;margin: auto;">
 	<h2>${getFoodInfo[0].FOODNAME}</h2>
@@ -35,7 +35,7 @@ font-size: 18px;
 	</div>
 	<div  style="width:92%;height: 70px;display: flex;align-items: center;justify-content: space-between;margin: auto;">
 		<span>수량</span>
-		<span><span class="numpm" onclick="setNumber('1')">+</span><span id="visibleNumber">1</span><span class="numpm"  onclick="setNumber('-1')">-</span><input type="hidden"  id="foodNumber" value="1"/></span>	
+		<span><span class="numpm"  onclick="setNumber('-1')">-</span><span id="visibleNumber">1</span><span class="numpm" onclick="setNumber('1')">+</span><input type="hidden"  id="foodNumber" value="1"/></span>	
 	</div>
 </div>
 <c:set var="optiongrnum" value="-1" />
