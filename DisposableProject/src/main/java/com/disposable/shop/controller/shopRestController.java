@@ -1,11 +1,14 @@
 package com.disposable.shop.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -38,18 +41,20 @@ public class shopRestController {
 	@RequestMapping(value="/getFoodOption.do", method=RequestMethod.POST)
 	public List<Map<String,Object>> getFoodOption(HttpServletRequest request,@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
 		List<Map<String,Object>> resultMap = shopservice.getFoodOption(paramMap);
+		System.out.println("getFoodOption++++++ : " + resultMap);
 		return resultMap;
 	}
 	
 	@RequestMapping(value="/orderInsert.do", method=RequestMethod.POST)
-	public List<Map<String,Object>> orderInsert(HttpServletRequest request,@RequestParam String jsondata) throws SQLException, Exception {
+	public List<Map<String,Object>> orderInsert(HttpServletRequest request,@RequestParam String jsondata, HttpSession session) throws SQLException, Exception {
 		System.out.println("jsondata ==>"+jsondata);
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Map<String, Object>> readValue = null;
-		
+
 		// util에서 클래스 가져옴
 		Uuid uuid = new Uuid();
 		String orderCode = uuid.uuid();
+		session.setAttribute("orderCode", orderCode);
         try {
            readValue = objectMapper.readValue(jsondata,
                     new TypeReference<List<Map<String, Object>>>() {
@@ -59,6 +64,11 @@ public class shopRestController {
                 //MapUtils.debugPrint(System.out, "map", map);
             	map.put("ordercode", orderCode);
             	System.out.println("mapmapamp :" + map);
+            	String foodnum = (String)map.get("foodnum");
+            	String optionnum = (String)map.get("optionnum");
+            	System.out.println("foodnumfoodnum=>"+foodnum);
+            	session.setAttribute("foodnum", foodnum);
+            	session.setAttribute("optionnum", optionnum);
             	int isS = shopservice.orderInsert(map);
             	
             }
@@ -69,8 +79,12 @@ public class shopRestController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } 
-		System.out.println("paramMap =>"+jsondata);
 		
 		return readValue;
+	}
+
+	private Object JSONParser(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
