@@ -72,4 +72,7 @@
 			SET STATES = #{state}
 			WHERE ORDERCODE = #{ordercode}
 	</update>
+	<select id="shopInfo" parameterType="String"  resultType="java.util.Map">
+		SELECT * FROM SHOP WHERE STORENUM = #{storenum}
+	</select>
 </mapper>

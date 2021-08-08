@@ -45,7 +45,11 @@ public class managementController {
 	 * @description 가게 정보 관리 페이지 이동
 	 */
 	@RequestMapping(value="shopInfo.do")
-	public String shopInfo() {
+	public String shopInfo(Model model,HttpSession session) {
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storeNum = String.valueOf(userInfo.get("STORENUM"));
+		Map<String,Object> resultMap =   managementservice.shopInfo(storeNum);
+		model.addAttribute("storeInfo", resultMap);
 		System.out.println("shopInfo");
 		return "management/shopInfo";
 	}

@@ -22,13 +22,13 @@ background: #f8f8f8;width: 100px;color:#393939;font-size: 13px;font-weight: bold
 		<tbody>
 			<tr>
 				<td class="titleTd">가게 명</td>
-				<td>213</td>
+				<td>${storeInfo.STORENAME}</td>
 				<td class="titleTd">전화번호</td>
-				<td>213</td>
+				<td>${storeInfo.PHONE}</td>
 			</tr>
 			<tr>
 				<td class="titleTd">주소</td>
-				<td colspan="3"></td>
+				<td colspan="3">${storeInfo.ADDRESS}</td>
 			</tr>
 			<tr>
 				<td class="titleTd">가게 분류</td>
@@ -38,7 +38,7 @@ background: #f8f8f8;width: 100px;color:#393939;font-size: 13px;font-weight: bold
 			<tr style="height: 450px">
 				<td class="titleTd">공지사항</td>
 				<td colspan="3" style="padding: 0px;" >
-					<div ></div>
+					<div >${storeInfo.NOTICE}</div>
 				</td>
 				
 			</tr>

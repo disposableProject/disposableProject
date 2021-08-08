@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6"></script>
 <style>
 *{
 	box-sizing: border-box;	letter-spacing: 0.1rem;
@@ -83,8 +84,9 @@
 				</div>
 				<div class="rightInfo">
 					<p>${getStoreInfo[0].STORENAME}</p>
-					<p>가게주소</p>
-					<p>공지사항</p>
+					<p>가게주소: ${getStoreInfo[0].ADDRESS} <button onclick="showMap()">지도로 보기</button></p>
+					<p>${getStoreInfo[0].NOTICE}</p>
+					<div id="map" style="width:450px;height:350px;"></div>
 				</div>
 			</div>
 		</div>
@@ -326,6 +328,16 @@ function orderInsert(){
 		});
 	}
 }
+function showMap(){
+	
+	$("#map").show()
+}
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
 
-
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 </script>
+

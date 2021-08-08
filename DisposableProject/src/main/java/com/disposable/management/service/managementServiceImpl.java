@@ -63,4 +63,9 @@ public class managementServiceImpl implements managementService{
 		
 		return check;
 	}
+	@Override
+	public Map<String, Object> shopInfo(String storeNum) {
+		// TODO Auto-generated method stub
+		return managementDao.shopInfo(storeNum);
+	}
 }

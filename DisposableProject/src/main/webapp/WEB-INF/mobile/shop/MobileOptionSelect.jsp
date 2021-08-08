@@ -26,7 +26,7 @@ font-size: 18px;
 </div>
 <div style="width: 92%;height: 100px;margin: auto;">
 	<h2>${getFoodInfo[0].FOODNAME}</h2>
-	<h5>음식 설명</h5>
+	<h5>음식설명</h5>
 </div>
 <div style="width: 100%;height: 140px;border-top: 1px solid #f2f2f2 ">
 	<div  style="width:92%;height: 70px;display: flex;align-items: center;justify-content: space-between;margin: auto;">
@@ -51,10 +51,10 @@ font-size: 18px;
 	</c:if>
 	<div style="width: 92%;height: 60px;display: flex;align-items: center;margin: auto;">
 		<c:if test="${FoodOptionLists.CHECKFLAG == 'N'}">
-				<input type="checkbox"  class="options"  value="${FoodOptionLists.OPTIONNAME}/${FoodOptionLists.PRICE}"/> ${FoodOptionLists.OPTIONNAME} <span>(+ ${FoodOptionLists.PRICE}원)</span>
+				<input type="checkbox"  class="options"  value="${FoodOptionLists.OPTIONNAME}/${FoodOptionLists.OPTIONPRICE}"/> ${FoodOptionLists.OPTIONNAME} <span>(+ ${FoodOptionLists.OPTIONPRICE}원)</span>
 		</c:if>
 		<c:if test="${FoodOptionLists.CHECKFLAG == 'Y'}">
-				<input type="radio"  class="options"  name="${optiongrnum}"  value="${FoodOptionLists.OPTIONNAME}/${FoodOptionLists.PRICE}"/> ${FoodOptionLists.OPTIONNAME} <span>(+ ${FoodOptionLists.PRICE}원)</span>
+				<input type="radio"  class="options"  name="${optiongrnum}"  value="${FoodOptionLists.OPTIONNAME}/${FoodOptionLists.OPTIONPRICE}"/> ${FoodOptionLists.OPTIONNAME} <span>(+ ${FoodOptionLists.OPTIONPRICE}원)</span>
 		</c:if>
 	</div>
 </c:forEach>
