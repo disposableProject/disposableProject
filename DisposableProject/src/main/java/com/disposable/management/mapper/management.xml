@@ -43,4 +43,36 @@
 			MT.RM > #{startpagenum}  AND  #{endpagenum} >= MT.RM
 			
 	</select>
+	<select id="storeOrderList" parameterType="java.util.Map"  resultType="java.util.Map">
+			SELECT 
+					OFD.ORDERNUM
+					,OFD.STORENUM
+					,OFD.FOODNUM
+					,OFD.ALLPRICE
+					,OFD.EMAIL
+					,OFD.ORDERCODE
+					,OFD.OPTIONS
+					,OFD.STATES
+					,OFD.MEMO
+					,FD.FOODNAME
+					,to_char(OFD.ORDERDATE, 'yyyy-mm-dd hh:mi:ss') AS ORDERDATE
+
+				FROM ORDERFOOD OFD
+				INNER JOIN (SELECT * FROM FOOD WHERE STORENUM =#{storenum}) FD
+				ON OFD.FOODNUM = FD.FOODNUM
+				INNER JOIN MEMBERS MBS
+				ON OFD.EMAIL = MBS.EMAIL
+				WHERE OFD.STORENUM = #{storenum}
+				<if test="state != ''  and state != null">
+				AND STATES = #{state}
+				</if>
+	</select>
+	<update id="updateOrder" parameterType="java.util.Map">
+			UPDATE ORDERFOOD 
+			SET STATES = #{state}
+			WHERE ORDERCODE = #{ordercode}
+	</update>
+	<select id="shopInfo" parameterType="String"  resultType="java.util.Map">
+		SELECT * FROM SHOP WHERE STORENUM = #{storenum}
+	</select>
 </mapper>

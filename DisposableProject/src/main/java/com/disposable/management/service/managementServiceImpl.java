@@ -46,4 +46,26 @@ public class managementServiceImpl implements managementService{
 		// TODO Auto-generated method stub
 		return managementDao.storeFoodListGet(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> storeOrderList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return managementDao.storeOrderList(paramMap);
+	}
+	@Override
+	public Integer updateOrder(Map<String, Object> paramMap) throws SQLException {
+		Integer check = null;
+		ArrayList ordercodes = (ArrayList)paramMap.get("orderCodes");
+		for(int i=0;i<ordercodes.size();i++) {
+			paramMap.put("ordercode",ordercodes.get(i));
+			check = managementDao.updateOrder(paramMap);
+		}
+		
+		
+		return check;
+	}
+	@Override
+	public Map<String, Object> shopInfo(String storeNum) {
+		// TODO Auto-generated method stub
+		return managementDao.shopInfo(storeNum);
+	}
 }

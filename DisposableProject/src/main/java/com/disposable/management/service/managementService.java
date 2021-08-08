@@ -10,4 +10,7 @@ public interface managementService {
 	public Integer foodOptionInsert(List<Object> paramMap) throws SQLException;
 	public Integer foodImageInsert(ArrayList paramMap) throws SQLException;
 	public List<Map<String,Object>> storeFoodListGet(Map<String, Object> paramMap);
+	public List<Map<String,Object>> storeOrderList(Map<String, Object> paramMap);
+	public Integer updateOrder(Map<String, Object> paramMap) throws SQLException;
+	public Map<String,Object> shopInfo(String storeNum);
 }
