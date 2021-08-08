@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.disposable.shop.service.shopService;
+import com.disposable.utils.KakaoPay;
 
 @Controller
 @RequestMapping("/shop")
@@ -20,6 +21,8 @@ public class shopController {
 	
 	@Autowired
 	private shopService shopservice;
+	@Autowired
+	private KakaoPay kakaopay;
 	
 	@RequestMapping(value="shopMain.do")
 	public String shopMain(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("device") String device) {
@@ -82,5 +85,42 @@ public class shopController {
 		
 		return "shop/order";
 	}
+		@RequestMapping(value="foodCart.do")
+	public String foodCart(Model model,@RequestParam("shopNum") String shopnum) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum", shopnum);
+		List<Map<String,Object>> resultMap = shopservice.getStoreInfo(shopnum);
+		model.addAttribute("getStoreInfo", resultMap);
+		return "mobile/shop/foodCart";
+	}
 	
+	@RequestMapping(value="best.do")
+	public String best() {
+		
+		return "mobile/shop/best";
+	}
+	
+	@RequestMapping(value="kakaoPayment.do")
+	public String kakaoPayment(@RequestParam("allprice") String allprice,@RequestParam("ordercode") String ordercode,@RequestParam("shopname") String shopname) {
+		
+		return "redirect:" + kakaopay.kakaoPayReady(allprice,ordercode,shopname);
+	}
+	
+	@RequestMapping(value="kakaoPaySuccess.do")
+	public String kakaoPaySuccess(@RequestParam("ordercode") String ordercode) {
+		System.out.println("ordercode" + ordercode);
+		return "shop/KakaoReturn";
+	}
+	
+	@RequestMapping(value="kakaoPayCancel.do")
+	public String kakaoPayCancel() {
+		
+		return "shop/KakaoReturn";
+	}
+	
+	@RequestMapping(value="kakaoPaySuccessFail.do")
+	public String kakaoPaySuccessFail() {
+		
+		return "shop/KakaoReturn";
+	}
 }
