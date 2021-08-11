@@ -25,26 +25,26 @@
 <div style="height: 800px;overflow: auto;">
 <div style="height: 80px;width: 80%;margin: auto;border: 1px solid black">
 	<div style="height: 50%">
-		<button onclick="checkCeckBox()">모두선택/해제</button>
-		<button onclick="takeOrder('TAKE')">주문접수</button>
-		<button onclick="takeOrder('CANCEL')">주문취소</button>
-		<button onclick="takeOrder('PICKUP')">전달완료</button>
+		<button id="dupliButton"  onclick="checkCeckBox()">모두선택/해제</button>
+		<button id="dupliButton"  onclick="takeOrder('TAKE')">주문접수</button>
+		<button id="dupliButton"  onclick="takeOrder('CANCEL')">주문취소</button>
+		<button id="dupliButton"  onclick="takeOrder('PICKUP')">전달완료</button>
 		
-		 <form action="downloadOrder.do" method="get">
+		 <form action="downloadOrder.do" method="get" style="display: inline-flex;">
 		 	<input type="hidden"  name="state" value="NEW" />
-            <button type="submit">매출내역 다운로드</button>
+            <button id="dupliButton"  type="submit" >내역 다운로드</button>
         </form>
 	</div>
 	<div style="height: 50%">처리상태: 
 		<select id="States">
-			<option value="NEW"> 주문내역
-			<option value="TAKE"> 주문접수
-			<option value="CANCEL"> 주문취소
-			<option value="PICKUP"> 전달완료
-			<option>
-			<option>
+			<option value="NEW"> 주문내역</option>
+			<option value="TAKE"> 주문접수</option>
+			<option value="CANCEL"> 주문취소</option>
+			<option value="PICKUP"> 전달완료</option>
+			<option></option>
+			<option></option>
 		</select>
-		<button onclick="storeOrderList()">조회</button>
+		<button  onclick="storeOrderList()">조회</button>
 	</div>
 </div>
 	<div id="orderList" >

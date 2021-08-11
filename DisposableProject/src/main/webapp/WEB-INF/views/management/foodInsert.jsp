@@ -46,14 +46,14 @@ height: 27px !important;
 <form name="foodForm">
 	<input type="hidden" name="storeNum" value="${userInfo.STORENUM}" >
 	<h2>음식 등록</h2>
-	<buttion type="button" onclick="addFood()">등록하기</buttion>
+	<button  id="dupliButton"  type="button" onclick="addFood()">등록하기</button>
 	<table class="mainTable">
 		<thead></thead>
 		<tbody class="mainBody">
 			<tr class="imageTr">
 				<td class="titleTd">음식 이미지</td>
 				<td colspan="3">
-					<input type="file" name="foodImg" multiple="multiple">
+					<input  type="file" name="foodImg" multiple="multiple">
 				</td>
 				
 			</tr>
@@ -81,7 +81,7 @@ height: 27px !important;
 			<tr>
 				<td class="titleTd">음식 분류</td>
 				<td colspan="3">
-					<button type="button">분류 찾기</button>
+					<button  id="dupliButton"  type="button">분류 찾기</button>
 				</td>
 			
 			</tr>
@@ -102,7 +102,7 @@ height: 27px !important;
 					</select>
 				</td>
 				<td style="width: 280px">옵션 그룹 명: <input type="text" id="optionName" /></td>
-				<td><button type="button" onclick="addOption()">옵션 추가하기</button></td>
+				<td><button  id="dupliButton"  type="button" onclick="addOption()">옵션 추가하기</button></td>
 			</tr>
 		</tbody>
 	</table>

@@ -60,7 +60,7 @@ border: 1px solid #1f9401;cursor: pointer;
 <div class="ManagementFoodsContainer">
 	<div class="InnerHeader">
 		<h2>음식 관리</h2>
-		<a href="foodInsert.do">등록하기</a>
+		<button id="dupliButton"  onclick='location.href="foodInsert.do"'>등록하기</button>
 	</div>
 	
 	<div class="gridContainer">
