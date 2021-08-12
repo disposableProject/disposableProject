@@ -14,4 +14,5 @@ public interface managementService {
 	public Integer updateOrder(Map<String, Object> paramMap) throws SQLException;
 	public Map<String,Object> shopInfo(String storeNum);
 	public Integer shopInfoUpdate(Map<String, Object> paramMap) throws SQLException;
+	public List<Map<String,Object>> foodInfo(Map<String, Object> paramMap);
 }

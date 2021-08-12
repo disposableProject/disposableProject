@@ -73,4 +73,9 @@ public class managementServiceImpl implements managementService{
 	public Integer shopInfoUpdate(Map<String, Object> paramMap) throws SQLException {
 		return managementDao.shopInfoUpdate(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> foodInfo(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return managementDao.foodInfo(paramMap);
+	}
 }

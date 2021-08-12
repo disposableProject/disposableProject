@@ -98,13 +98,13 @@ $(document).ready(function(){
 						}
 						
 						html += '<div>'+json[i].FOODNAME+'</div>'
-						html += '<div style="display: flex;width: 100%;"><span>'+json[i].OPTIONS+'</span><span>'+json[i].PRICE+'</span></div>'
+						html += '<div style="display: flex;width: 100%;"><span>'+json[i].OPTIONS+'</span><span>가격:'+common.format(json[i].ALLPRICE)+'원</span></div>'
 					
 					
 						ordercode = json[i].ORDERCODE
 						if(i<json.length-1){
 						if(ordercode  != json[i+1].ORDERCODE){
-							html += '<div>총 가격: '+json[i].ALLPRICE+'원/</div><div>주문자: '+json[i].EMAIL+'</div>'
+							html += '<div>총 가격: '+common.format(json[i].ALLPRICE)+'원/</div><div>주문자: '+json[i].EMAIL+'</div>'
 							if(json[i].MEMO){
 								html += '<div> '+json[i].MEMO+'</div>'
 							}

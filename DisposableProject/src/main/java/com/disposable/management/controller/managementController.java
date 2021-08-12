@@ -183,4 +183,21 @@ public class managementController {
 
 	        return "management/managementSales";
 	}
+	
+	/**
+	 * @author 손호일
+	 * @description 음식 수정 페이지 이동
+	 */
+	@RequestMapping(value="foodUpdate.do")
+	public String foodUpdate(HttpSession session,Model model,@RequestParam(value="foodnum") String foodnum) {
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storeNum = String.valueOf(userInfo.get("STORENUM"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storenum",storeNum);
+		paramMap.put("foodnum",foodnum);
+		List<Map<String,Object>> resultMap = managementservice.foodInfo(paramMap);
+		System.out.println("foodUpdate =>"+foodnum);
+		model.addAttribute("resultMap", resultMap);
+		return "management/foodupdate";
+	}
 }
