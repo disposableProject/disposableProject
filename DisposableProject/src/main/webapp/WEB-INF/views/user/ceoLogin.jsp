@@ -61,7 +61,7 @@ function Login(){
 			console.log(data)
 			if(data.JavaData != null && data.JavaData != ""){
 				alert("로그인되었습니다.");
-				location.href = '/user/usermain.do'
+				location.href = '/'
 			}else{
 				alert("로그인 정보가 다릅니다.");
 			}

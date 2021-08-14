@@ -13,7 +13,14 @@
 	width: 880px;	position: relative;	
 }
 .rightSection{
-	width: 360px;	height: 100%;	position: fixed;	left: 64%;	border: 1px solid black;
+	width: 360px;	min-height: 500px;max-height:800px	;position: fixed;	left: 64%;	border: 1px solid black;overflow: auto;background: white;
+}
+.rightSection {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.rightSection::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 .topBox{
 	border: 1px solid black;
@@ -25,7 +32,7 @@
 	border: 1px solid black;
 }
 .middleBox{
-	border: 1px solid black;
+	border: 1px solid black; 
 }
 .selectMenu{
 	border: 1px solid #c4c4c4;	min-height: 100px;
@@ -56,6 +63,11 @@
 }
 .delBtn{
     float: right; margin-right: 5px;
+}
+.foodImg{
+width: 100%;
+height: 70%;
+border-bottom: 1px solid #d5d5d5;
 }
 /* @media screen and (max-width: 768px){
 	.rightSection{
@@ -97,6 +109,9 @@
 			<div class="items">
 				<c:forEach items="${StoreFoodList}" var="foodInfo">
 					<div class="foodBox" onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
+						<div class="foodImg">
+							<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
+						</div>
 						<span>${foodInfo.FOODNAME} -> </span>
 						<span>${foodInfo.PRICE}원</span>
 					</div>
@@ -165,7 +180,7 @@
 		<!-- 최종 장바구니 + 최종 결제 금액 -->
 		<div class="selectMenu" id="selectMenu"></div>
 		<div id="totalPayment"></div>
-		<input type="button" onclick="orderInsert()" value="주문하기">
+		<input id="dupliButton"  type="button" onclick="orderInsert()" value="주문하기">
 	</div>
 </div>
 
@@ -173,7 +188,7 @@
 var totalPrice = 0;
 
 function getFoodOption(storenum,foodnum,foodname,foodprice){
-	$("#totalPrice").html("선택 가격: "+foodprice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
+	$("#totalPrice").html("선택 가격: "+common.format(foodprice)+"원 <br><button  id='dupliButton'  onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',
 		url : '/shop/getFoodOption.do',
@@ -185,7 +200,7 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 			var html = "";
 			var optionGroupNum = 0;
 			var optionnum = 0;
-			html += "<div><span>"+foodname+"</span><span> "+foodprice+"원</span></div>"
+			html += "<div><span>"+foodname+"</span><span> "+common.format(foodprice)+"원</span></div>"
 			if(json.length > 0){
 				html += "<div>추가옵션</div>"
 				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"<input type=hidden value="+json[0].OPTIONNUM+"></div>"
@@ -197,10 +212,10 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 					}
 					if(json[i].CHECKFLAG == "N"){
 						optionnum = json[i].OPTIONNUM
-						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+common.format(json[i].OPTIONPRICE)+"원</div>"
 					}else{
 						optionnum = json[i].OPTIONNUM
-						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+common.format(json[i].OPTIONPRICE)+"원</div>"
 					}
 					
 				}
@@ -224,7 +239,7 @@ function setFoodPrice(foodPrice,foodname,foodnum,optionnum){
 		var value = $(this).val();
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
-	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionnum+"')>메뉴담기</button>")
+	$("#totalPrice").html("선택 가격: "+common.format(optionPrice)+"원 <br><button id='dupliButton' onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionnum+"')>메뉴 담기</button>")
 }
 
 // 메뉴 선택 정보를 가져옴
@@ -255,7 +270,7 @@ function getOrderInfo(foodname, foodprice,foodnum,optionnum){
 	console.log("eaeaeaeaeaea" + eaea)
 	console.log(eaea)
 	totalPrice = parseInt(totalPrice)+parseInt(foodprice)*parseInt(eaea)
-	$("#totalPayment").text(totalPrice)
+	$("#totalPayment").text(common.format(totalPrice)+" 원")
 }
 
 function menuDelete(ths,price){

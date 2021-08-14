@@ -18,12 +18,25 @@
     height: 19px;
     margin-top: 5px;
 } 
+select {
+  width: 200px;
+  height:40px;
+  padding: .8em .5em;
+  font-family: inherit;
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #999;
+  border-radius: 0px;
+}
+
 </style>
 <!-- <table id="jqGrid" style="margin: auto"></table> 
 <div id="gridpager"></div> -->
 
-<div style="height: 800px;overflow: auto;">
-<div style="height: 80px;width: 80%;margin: auto;border: 1px solid black">
+<div style="height: 800px;overflow: auto;margin-top: 20px">
+<div style="height: 80px;width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
 	<div style="height: 50%">
 		<button id="dupliButton"  onclick="checkCeckBox()">모두선택/해제</button>
 		<button id="dupliButton"  onclick="takeOrder('TAKE')">주문접수</button>
@@ -35,16 +48,14 @@
             <button id="dupliButton"  type="submit" >내역 다운로드</button>
         </form>
 	</div>
-	<div style="height: 50%">처리상태: 
-		<select id="States">
-			<option value="NEW"> 주문내역</option>
+	<div style="height: 50%;display: flex;align-items: center;">
+		<select id="States" style="margin-left: 5px;margin-right: 5px">
+			<option value="PAY"> 주문내역</option>
 			<option value="TAKE"> 주문접수</option>
 			<option value="CANCEL"> 주문취소</option>
 			<option value="PICKUP"> 전달완료</option>
-			<option></option>
-			<option></option>
 		</select>
-		<button  onclick="storeOrderList()">조회</button>
+		<button id="dupliButton"  onclick="storeOrderList()">조회</button>
 	</div>
 </div>
 	<div id="orderList" >

@@ -28,17 +28,25 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><a href="${naverUrl}">naver Login</a></td>
+				<td>
+				<div style="width:90%;margin: auto;height: 40px;display: flex;align-items: center;justify-content: center;" id="regiButton"   onclick='location.href="${naverUrl}"'>
+					네이버 로그인
+				</div>
+				</td>
 				<td class="btnTd"></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><a href="javascript:kakaoLogin()">kakao Login</a></td>
+				<td>
+				<div style="width:90%;margin: auto;height: 40px;display: flex;align-items: center;justify-content: center;" id="regiButton"   onclick="javascript:kakaoLogin()">
+					카카오 로그인
+				</div>
+				</td>
 				<td class="btnTd"></td>
 			</tr>
 				<tr>
 				<td></td>
-				<td><a class="g-signin2"  onClick="onSignIn()">Google Login</a></td>
+				<td><a   style="width:90%;margin: auto;height: 40px;display: flex;align-items: center;justify-content: center;" id="regiButton" class="g-signin2"  onClick="onSignIn()">Google Login</a></td>
 				<td class="btnTd"></td>
 			</tr>
 		</tbody>

@@ -33,7 +33,7 @@ color: #333;
 width: 1200px;
 margin: auto;
 text-align: center;
-height: 35px;
+height: 55px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -94,34 +94,6 @@ align-items: center;
 <div class="NavMid">
 	<h4 style="font-size: 25px; font-weight: bold;display: inline-block;cursor: pointer;" onclick="location.href='http://localhost:8110/'">Disposable</h4>
 </div>
-<div class="NavBot">
-<span>
-	<ul class="firstUl" style="margin: auto;">
-		<li>신메뉴</li>
-		<li>베스트</li>
-		<li>주변가게</li>
-		<li>특가혜택</li>
-	</ul>
-	<!-- <ul class="secUl">
-		<li>
-			<input />
-		</li>
-		<li>버튼1</li>
-		<li>버튼2</li>
-	</ul> -->
-</span>
-</div>
+
 
 </nav>
-<script>
- const header = document.querySelector('.NavBot'); 
-function scrollFunc(){ 
-	if (pageYOffset >= 90) {
-		header.classList.add('on'); 
-		} else {
-			header.classList.remove('on'); 
-			} 
-	} 
-	window.addEventListener('scroll', scrollFunc); 
-
-</script>

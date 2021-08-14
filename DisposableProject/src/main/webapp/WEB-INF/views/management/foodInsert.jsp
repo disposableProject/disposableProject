@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 .foodInsertContainer{
-width: 90%;height: 100%;margin: auto;
+width: 100%;height: 800px;margin: auto;overflow: auto;
+}
+.foodInsertContainer form{
+width: 90%;margin: auto;
+}
+.foodInsertContainer {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.foodInsertContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 .foodInsertContainer table{
 width: 100%;border-collapse: collapse;margin: auto;
@@ -104,6 +114,7 @@ height: 27px !important;
 				<td style="width: 280px">옵션 그룹 명: <input type="text" id="optionName" /></td>
 				<td><button  id="dupliButton"  type="button" onclick="addOption()">옵션 추가하기</button></td>
 			</tr>
+			
 		</tbody>
 	</table>
 	</form>
