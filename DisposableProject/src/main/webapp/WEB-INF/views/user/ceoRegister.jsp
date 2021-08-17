@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210421" /><!-- 버전 수정 -->
+<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=2104222" /><!-- 버전 수정 -->
 
 
 <form name="registerForm" id="registerForm" method = "post">

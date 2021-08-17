@@ -151,7 +151,7 @@ border-bottom: 1px solid #d5d5d5;
 							<th>번호</th>
 							<th>photo</th>
 							<th>review</th>
-							<th>작성자</th>
+							<th>작성자</th> 
 							<th>작성일</th>
 						</tr>
 						<tr class="userReview">

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/userRegister.css?version=21042510" />
+<link rel="stylesheet" type="text/css" href="/css/userRegister.css?version=21042111" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>일반 회원가입</title>
 </head>
@@ -23,7 +23,7 @@
 					<input id="emailCheck" name="emailCheck" >
 					<input type="hidden"  id="email" name="email"/>
 				</td>
-				<td><button id="dupliButton" type="button"  onclick="checkEmail()" onclick="poenPopup('emailCheckModal')">이메일 인증</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button"  onclick="checkEmail()" onclick="poenPopup('emailCheckModal')">이메일 인증</button></td>
 			</tr>
 			<tr>
 				<td class="text">닉네임</td>
@@ -31,7 +31,7 @@
 					<input id="nicknameCheck" name="nicknameCheck">
 					<input type="hidden" id="nickname" name="nickname">
 				</td>
-				<td><button id="dupliButton" type="button" onclick="checkNickname()">중복체크</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button" onclick="checkNickname()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td class="text">비밀번호</td>
@@ -51,7 +51,7 @@
 			<tr>
 				<td></td>
 				<td><input type="button" id="regiButton" onclick="register()" value="회원가입" /></td>
-				<td></td>
+				<td  class="btnTd"></td>
 			</tr>
 		</tbody>
 	</table>

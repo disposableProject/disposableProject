@@ -35,7 +35,7 @@ select {
 <!-- <table id="jqGrid" style="margin: auto"></table> 
 <div id="gridpager"></div> -->
 
-<div style="height: 800px;overflow: auto;margin-top: 20px">
+<div style="height: 780px;overflow: auto;margin-top: 20px">
 <div style="height: 80px;width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
 	<div style="height: 50%">
 		<button id="dupliButton"  onclick="checkCeckBox()">모두선택/해제</button>
@@ -101,21 +101,24 @@ $(document).ready(function(){
 					if(json.length == 0){
 						html += '<div style="width:80%;margin: auto;margin-top: 20px;">검색된 내용이 없습니다.</div>'
 					}
+					var totalPrice  = 0;
+					var num = 1
 					for(var i=0;i<json.length;i++){
 						if(ordercode != json[i].ORDERCODE){
-							
+							totalPrice = 0
+							num = 1
 							html += '<div  style="width:80%;margin: auto;margin-top: 20px;"><input type="checkbox" class="orderCode" value="'+json[i].ORDERCODE+'" />주문코드: '+json[i].ORDERCODE+' 주문시간: '+json[i].ORDERDATE+'</div>'
-							html += '<div style="width:80%;min-height: 100px;border: 1px solid black; margin: auto;display: flex;justify-content: space-between;"><div style="width: 80%"><div style="width: 100%;margin-bottom:10px">'
+							html += '<div style="width:80%;min-height: 100px;border: 1px solid black; margin: auto;display: flex;justify-content: space-between;"><div style="width: 80%;display:flex;align-items:center;padding-left:20px"><div style="width: 100%;margin-bottom:10px;line-height: 25px;">'
 						}
 						
-						html += '<div>'+json[i].FOODNAME+'</div>'
-						html += '<div style="display: flex;width: 100%;"><span>'+json[i].OPTIONS+'</span><span>가격:'+common.format(json[i].ALLPRICE)+'원</span></div>'
-					
-					
+						html += '<div><span style="font-weight:bold;font-size:20px">('+(num)+') </span><span style="font-weight:bold;font-size:20px">'+json[i].FOODNAME+'</span><span style="font-size:13px;font-weight:bold;color:gray"> ('+ json[i].OPTIONS.slice(0, -3)+')</span><span> - '+common.format(json[i].ALLPRICE)+'원</span></div>'
+						html += '<div style="display: flex;width: 100%;"></div>'
+						totalPrice += parseInt(json[i].ALLPRICE)
+						num = num + 1
 						ordercode = json[i].ORDERCODE
 						if(i<json.length-1){
 						if(ordercode  != json[i+1].ORDERCODE){
-							html += '<div>총 가격: '+common.format(json[i].ALLPRICE)+'원/</div><div>주문자: '+json[i].EMAIL+'</div>'
+							html += '<div>총 가격: '+common.format(totalPrice)+'원</div><div>주문자: '+json[i].EMAIL+'</div>'
 							if(json[i].MEMO){
 								html += '<div> '+json[i].MEMO+'</div>'
 							}
@@ -124,7 +127,7 @@ $(document).ready(function(){
 							}
 						}
 						if(i == json.length-1){
-							html += '<div>총 가격</div><div>주문자: '+json[i].EMAIL+'</div>'
+							html += '<div>총 가격: '+common.format(totalPrice)+'원</div><div>주문자: '+json[i].EMAIL+'</div>'
 							if(json[i].MEMO){
 								html += '<div> '+json[i].MEMO+'</div>'
 							}

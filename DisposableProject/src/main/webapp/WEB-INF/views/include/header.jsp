@@ -50,6 +50,7 @@ width:70%;
 list-style: none;
 display: flex;
 margin: auto;
+padding-left: 0px
 }
 .NavBot .firstUl li{
 padding-left: 120px;

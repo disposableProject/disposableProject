@@ -47,7 +47,7 @@ height: 30px;
 cursor: pointer;
 }
 .clickTag{
-background-color: #b2cfbe;
+background-color: #B6CBA3;
 color: #fff;
 }
 .shopListBox{
@@ -66,7 +66,7 @@ color: #444;
 .box {
   background-color: #444;
   color: #fff;
-  border-radius: 5px;
+
   border: 1px solid #444;
   font-size: 150%;
   height: 250px;
@@ -74,6 +74,33 @@ color: #444;
 .nowpage{
 color:red;
 }
+
+
+.pageAreaUl {
+  display: inline-block;
+  list-style: none;
+}
+
+.pageAreaUl li {
+
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  cursor: pointer;
+}
+.noclick{
+  color: black;
+}
+.nowpage {
+  background-color: #B6CBA3;
+  color: white; 
+  border: 1px solid #4CAF50;
+}
+
+.pageAreaUl li:hover:not(.active) {background-color: #ddd;}
 </style>
 <script>
 $(document).ready(function(){
@@ -186,13 +213,13 @@ function makePaging(total,now){
 	console.log("nowBlock",nowBlock)
 	var html = ""
 	if(pageBlock > 1 && nowBlock > 1){
-		html += "<li  onclick='getShopList("+(nowBlock*5-4)+"'> &laquo;</li>"
+		html += "<li class-'noclick' onclick='getShopList("+(nowBlock*5-4)+"'> &laquo;</li>"
 	}
 	for(var i=startCnt;i<=pagecnt;i++){
 		if(now == i){
 			html += "<li class='nowpage' onclick='getShopList("+i+")'>"+i+"</li>"
 		}else{
-			html += "<li  onclick='getShopList("+i+")'>"+i+"</li>"
+			html += "<li class-'noclick' onclick='getShopList("+i+")'>"+i+"</li>"
 		}
 		
 	}
@@ -216,58 +243,58 @@ function ok(){
 		<li ><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1596164134.jpg" style="width: 100%"></li> 
 	</ul>
 	</section>
-	<section style="height:652px">
+	<section style="height:582px">
 		<h2 style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">추천 음식 소개</h2>
 		<!-- <div class="arrowSlider" style="display: flex;width: 1400px;justify-content: space-between;position:relative;left: 13%;top: 200px">
 			<span class="prev" id="aro1_prev">prev</span>
 			<span class="next" id="aro1_next">next</span>
 		</div> -->
-		<ul class="slide02" style="height: 450px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
+		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
 		
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
@@ -275,61 +302,61 @@ function ok(){
 		</ul>
 		
 	</section>
-	<section style="height:684px;background-color: #f7f7f7;">
+	<section style="height:584px;background-color: #f7f7f7;">
 		<h2 style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">특가 음식</h2>
-		<ul class="slide02" style="height: 450px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
+		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
 		
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 350px;background-size: cover;"></div>
+				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
 				<div>이름</div>
 				<div>가격</div>
 				<div>원가</div>
 			</li>
 		</ul>
 	</section>
-	<section style="height:1252px;">
+	<section style="margin-bottom:30px">
 	<h2 class="storeTitle" style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">우리동네 가게</h2>
 		<div class="shopTag">
 			<span class="tag clickTag">전체</span>
@@ -340,12 +367,7 @@ function ok(){
 			<span class="tag">카페</span>
 		</div>
 		<div class="shopListBox">
-			<div class="box a">A</div>
-			<div class="box b">B</div>
-			<div class="box c">C</div>
-			<div class="box d">D</div>
-			<div class="box e">E</div>
-			<div class="box f">F</div>
+			
 		</div>
 		<div clas="pageArea" style="display: flex;justify-content: center;">
 			<ul class="pageAreaUl"></ul>

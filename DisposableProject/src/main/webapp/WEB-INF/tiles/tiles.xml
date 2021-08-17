@@ -7,13 +7,14 @@
 		<put-attribute name="header" value="" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="left" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+		<put-attribute name="footer" value="" />
 	</definition>
 
 	<definition name="management/*" extends="shopadmin">
 		<put-attribute name="header" value="/WEB-INF/views/include/header2.jsp" />
 		<put-attribute name="body"  expression="/WEB-INF/views/management/{1}.jsp" />
 		<put-attribute name="left"  expression="/WEB-INF/views/include/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/none.jsp" />
 	</definition>
 	<!--// main layout -->
 	<definition name="mainTiles" template="/WEB-INF/views/index.jsp">
