@@ -67,6 +67,7 @@
 		<h2>주문 메뉴</h2>
 			<ul style="list-style: none; padding-left: 0;">
 				<div class="boxLine">
+				<c:set var="optionMinuse" value="0"/>
 					<c:forEach items="${orderPayment}" var="orderList">
 						<li style="display: flex; height: 60px;">
 							<div class="photo" style="width: 300px;"><span>포토 들어갈 자리</span></div>
@@ -74,9 +75,9 @@
 								<div class="name" style="width: 500px;"><span class="nameFont">${orderList.FOODNAME} 메뉴명</span>
 								<div class="optionName" style="width: 200px; padding-top: 4px;"><span class="opnameFont">${orderList.OPTIONS} 옵션명</span></div></div>
 							</div>
-							<div class="quantity" style="width: 200px;"><span>${orderList.PRICE}원</<span></div>
-							<div class="quantity" style="width: 200px;"><span>${orderList.OPTIONPRICE}원</<span></div>
-							<%-- <div class="quantity" style="width: 200px;"><span>${orderList.PRICE} 수량 원</<span></div> --%>
+							<div class="price" style="width: 200px;"><span>${orderList.PRICE}원</<span></div>
+							<c:set var="optionMinuse" value="${orderList.OPTIONPRICE-orderList.PRICE}"/>
+							<div class="price" style="width: 200px;"><span><c:out value="${optionMinuse}"/>원</<span></div>
 						</li>
 					</c:forEach>
 				</div>

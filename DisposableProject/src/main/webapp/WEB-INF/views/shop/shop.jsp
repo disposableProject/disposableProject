@@ -184,11 +184,10 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 			console.log(json)
 			var html = "";
 			var optionGroupNum = 0;
-			var optionnum = 0;
 			html += "<div><span>"+foodname+"</span><span> "+foodprice+"원</span></div>"
 			if(json.length > 0){
 				html += "<div>추가옵션</div>"
-				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"<input type=hidden value="+json[0].OPTIONNUM+"></div>"
+				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"</div>"
 				for(var i=0;i<json.length;i++){
 					console.log()
 					if(json[i].OPTIONGROUP != optionGroupNum){
@@ -196,11 +195,11 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 						html += "</div><div> <div>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
 					}
 					if(json[i].CHECKFLAG == "N"){
-						optionnum = json[i].OPTIONNUM
-						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						optionprice = json[i].OPTIONPRICE;
+						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
 					}else{
-						optionnum = json[i].OPTIONNUM
-						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionnum+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						optionprice = json[i].OPTIONPRICE;
+						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
 					}
 					
 				}
@@ -217,23 +216,22 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 	});
 }
 
-function setFoodPrice(foodPrice,foodname,foodnum,optionnum){
+function setFoodPrice(foodPrice,foodname,foodnum,optionprice){
 	var optionPrice = foodPrice;
 	$('.foodoptions:checked').each(function() {
 		
 		var value = $(this).val();
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
-	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionnum+"')>메뉴담기</button>")
+	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionprice+"')>메뉴담기</button>")
 }
 
 // 메뉴 선택 정보를 가져옴
-function getOrderInfo(foodname, foodprice,foodnum,optionnum){
+function getOrderInfo(foodname, foodprice,foodnum){
 	var foodOption = document.querySelectorAll(".foodoptions");
 	console.log('fffff '+foodname);
 	console.log(foodOption);
-	console.log('옵션 넘버 좀 가지고 있어줄래?')
-	console.log(optionnum)
+	console.log(foodprice);
 	var result = '';
 	var optionName="";
 	var j = 0
@@ -248,13 +246,8 @@ function getOrderInfo(foodname, foodprice,foodnum,optionnum){
 	console.log("너 무슨 값인데?")
 	console.log(result)
 	var selectMenuText = document.querySelector(".selectMenu");
-	//selectFood 내 foodnum과 food옵션 가져오기
-	$(selectMenuText).append("<div class='selectFood' name='"+foodnum+"'><input type='hidden' class='foodnum' value='"+foodnum+"'><input type='hidden' class='optionnum' value='"+optionnum+"'><input type='hidden' class='optionName' value='"+optionName+"'>"+foodname+"<br><span class='selectfoodoption'>"+result+"</span> <br> <button onclick='test()'>-</button><input type='text' name='eaea' id='eaea' value='1' size='2' readonly='readonly' /><button onclick='test1()'>+</button> <button type='button' class='delBtn' onclick=menuDelete(this,'"+foodprice+"')>X</button></div>");
-
-	var eaea = document.getElementById("eaea").value;
-	console.log("eaeaeaeaeaea" + eaea)
-	console.log(eaea)
-	totalPrice = parseInt(totalPrice)+parseInt(foodprice)*parseInt(eaea)
+	$(selectMenuText).append("<div class='selectFood' name='"+foodnum+"'><input type='hidden' class='foodnum' value='"+foodnum+"'><input type='hidden' class='foodprice' value='"+foodprice+"'><input type='hidden' class='optionName' value='"+optionName+"'>"+foodname+"<br><span class='selectfoodoption'>"+result+"</span>  <button type='button' onclick=menuDelete(this,'"+foodprice+"')>삭제하기</button></div>");
+	totalPrice = parseInt(totalPrice)+parseInt(foodprice)
 	$("#totalPayment").text(totalPrice)
 }
 
@@ -295,7 +288,9 @@ function orderInsert(){
 		var selectFoodList = $(".selectFood")
 		var foodnum = $(".selectFood .foodnum")
 		var optionName = $(".selectFood .optionName")
-		var optionnum = $(".selectFood .optionnum")
+		var optionPrice = $(".selectFood .foodprice")
+		console.log("옵션의 가격 가져오기")
+		console.log(optionPrice)
 		for(var i=0; i< selectFoodList.length;i++){
 	
 			var orderInfo ={
@@ -304,8 +299,8 @@ function orderInsert(){
 					price : $('#totalPayment').text(),
 					email : '${userInfo.EMAIL}',
 					options : optionName[i].value,
-					optionnum : optionnum[i].value
-				}
+					optionprice : optionPrice[i].value
+			}
 			orderArray.push(orderInfo)
 		}
 		console.log("오더 옵션")
