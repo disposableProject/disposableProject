@@ -40,7 +40,7 @@ justify-content: center;
 align-items: center;
 margin-right: 15px;
 margin-top: 20px;
-border: 1px solid black;
+border: 1px solid #ddd;
 border-radius: 10px;
 width: 75px;
 height: 30px;
@@ -50,6 +50,8 @@ cursor: pointer;
 background-color: #B6CBA3;
 color: #fff;
 }
+.tag:hover:not(.clickTag) {background-color: #ddd;}
+
 .shopListBox{
 
 width: 1200px;
@@ -100,7 +102,7 @@ color:red;
   border: 1px solid #4CAF50;
 }
 
-.pageAreaUl li:hover:not(.active) {background-color: #ddd;}
+.pageAreaUl li:hover:not(.nowpage) {background-color: #ddd;}
 </style>
 <script>
 $(document).ready(function(){
@@ -244,7 +246,12 @@ function ok(){
 	</ul>
 	</section>
 	<section style="height:582px">
-		<h2 style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">추천 음식 소개</h2>
+		<div style="padding: 69px 0 35px;display: flex;align-items: center;justify-content: space-around;width: 500px;margin: auto;">
+		<span></span>
+		<h2 style="text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;display: inline-block;">추천 음식 소개</h2>
+		<span style="font-size: 40px;color: #ddd" onclick="location.href='/best.do'">></span>
+		</div>
+		
 		<!-- <div class="arrowSlider" style="display: flex;width: 1400px;justify-content: space-between;position:relative;left: 13%;top: 200px">
 			<span class="prev" id="aro1_prev">prev</span>
 			<span class="next" id="aro1_next">next</span>
@@ -303,7 +310,11 @@ function ok(){
 		
 	</section>
 	<section style="height:584px;background-color: #f7f7f7;">
-		<h2 style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">특가 음식</h2>
+		<div style="padding: 69px 0 35px;display: flex;align-items: center;justify-content: space-around;width: 500px;margin: auto;">
+		<span></span>
+		<h2 style="text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;display: inline-block;">특가 음식</h2>
+		<span style="font-size: 40px;color: #ddd" onclick="location.href='/sale.do'">></span>
+		</div>
 		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
 		
 			<li>
@@ -361,9 +372,11 @@ function ok(){
 		<div class="shopTag">
 			<span class="tag clickTag">전체</span>
 			<span class="tag">한식</span>
-			<span class="tag">양식</span>
-			<span class="tag">중식</span>
 			<span class="tag">일식</span>
+			<span class="tag">양식</span>
+			<span class="tag">분식</span>
+			<span class="tag">치킨</span>
+			<span class="tag">족발/보쌈</span>
 			<span class="tag">카페</span>
 		</div>
 		<div class="shopListBox">

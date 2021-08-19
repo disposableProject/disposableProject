@@ -98,10 +98,10 @@ align-items: center;
 <div class="NavBot">
 <span>
 	<ul class="firstUl" style="margin: auto;">
-		<li>신메뉴</li>
-		<li>베스트</li>
-		<li>주변가게</li>
-		<li>특가혜택</li>
+		<li onclick="location.href='/new.do'">신메뉴</li>
+		<li onclick="location.href='/best.do'">베스트</li>
+		<li onclick="location.href='/around.do'">주변가게</li>
+		<li onclick="location.href='/sale.do'">특가혜택</li>
 	</ul>
 	<!-- <ul class="secUl">
 		<li>

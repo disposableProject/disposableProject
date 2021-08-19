@@ -275,22 +275,19 @@ function menuDelete(ths,price){
 	var ths = $(ths);
 	ths.parent("div").empty();
 	totalPrice = parseInt(totalPrice)-parseInt(price)
-	$("#totalPayment").text(totalPrice)
-	document.getElementById
-	
+	$("#totalPayment").text(common.format(totalPrice)+" 원")
+	$("#totalPaymentInput").val(totalPrice)
 }
 
 //수량체크
 function test() {
     var tmp = document.getElementById("eaea").value;
     tmp--;
-
     document.getElementById("eaea").value = tmp;
 }
 function test1() {
     var tmp = document.getElementById("eaea").value;
     tmp++;
-
     document.getElementById("eaea").value = tmp;
 }
 
