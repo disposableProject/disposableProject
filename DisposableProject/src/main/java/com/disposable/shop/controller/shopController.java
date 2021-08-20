@@ -109,19 +109,19 @@ public class shopController {
 	@RequestMapping(value="kakaoPaySuccess.do")
 	public String kakaoPaySuccess(@RequestParam("ordercode") String ordercode) {
 		System.out.println("ordercode" + ordercode);
-		return "shop/KakaoReturn";
+		return "shop/kakaoReturn";
 	}
 	
 	@RequestMapping(value="kakaoPayCancel.do")
 	public String kakaoPayCancel() {
 		
-		return "shop/KakaoReturn";
+		return "shop/kakaoReturn";
 	}
 	
 	@RequestMapping(value="kakaoPaySuccessFail.do")
 	public String kakaoPaySuccessFail() {
 		
-		return "shop/KakaoReturn";
+		return "shop/kakaoReturn";
 	}
 }
 
