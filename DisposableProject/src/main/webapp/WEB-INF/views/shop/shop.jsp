@@ -13,7 +13,14 @@
 	width: 880px;	position: relative;	
 }
 .rightSection{
-	width: 360px;	height: 100%;	position: fixed;	left: 64%;	border: 1px solid black;
+	width: 360px;	min-height: 500px;max-height:800px	;position: fixed;	left: 64%;	border: 1px solid black;overflow: auto;background: white;
+}
+.rightSection {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.rightSection::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 .topBox{
 	border: 1px solid black;
@@ -25,10 +32,11 @@
 	border: 1px solid black;
 }
 .middleBox{
-	border: 1px solid black;
+	border: 1px solid black; 
 }
 .selectMenu{
-	border: 1px solid #c4c4c4;	min-height: 100px;
+	border: 1px solid #c4c4c4;
+	min-height: 100px;
 }
 .foodBox{
 	border: 1px solid; width: 280px; height: 300px; display: flex; flex-direction: column;
@@ -56,6 +64,11 @@
 }
 .delBtn{
     float: right; margin-right: 5px;
+}
+.foodImg{
+width: 100%;
+height: 70%;
+border-bottom: 1px solid #d5d5d5;
 }
 /* @media screen and (max-width: 768px){
 	.rightSection{
@@ -97,6 +110,9 @@
 			<div class="items">
 				<c:forEach items="${StoreFoodList}" var="foodInfo">
 					<div class="foodBox" onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
+						<div class="foodImg">
+							<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
+						</div>
 						<span>${foodInfo.FOODNAME} -> </span>
 						<span>${foodInfo.PRICE}원</span>
 					</div>
@@ -136,7 +152,7 @@
 							<th>번호</th>
 							<th>photo</th>
 							<th>review</th>
-							<th>작성자</th>
+							<th>작성자</th> 
 							<th>작성일</th>
 						</tr>
 						<tr class="userReview">
@@ -165,15 +181,15 @@
 		<!-- 최종 장바구니 + 최종 결제 금액 -->
 		<div class="selectMenu" id="selectMenu"></div>
 		<div id="totalPayment"></div>
-		<input type="button" onclick="orderInsert()" value="주문하기">
+		<input id="dupliButton"  type="button" onclick="orderInsert()" value="주문하기">
 	</div>
 </div>
-
+<input type="hidden" id="totalPaymentInput" value="0" />
 <script>
 var totalPrice = 0;
 
 function getFoodOption(storenum,foodnum,foodname,foodprice){
-	$("#totalPrice").html("선택 가격: "+foodprice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
+	$("#totalPrice").html("선택 가격: "+common.format(foodprice)+"원 <br><button  id='dupliButton'  onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',
 		url : '/shop/getFoodOption.do',
@@ -184,22 +200,21 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 			console.log(json)
 			var html = "";
 			var optionGroupNum = 0;
-			html += "<div><span>"+foodname+"</span><span> "+foodprice+"원</span></div>"
+			html += "<div><span>"+foodname+"</span><span> "+common.format(foodprice)+"원</span></div>"
 			if(json.length > 0){
 				html += "<div>추가옵션</div>"
 				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"</div>"
 				for(var i=0;i<json.length;i++){
-					console.log()
 					if(json[i].OPTIONGROUP != optionGroupNum){
 						optionGroupNum = json[i].OPTIONGROUP
 						html += "</div><div> <div>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
 					}
 					if(json[i].CHECKFLAG == "N"){
 						optionprice = json[i].OPTIONPRICE;
-						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						html += "<input type='radio' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"')  class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+common.format(json[i].OPTIONPRICE)+" 원</div>"
 					}else{
 						optionprice = json[i].OPTIONPRICE;
-						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+json[i].OPTIONPRICE+"</div>"
+						html += "<input type='checkbox' onclick=setFoodPrice('"+foodprice+"','"+foodname+"','"+foodnum+"','"+optionprice+"') class='foodoptions' name='"+json[i].OPTIONGROUP+"' value='"+json[i].OPTIONPRICE+"/"+json[i].OPTIONNAME+"' /><div>"+json[i].OPTIONNAME+": "+common.format(json[i].OPTIONPRICE)+" 원</div>"
 					}
 					
 				}
@@ -216,6 +231,7 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 	});
 }
 
+
 function setFoodPrice(foodPrice,foodname,foodnum,optionprice){
 	var optionPrice = foodPrice;
 	$('.foodoptions:checked').each(function() {
@@ -223,11 +239,12 @@ function setFoodPrice(foodPrice,foodname,foodnum,optionprice){
 		var value = $(this).val();
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
-	$("#totalPrice").html("선택 가격: "+optionPrice+"원 <br><button onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionprice+"')>메뉴담기</button>")
+	console.log(foodnum)
+	$("#totalPrice").html("선택 가격: "+common.format(optionPrice)+"원 <br><button id='dupliButton' onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionprice+"')>메뉴 담기</button>")
 }
 
 // 메뉴 선택 정보를 가져옴
-function getOrderInfo(foodname, foodprice,foodnum){
+function getOrderInfo(foodname, foodprice,foodnum,optionprice){
 	var foodOption = document.querySelectorAll(".foodoptions");
 	console.log('fffff '+foodname);
 	console.log(foodOption);
@@ -246,9 +263,12 @@ function getOrderInfo(foodname, foodprice,foodnum){
 	console.log("너 무슨 값인데?")
 	console.log(result)
 	var selectMenuText = document.querySelector(".selectMenu");
+
 	$(selectMenuText).append("<div class='selectFood' name='"+foodnum+"'><input type='hidden' class='foodnum' value='"+foodnum+"'><input type='hidden' class='foodprice' value='"+foodprice+"'><input type='hidden' class='optionName' value='"+optionName+"'>"+foodname+"<br><span class='selectfoodoption'>"+result+"</span>  <button type='button' onclick=menuDelete(this,'"+foodprice+"')>삭제하기</button></div>");
 	totalPrice = parseInt(totalPrice)+parseInt(foodprice)
-	$("#totalPayment").text(totalPrice)
+	$("#totalPayment").text(common.format(totalPrice)+" 원")
+	$("#totalPaymentInput").val(totalPrice)
+
 }
 
 function menuDelete(ths,price){
@@ -257,22 +277,19 @@ function menuDelete(ths,price){
 	var ths = $(ths);
 	ths.parent("div").empty();
 	totalPrice = parseInt(totalPrice)-parseInt(price)
-	$("#totalPayment").text(totalPrice)
-	document.getElementById
-	
+	$("#totalPayment").text(common.format(totalPrice)+" 원")
+	$("#totalPaymentInput").val(totalPrice)
 }
 
 //수량체크
 function test() {
     var tmp = document.getElementById("eaea").value;
     tmp--;
-
     document.getElementById("eaea").value = tmp;
 }
 function test1() {
     var tmp = document.getElementById("eaea").value;
     tmp++;
-
     document.getElementById("eaea").value = tmp;
 }
 
@@ -292,12 +309,13 @@ function orderInsert(){
 		var optionPrice = $(".selectFood .foodprice")
 		console.log("옵션의 가격 가져오기")
 		console.log(optionPrice)
+		console.log("val =>"+$('#totalPaymentInput').val())
 		for(var i=0; i< selectFoodList.length;i++){
 	
 			var orderInfo ={
 					storenum : '${getStoreInfo[0].STORENUM}',
 					foodnum : foodnum[i].value,
-					price : $('#totalPayment').text(),
+					price : $('#totalPaymentInput').val(),
 					email : '${userInfo.EMAIL}',
 					options : optionName[i].value,
 					optionprice : optionPrice[i].value
@@ -324,16 +342,24 @@ function orderInsert(){
 		});
 	}
 }
-function showMap(){
-	
-	$("#map").show()
-}
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
 };
 
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+//마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+//마커를 생성합니다
+var marker = new kakao.maps.Marker({
+position: markerPosition
+});
+
+//마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
 </script>
 

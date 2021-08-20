@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210423" /><!-- 버전 수정 -->
+<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=210433" /><!-- 버전 수정 -->
 
 <form name="registerForm" id="registerForm" method = "post">
 	<table >
@@ -61,7 +61,7 @@ function Login(){
 			console.log(data)
 			if(data.JavaData != null && data.JavaData != ""){
 				alert("로그인되었습니다.");
-				location.href = '/user/usermain.do'
+				location.href = '/'
 			}else{
 				alert("로그인 정보가 다릅니다.");
 			}

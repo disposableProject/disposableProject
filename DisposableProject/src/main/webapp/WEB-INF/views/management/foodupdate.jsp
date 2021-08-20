@@ -55,7 +55,7 @@ height: 27px !important;
 <div class="foodInsertContainer">
 <form name="foodForm">
 	<input type="hidden" name="storeNum" value="${userInfo.STORENUM}" >
-	<h2>음식 등록</h2>
+	<h2>음식 관리</h2>
 	<button  id="dupliButton"  type="button" onclick="addFood()">등록하기</button>
 	<table class="mainTable">
 		<thead></thead>
@@ -70,21 +70,21 @@ height: 27px !important;
 			<tr>
 				<td class="titleTd">음식 이름</td>
 				<td colspan="3">
-					<input type="text" name="foodName" >
+					<input type="text" name="foodName"  value="${resultMap[0].FOODNAME}">
 				</td>
 			
 			</tr>
 			<tr>
 				<td class="titleTd">가격</td>
 				<td colspan="3">
-					<input type="text" name="foodPrice" >
+					<input type="text" name="foodPrice"  value="${resultMap[0].PRICE}">
 				</td>
 				
 			</tr>
 			<tr>
 				<td class="titleTd">소요시간</td>
 				<td colspan="3">
-					<input type="text" name="waitTime" >
+					<input type="text" name="waitTime" value="${resultMap[0].WAITTIME}">
 				</td>
 				
 			</tr>
@@ -114,7 +114,24 @@ height: 27px !important;
 				<td style="width: 280px">옵션 그룹 명: <input type="text" id="optionName" /></td>
 				<td><button  id="dupliButton"  type="button" onclick="addOption()">옵션 추가하기</button></td>
 			</tr>
-			
+			<tr class='optionBox option"+optionLength+"'>
+			<td class="titleTd optionNameTd"></td>
+			<td colspan="3">
+			<span>다중 선택 가능 <input type='checkbox' id='multipleCheck' value='multi' ></span>
+			<button onclick='deleteOption("+optionLength+")'>삭제</button>
+			<table style="border-top:1px solid #e7e7e7">
+			<tbody>
+					<tr>
+					<input type='hidden' id='optionNum' value=""/>
+					<input type='hidden' id='optionGroupName' value="" />
+					<input type='hidden' id='optionGroupNum' value="" />
+					<td class="titleTd" style="width: 20px">옵션 명: </td>
+						<td style="width:10px"><input type="text" name="option" id="optionName"></td>
+						<td class="titleTd" style="width: 20px">가격: </td>
+						<td style="width:150px"><input type="number" name="price" id="optionPrice" /></td>
+					</tr>
+				</tbody>
+			</table>
 		</tbody>
 	</table>
 	</form>

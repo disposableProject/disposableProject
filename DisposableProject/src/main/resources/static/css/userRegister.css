@@ -43,10 +43,15 @@
   width: 650px;
   border-collapse: collapse;
   border-spacing: 0 10px;
+  text-align: center;
 }
 .text {
   width: 130px;
   font-weight: bold;
+  text-align: left;
+}
+.btnTd{
+width: 100px
 }
 
 #userRegisterForm tbody #regiButton {

@@ -75,4 +75,21 @@
 	<select id="shopInfo" parameterType="String"  resultType="java.util.Map">
 		SELECT * FROM SHOP WHERE STORENUM = #{storenum}
 	</select>
+	
+		<update id="shopInfoUpdate" parameterType="java.util.Map">
+			UPDATE SHOP 
+			SET ADDRESS = #{ADDRESS}
+			,NOTICE = #{notice}
+			,PHONE = #{phone}
+			WHERE STORENUM = #{storenum}
+	</update>
+	
+	<select id="foodInfo" parameterType="java.util.Map"  resultType="java.util.Map">
+		SELECT * 
+		FROM FOOD FD
+		INNER JOIN FOODOPTION FOP
+		ON FD.STORENUM = FOP.STORENUM
+		AND FD.FOODNUM = FOP.FOODNUM
+		WHERE FD.STORENUM = #{storenum} AND FD.FOODNUM = #{foodnum}
+	</select>
 </mapper>

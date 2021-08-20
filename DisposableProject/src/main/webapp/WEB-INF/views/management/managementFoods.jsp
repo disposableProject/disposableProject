@@ -60,7 +60,7 @@ border: 1px solid #1f9401;cursor: pointer;
 <div class="ManagementFoodsContainer">
 	<div class="InnerHeader">
 		<h2>음식 관리</h2>
-		<a href="foodInsert.do">등록하기</a>
+		<button id="dupliButton"  onclick='location.href="foodInsert.do"'>등록하기</button>
 	</div>
 	
 	<div class="gridContainer">
@@ -81,7 +81,7 @@ border: 1px solid #1f9401;cursor: pointer;
 		</tbody>
 	</table> --%>	
 	
-	<div class="gridItem">
+	<div class="gridItem" onclick="location.href='foodUpdate.do?foodnum=${foodInfo.FOODNUM}'">
 		<div class="foodImg">
 			<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
 		</div>

@@ -99,6 +99,18 @@ public class managementRestController {
 		return resultMap;
 	}
 	
+	@RequestMapping(value="/shopInfoUpdate.do", method=RequestMethod.POST)
+	public Map<String,Object> shopInfoUpdate(HttpSession session,HttpServletRequest request,@RequestParam Map<String,Object> paramMap) throws SQLException, Exception {
+		System.out.println("shopInfoUpdate ============== ");
+		System.out.println(paramMap);
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storenum = String.valueOf(userInfo.get("STORENUM"));
+		paramMap.put("storenum",storenum);
+		Integer result = managementservice.shopInfoUpdate(paramMap);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		
+		return resultMap;
+	}
 	
 	
 }

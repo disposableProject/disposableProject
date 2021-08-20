@@ -33,6 +33,10 @@ color: #333;
 width: 1200px;
 margin: auto;
 text-align: center;
+height: 35px;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 .NavBot span{
 width: 1200px;
@@ -45,6 +49,8 @@ justify-content: space-between;
 width:70%;
 list-style: none;
 display: flex;
+margin: auto;
+padding-left: 0px
 }
 .NavBot .firstUl li{
 padding-left: 120px;
@@ -59,10 +65,15 @@ display: flex;
 padding-left: 30px;
 }
 
-.on { position: fixed; z-index: 9999 ;background: white;width: 100%; top: 0px} 
+.on { position: fixed; z-index: 9999 ;background: white;width: 100%; top: 0px;border-bottom: 1px solid #f2f2f2} 
 .on span{z-index: 9999 ;background: white;width: 1200px;;display: flex;margin: auto;} 
 .topNav li{
 font-weight: 700;
+}
+.NavBot  {
+height: 64px;
+display: flex;
+align-items: center;
 }
 </style>
 
@@ -74,35 +85,37 @@ font-weight: 700;
 		<c:if test="${userInfo.STORENAME != null && userInfo.STORENAME != ''}">
 			<a href="/management/managementMain.do">${userInfo.STORENAME}</a> 
 		</c:if>
-		| <a href="javascript:signOut();">로그아웃</a> | <a href="/user/ceoRegister.do">사장님 시작하기</a> | <a href="/user/ceoLogin.do">사장님 로그인</a></span>	
+		| <a href="javascript:signOut();">로그아웃</a><!--  | <a href="/user/ceoRegister.do">사장님 시작하기</a> | <a href="/user/ceoLogin.do">사장님 로그인</a> --></span>	
 	</c:if>
 	<c:if test="${userInfo == null || userInfo == ''}">
 		<span><a href="/user/userRegister.do">회원가입</a> | <a href="/user/userLogin.do">로그인</a> | <a href="/user/ceoRegister.do">사장님 시작하기</a> | <a href="/user/ceoLogin.do">사장님 로그인</a></span>
 	</c:if>
 	
 </div>
-<div class="NavMid"><img src="https://res.kurly.com/images/marketkurly/logo/logo_x2.png" style="height: 79px"></div>
+<div class="NavMid">
+	<h4 style="font-size: 25px; font-weight: bold;display: inline-block;cursor: pointer;" onclick="location.href='http://localhost:8110/'">Disposable</h4>
+</div>
 <div class="NavBot">
 <span>
-	<ul class="firstUl">
-		<li>신메뉴</li>
-		<li>베스트</li>
-		<li>주변가게</li>
-		<li>특가혜택</li>
+	<ul class="firstUl" style="margin: auto;">
+		<li onclick="location.href='/new.do'">신메뉴</li>
+		<li onclick="location.href='/best.do'">베스트</li>
+		<li onclick="location.href='/around.do'">주변가게</li>
+		<li onclick="location.href='/sale.do'">특가혜택</li>
 	</ul>
-	<ul class="secUl">
+	<!-- <ul class="secUl">
 		<li>
 			<input />
 		</li>
 		<li>버튼1</li>
 		<li>버튼2</li>
-	</ul>
+	</ul> -->
 </span>
 </div>
 
 </nav>
 <script>
-const header = document.querySelector('.NavBot'); 
+ const header = document.querySelector('.NavBot'); 
 function scrollFunc(){ 
 	if (pageYOffset >= 90) {
 		header.classList.add('on'); 
@@ -110,6 +123,6 @@ function scrollFunc(){
 			header.classList.remove('on'); 
 			} 
 	} 
-	window.addEventListener('scroll', scrollFunc);
+	window.addEventListener('scroll', scrollFunc); 
 
 </script>
