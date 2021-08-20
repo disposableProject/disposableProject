@@ -35,7 +35,8 @@
 	border: 1px solid black; 
 }
 .selectMenu{
-	border: 1px solid #c4c4c4;	min-height: 100px;
+	border: 1px solid #c4c4c4;
+	min-height: 100px;
 }
 .foodBox{
 	border: 1px solid; width: 280px; height: 300px; display: flex; flex-direction: column;
@@ -229,6 +230,7 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 		}
 	});
 }
+
 
 function setFoodPrice(foodPrice,foodname,foodnum,optionprice){
 	var optionPrice = foodPrice;
