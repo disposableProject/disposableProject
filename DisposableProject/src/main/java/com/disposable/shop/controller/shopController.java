@@ -103,6 +103,10 @@ public class shopController {
 	@RequestMapping(value="kakaoPayment.do")
 	public String kakaoPayment(@RequestParam("allprice") String allprice,@RequestParam("ordercode") String ordercode,@RequestParam("shopname") String shopname) {
 		
+		System.out.println("allprice==>" + allprice);
+		System.out.println("ordercode==>" + ordercode);
+		System.out.println("shopname==>" + shopname);
+		
 		return "redirect:" + kakaopay.kakaoPayReady(allprice,ordercode,shopname);
 	}
 	

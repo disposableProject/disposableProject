@@ -116,7 +116,7 @@
 				</div>
 			<!-- 결제 버튼(태그) -->
 			<div class="payArea">
-			<form action="/shop/kakaoPayment.do">
+			<form action="/shop/kakaoPayment.do" id="payFrom">
 				<input type="hidden" name="allprice" value="${orderPayment[0].ALLPRICE}">
 				<input type="hidden" name="ordercode" value="${orderPayment[0].ORDERCODE}">
 				<input type="hidden" name="shopname" value="test">
@@ -127,4 +127,9 @@
 	</div>
 </div>
 <script>
+/* jQuery('#payFrom').submit(
+	function(){
+		alert('주문 및 결제가 완료되었습니다.');
+	}
+); */
 </script>

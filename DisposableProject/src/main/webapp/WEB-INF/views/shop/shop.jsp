@@ -277,7 +277,8 @@ function test1() {
 }
 
 //주문서 생성
-//비회원이 주문서 생성할 때 로그인 하라고 알람 주기
+//비회원이 주문서 생성할 때 로그인 하라고 알람 주기 - ok
+//주문서에 메뉴 없으면 메뉴 넣어달라고 alert 넣기
 function orderInsert(){
 	var userInfo = '${userInfo.EMAIL}';
 	if(userInfo == null || userInfo == ''){
