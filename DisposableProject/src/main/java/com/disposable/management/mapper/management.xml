@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.disposable.management.dao.managementDao">
 	<insert id="foodMainInsert" parameterType="java.util.Map">
-			INSERT INTO FOOD (FOODNUM,STORENUM,FOODNAME,PRICE,WAITTIME,FOODPHOTO,FOOTTEXT)
-			VALUES (FOOD_SEQ.NEXTVAL,#{storeNum},#{foodName},#{foodPrice},#{waitTime},'','')
+			INSERT INTO FOOD (FOODNUM,STORENUM,FOODNAME,PRICE,WAITTIME,FOODPHOTO,FOOTTEXT,CLASSIFY)
+			VALUES (FOOD_SEQ.NEXTVAL,#{storeNum},#{foodName},#{foodPrice},#{waitTime},'',#{foodtext},#{classify})
 	</insert>
 	<insert id="foodOptionInsert" parameterType="java.util.Map">
-			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,PRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNAME)
+			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,OPTIONPRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNAME)
 			VALUES (FOOD_SEQ.CURRVAL,#{storeNum},#{optionNum},#{optionGroupNum},#{optionPrice},#{multiple},#{optionGroupName},#{optionName})
 	</insert>
 	<insert id="foodImageInsert" parameterType="String">

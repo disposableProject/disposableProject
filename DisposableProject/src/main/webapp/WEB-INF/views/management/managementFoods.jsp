@@ -54,6 +54,32 @@ height: 300px;
 .gridItem:hover{
 border: 1px solid #1f9401;cursor: pointer;
 }
+
+.pageAreaUl {
+  display: inline-block;
+  list-style: none;
+}
+
+.pageAreaUl li {
+
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  cursor: pointer;
+}
+.noclick{
+  color: black;
+}
+.nowpage { 
+  background-color: #B6CBA3;
+  color: white; 
+  border: 1px solid #4CAF50;
+}
+
+.pageAreaUl li:hover:not(.nowpage) {background-color: #ddd;}
 </style>
 
 
@@ -96,19 +122,31 @@ border: 1px solid #1f9401;cursor: pointer;
 
 
 	<div class="bottomBtn">
-		<ul>
+		<ul class="pageAreaUl">
 			<c:if test="${1 < pageGroupNum}">
-		<li aria-label="Previous"
+		<li aria-label="Previous" class='noclick'
 			onclick="pageGroupMove('${pageGroupNum - 1}','${boardNum}')">&laquo;</li>
 		</c:if>
 		<c:if test="${pageGroupNum < pageGroupCnt}">
 		<c:forEach var="p" begin="${startPage}" end="${startPage + 4}">
-			<li onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+			<c:if test="${pageNum == p }">
+			<li class='nowpage' onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+			</c:if>
+			<c:if test="${pageNum != p }">
+			<li class='noclick' onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+			</c:if>
 		</c:forEach>
 		</c:if>
 		<c:if test="${pageGroupNum == pageGroupCnt}">
 		<c:forEach var="p" begin="${startPage}" end="${totalPageCnt}">
-			<li onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+		
+			<c:if test="${pageNum == p }">
+			<li class='nowpage' onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+			</c:if>
+			<c:if test="${pageNum != p }">
+			<li class='noclick' onclick="pageMove('${p}','${boardNum}')"><span class="page${p}">${p}</span></li>
+			</c:if>
+			
 		</c:forEach>
 		</c:if>
 

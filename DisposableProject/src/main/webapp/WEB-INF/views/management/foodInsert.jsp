@@ -91,7 +91,21 @@ height: 27px !important;
 			<tr>
 				<td class="titleTd">음식 분류</td>
 				<td colspan="3">
-					<button  id="dupliButton"  type="button">분류 찾기</button>
+					<input  type="radio" name="classify"  value="KOR"/>한식 
+					<input  type="radio" name="classify" value="JPN"/>일식
+					<input  type="radio" name="classify" value="WEST" />양식
+					<input  type="radio" name="classify"  value="SIMPLE"/>분식
+					<input  type="radio" name="classify"  value="CHICKEN"/>치킨
+					<input  type="radio" name="classify"  value="PIG"/>족발/보쌈
+					<input  type="radio" name="classify"  value="CAFE"/>카페
+					<input  type="radio" name="classify"  value="ANOTHER"/>기타
+				</td>
+			
+			</tr>
+			<tr>
+				<td class="titleTd">음식 설명</td>
+				<td colspan="3">
+					<textarea name="foodtext"></textarea>
 				</td>
 			
 			</tr>

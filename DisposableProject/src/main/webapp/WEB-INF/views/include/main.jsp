@@ -73,9 +73,6 @@ color: #444;
   font-size: 150%;
   height: 250px;
 }
-.nowpage{
-color:red;
-}
 
 
 .pageAreaUl {
@@ -215,13 +212,13 @@ function makePaging(total,now){
 	console.log("nowBlock",nowBlock)
 	var html = ""
 	if(pageBlock > 1 && nowBlock > 1){
-		html += "<li class-'noclick' onclick='getShopList("+(nowBlock*5-4)+"'> &laquo;</li>"
+		html += "<li class='noclick' onclick='getShopList("+(nowBlock*5-4)+"'> &laquo;</li>"
 	}
 	for(var i=startCnt;i<=pagecnt;i++){
 		if(now == i){
 			html += "<li class='nowpage' onclick='getShopList("+i+")'>"+i+"</li>"
 		}else{
-			html += "<li class-'noclick' onclick='getShopList("+i+")'>"+i+"</li>"
+			html += "<li class='noclick' onclick='getShopList("+i+")'>"+i+"</li>"
 		}
 		
 	}
