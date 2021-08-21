@@ -18,4 +18,8 @@
 	ON OFD.STORENUM = SH.STORENUM)AA)BB
 	WHERE 11 > BB.rm
 	</select>
+	
+	<select id="AllStoreList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT * FROM SHOP WHERE LATITUDE IS NOT NULL
+	</select>
 </mapper>

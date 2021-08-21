@@ -95,6 +95,9 @@
 			SET ADDRESS = #{ADDRESS}
 			,NOTICE = #{notice}
 			,PHONE = #{phone}
+			,CLASSIFY = #{classify}
+			,LATITUDE = #{LATITUDE}
+			,LONGITUDE = #{LONGITUDE}
 			WHERE STORENUM = #{storenum}
 	</update>
 	

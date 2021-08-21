@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6&libraries=services"></script>
 
 <style>
 .shopInfoContainer{
@@ -46,13 +48,24 @@ border: #264e36 2px solid;
 			</tr>
 			<tr>
 				<td class="titleTd">주소</td>
-				<td colspan="2"><input  type="text"  name="ADDRESS"  style="width: 500px"  value="${storeInfo.ADDRESS}" readonly="readonly"></td>
-				<td colspan="1"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
+				<td colspan="2"><input  type="text" id="address"  name="ADDRESS"  style="width: 500px"  value="${storeInfo.ADDRESS}" readonly="readonly"></td>
+				<td colspan="1"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'),$('#latitude'),$('#longitude'))">주소검색</button></td>
+				<input  type="hidden" id="latitude"  name="LATITUDE"    value="${storeInfo.LATITUDE}" >
+				<input  type="hidden" id="longitude"  name="LONGITUDE"   value="${storeInfo.LONGITUDE}" >
 			</tr>
 			<tr>
 				<td class="titleTd">가게 분류</td>
-				<td colspan="2"></td>
-				<td colspan="1"><button id="dupliButton" type="button" >추가</button></td>
+				<td colspan="3">
+				
+					<input  type="radio" name="classify"  value="KOR"  <c:if test="${storeInfo.CLASSIFY =='KOR' }">checked</c:if> />한식 
+					<input  type="radio" name="classify" value="JPN"<c:if test="${storeInfo.CLASSIFY =='JPN' }">checked</c:if> />일식
+					<input  type="radio" name="classify" value="WEST" <c:if test="${storeInfo.CLASSIFY =='WEST' }">checked</c:if> />양식
+					<input  type="radio" name="classify"  value="SIMPLE"<c:if test="${storeInfo.CLASSIFY =='SIMPLE' }">checked</c:if> />분식
+					<input  type="radio" name="classify"  value="CHICKEN"<c:if test="${storeInfo.CLASSIFY =='CHICKEN' }">checked</c:if> />치킨
+					<input  type="radio" name="classify"  value="PIG" <c:if test="${storeInfo.CLASSIFY =='PIG' }">checked</c:if> />족발/보쌈
+					<input  type="radio" name="classify"  value="CAFE"<c:if test="${storeInfo.CLASSIFY =='CAFE' }">checked</c:if> />카페
+					<input  type="radio" name="classify"  value="ANOTHER"<c:if test="${storeInfo.CLASSIFY =='ANOTHER' }">checked</c:if> />기타
+				</td>
 			</tr>
 			<tr style="height: 450px">
 				<td class="titleTd">공지사항</td>

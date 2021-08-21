@@ -24,7 +24,7 @@
 		FROM CEOMEMBERS CMS
 		INNER JOIN SHOP SP
 		ON CMS.STORENUM = SP.STORENUM
-		WHERE CMS.USERID = #{userid} AND CMS.EMAIL = #{email} AND CMS.PASSWORD = #{password}
+		WHERE CMS.USERID = #{userid} 
 	</select>
 	<select id="checkUserEmail" resultType="int" parameterType="java.util.Map">
 		SELECT COUNT(*) FROM MEMBERS WHERE EMAIL = #{email}

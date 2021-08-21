@@ -17,12 +17,32 @@ var common = {
 				
 				}
 				return obj;
-	},findAddress: function(input) {
+	},findAddress: function(input,latitude,longitude) {
 		new daum.Postcode({
-			oncomplete: function(data) {
-			input.val(data.address)
-			}
-		}).open();
+        oncomplete: function(data) {
+            Promise.resolve(data).then(o => {
+            	input.val(data.address)
+                const { address } = data;
+
+                return new Promise((resolve, reject) => {
+                    const geocoder = new daum.maps.services.Geocoder();
+
+                    geocoder.addressSearch(address, (result, status) =>{
+                        if(status === daum.maps.services.Status.OK){
+                            const { x, y } = result[0];
+
+                            resolve({ lat: y, lon: x })
+                        }else{
+                            reject();
+                        }
+                    });
+                })
+            }).then(result => {
+              latitude.val(result.lat)
+              longitude.val(result.lon)
+            });
+        }
+    }).open();
 	},progressOn: function(msg,progressName) {
 		$("."+progressName+" h2").html(msg)
 		$("."+progressName).show()

@@ -97,7 +97,7 @@ border-bottom: 1px solid #d5d5d5;
 				</div>
 				<div class="rightInfo">
 					<p>${getStoreInfo[0].STORENAME}</p>
-					<p>가게주소: ${getStoreInfo[0].ADDRESS} <button onclick="showMap()">지도로 보기</button></p>
+					<p>가게주소: ${getStoreInfo[0].ADDRESS} <button id="dupliButton"  onclick="window.open('https://map.kakao.com/link/roadview/${getStoreInfo[0].LATITUDE},${getStoreInfo[0].LONGITUDE}')">로드뷰로 보기</button></p>
 					<p>${getStoreInfo[0].NOTICE}</p>
 					<div id="map" style="width:450px;height:350px;"></div>
 				</div>
@@ -341,17 +341,21 @@ function orderInsert(){
 		});
 	}
 }
-
+var StoreName =  '${getStoreInfo[0].STORENAME}'
+var LONGITUDE = '${getStoreInfo[0].LONGITUDE}'
+var LATITUDE =  '${getStoreInfo[0].LATITUDE}'
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(LATITUDE, LONGITUDE), // 지도의 중심좌표
     level: 3 // 지도의 확대 레벨
 };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+
+
 //마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+var markerPosition  = new kakao.maps.LatLng(LATITUDE, LONGITUDE); 
 
 //마커를 생성합니다
 var marker = new kakao.maps.Marker({
@@ -360,5 +364,29 @@ position: markerPosition
 
 //마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
+
+
+var iwContent = '<div style="padding:5px;">길찾기 바로가기</div>';
+//인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({
+    content : iwContent
+});
+//마커에 마우스오버 이벤트를 등록합니다
+kakao.maps.event.addListener(marker, 'mouseover', function() {
+  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+    infowindow.open(map, marker);
+});
+
+// 마커에 마우스아웃 이벤트를 등록합니다
+kakao.maps.event.addListener(marker, 'mouseout', function() {
+    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+    infowindow.close();
+});
+//마커에 마우스아웃 이벤트를 등록합니다
+kakao.maps.event.addListener(marker, 'click', function() {
+	window.open("https://map.kakao.com/link/to/"+StoreName+","+LATITUDE+","+LONGITUDE)
+});
+
+
 </script>
 
