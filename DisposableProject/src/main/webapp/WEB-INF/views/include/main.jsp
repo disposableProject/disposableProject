@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -254,55 +255,63 @@ function ok(){
 			<span class="next" id="aro1_next">next</span>
 		</div> -->
 		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
+			<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/>(${SaleFoodLists.SALEPERCENT}%)</div>
+			</div>
+			<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
+			<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
+			<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
+						<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
+						<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
+						<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/></div>
+			</div>
 		
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
 		</ul>
 		
 	</section>
@@ -314,54 +323,16 @@ function ok(){
 		</div>
 		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
 		
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
-			<li>
-				<div style="background-image: url(https://img-cf.kurly.com/shop/data/goods/1470792458150l0.jpg);width: 100%;height: 280px;background-size: cover;"></div>
-				<div>이름</div>
-				<div>가격</div>
-				<div>원가</div>
-			</li>
+		<c:forEach items="${SaleFoodList}" var="SaleFoodLists">
+			<div style="width: 250px;height: 300px;border: 1px solid #ddd;margin: 10px">
+				<div style="height: 75%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="font-weight: bold;font-size: 20px">${SaleFoodLists.STORENAME} - ${SaleFoodLists.FOODNAME}</div>
+				<div>판매가: <fmt:formatNumber value="${SaleFoodLists.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${SaleFoodLists.PRICE - SaleFoodLists.PRICE * (SaleFoodLists.SALEPERCENT/100) }" type="currency"/> (${SaleFoodLists.SALEPERCENT}%)</div>
+			</div>
+		</c:forEach>
 		</ul>
 	</section>
 	<section style="margin-bottom:30px">

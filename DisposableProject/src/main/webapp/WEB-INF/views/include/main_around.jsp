@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6"></script>
 <style>
 .shopTag{
@@ -51,6 +52,10 @@ border: #264e36 1px solid;
 	</div>
 	<div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;width: 98%;margin: auto;margin-top: 30px">
 		<input style="width: 350px;" /><button  id="dupliButton"  >검색하기</button>
+	</div>
+	<div style="width: 98%;margin: auto;margin-top: 30px">
+		<div>평점</div>
+		<input type="range"  style="width: 95%"/>
 	</div>
 </div>
 </div>

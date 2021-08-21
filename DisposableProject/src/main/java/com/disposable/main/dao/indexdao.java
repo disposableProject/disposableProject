@@ -10,4 +10,5 @@ public interface indexdao {
 	public List<Map<String,Object>> storeList(Map<String, Object> paramMap);
 	public List<Map<String,Object>> bestStoreList(Map<String, Object> paramMap);
 	public List<Map<String,Object>> AllStoreList();
+	public List<Map<String,Object>> SaleFoodList();
 }

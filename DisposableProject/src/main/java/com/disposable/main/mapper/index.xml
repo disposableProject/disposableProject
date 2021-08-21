@@ -22,4 +22,16 @@
 	<select id="AllStoreList" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT * FROM SHOP WHERE LATITUDE IS NOT NULL
 	</select>
+	
+	<select id="SaleFoodList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT * 
+			FROM FOOD FD
+			LEFT JOIN ( SELECT B.* FROM (SELECT ROW_NUMBER() OVER(PARTITION BY A.BOARDNUM 
+			ORDER BY A.IMGNAME,A.BOARDNUM) AS ROW_NUM,A.* FROM IMAGEBOX A WHERE A.CLASSIFY='SHOP') B WHERE 
+			B.ROW_NUM = 1 ) IB
+			ON FD.FOODNUM = IB.BOARDNUM
+			INNER JOIN SHOP SP
+			ON FD.STORENUM = SP.STORENUM 
+			 WHERE FD.SALEPERCENT != 0
+	</select>
 </mapper>

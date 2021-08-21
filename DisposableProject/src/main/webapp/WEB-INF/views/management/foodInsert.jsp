@@ -82,6 +82,13 @@ height: 27px !important;
 				
 			</tr>
 			<tr>
+				<td class="titleTd">할인률</td>
+				<td colspan="3">
+					<input type="text" name="salepercent"  >
+				</td>
+				
+			</tr>
+			<tr>
 				<td class="titleTd">소요시간</td>
 				<td colspan="3">
 					<input type="text" name="waitTime" >
