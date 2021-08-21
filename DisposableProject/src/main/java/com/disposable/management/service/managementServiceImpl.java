@@ -2,6 +2,7 @@ package com.disposable.management.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,10 +35,14 @@ public class managementServiceImpl implements managementService{
 	}
 	
 	@Override
-	public Integer foodImageInsert(ArrayList paramMap) throws SQLException {
+	public Integer foodImageInsert(ArrayList paramMap,String foodnum) throws SQLException {
 		Integer check = null;
+		
 			for(int i=0;i<paramMap.size();i++) {
-				check = managementDao.foodImageInsert((String)paramMap.get(i));
+				Map<String, Object> paramMap2 = new HashMap<String, Object>();
+				paramMap2.put("fileName", (String)paramMap.get(i));
+				paramMap2.put("foodnum", foodnum);
+				check = managementDao.foodImageInsert(paramMap2);
 			}
 		return check;
 	}
@@ -77,5 +82,23 @@ public class managementServiceImpl implements managementService{
 	public List<Map<String, Object>> foodInfo(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
 		return managementDao.foodInfo(paramMap);
+	}
+	
+	
+	@Transactional
+	@Override
+	public Integer foodMainUpdate(Map<String, Object> paramMap) throws SQLException {
+		return managementDao.foodMainUpdate(paramMap);
+	}
+	
+	@Override
+	public Integer foodOptiondelete(List<Object> paramMap) throws SQLException {
+		Integer check = managementDao.foodOptiondelete((Map<String, Object>)paramMap.get(0));
+		return check;
+	}
+	@Override
+	public Integer foodImageDelete(Map<String, Object> paramMap) throws SQLException {
+		Integer check = managementDao.foodImageDelete(paramMap);
+		return check;
 	}
 }

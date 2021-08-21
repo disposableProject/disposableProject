@@ -20,7 +20,7 @@
 		FROM FOODOPTION 
 		WHERE STORENUM = #{storenum} 
 		AND FOODNUM = #{foodnum} 
-		ORDER BY OPTIONGROUP
+		ORDER BY OPTIONGROUP,OPTIONNUM
 	</select>
 	
 	<select id="getStoreInfo" parameterType="String" resultType="java.util.Map">

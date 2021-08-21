@@ -63,8 +63,9 @@ public class managementRestController {
 			foodInsertCheck = managementservice.foodOptionInsert((List<Object>) paramMap.get("foodOptionInfo"));
 		}
 		if(files.length > 0) {
+			String foodnum = "";
 			fileNames = filemanagement.FileUploader(files);
-			foodInsertCheck = managementservice.foodImageInsert(fileNames);
+			foodInsertCheck = managementservice.foodImageInsert(fileNames,foodnum);
 		}
 		if(foodInsertCheck == 1) {
 			
@@ -111,6 +112,45 @@ public class managementRestController {
 		
 		return resultMap;
 	}
-	
+	/**
+	 * @author 손호일
+	 * @param paramMap
+	 * @return Map<String, Object>
+	 * @throws SQLException
+	 * @throws Exception
+	 * @description 음식수정
+	 */
+	@Transactional
+	@RequestMapping(value="/foodUpdatePro.do", method=RequestMethod.POST)
+	public Map<String, Object> foodUpdatePro(HttpServletRequest request,
+			@RequestParam(value="foodImg", required=false) MultipartFile[] files
+			,@RequestParam(value="foodData", required=false) String param) throws SQLException, Exception {
+		ArrayList fileNames = null;
+		Integer foodUpdateCheck = null;
+
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> paramMap = mapper.readValue(param, Map.class);
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		foodUpdateCheck = managementservice.foodMainUpdate(paramMap);
+		if(((List<Object>) paramMap.get("foodOptionInfo")).size() > 0) {
+			foodUpdateCheck = managementservice.foodOptiondelete((List<Object>) paramMap.get("foodOptionInfo"));
+			foodUpdateCheck = managementservice.foodOptionInsert((List<Object>) paramMap.get("foodOptionInfo"));
+		}
+		if(files != null) {
+			if(files.length > 0) {
+				fileNames = filemanagement.FileUploader(files);
+				String foodnum = (String)paramMap.get("foodnum");
+				foodUpdateCheck = managementservice.foodImageDelete(paramMap);
+				foodUpdateCheck = managementservice.foodImageInsert(fileNames,foodnum);
+			}
+		}
+		
+		if(foodUpdateCheck == 1) {
+			
+		}
+		resultMap.put("JavaData", foodUpdateCheck);
+		return resultMap;
+	}
 	
 }

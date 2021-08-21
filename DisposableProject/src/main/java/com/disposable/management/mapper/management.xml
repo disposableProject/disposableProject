@@ -7,11 +7,25 @@
 	</insert>
 	<insert id="foodOptionInsert" parameterType="java.util.Map">
 			 INSERT INTO FOODOPTION (FOODNUM,STORENUM,OPTIONNUM,OPTIONGROUP,OPTIONPRICE,CHECKFLAG,OPTIONGRNAME,OPTIONNAME)
-			VALUES (FOOD_SEQ.CURRVAL,#{storeNum},#{optionNum},#{optionGroupNum},#{optionPrice},#{multiple},#{optionGroupName},#{optionName})
+			VALUES (
+			<if test="foodnum != ''  and foodnum != null">
+				#{foodnum},
+			</if>
+			<if test="foodnum == ''  or foodnum == null">
+				FOOD_SEQ.CURRVAL,
+			</if>
+			#{storeNum},#{optionNum},#{optionGroupNum},#{optionPrice},#{multiple},#{optionGroupName},#{optionName})
 	</insert>
-	<insert id="foodImageInsert" parameterType="String">
+	<insert id="foodImageInsert" parameterType="java.util.Map" >
 			 INSERT INTO IMAGEBOX (IMGNUM,BOARDNUM,IMGNAME,CLASSIFY)
-			VALUES (IMAGEBOX_SEQ.NEXTVAL,FOOD_SEQ.CURRVAL,#{value},'SHOP')
+			VALUES (IMAGEBOX_SEQ.NEXTVAL,
+			<if test="foodnum != ''  and foodnum != null">
+				#{foodnum},
+			</if>
+			<if test="foodnum == ''  or foodnum == null">
+				FOOD_SEQ.CURRVAL,
+			</if>
+			#{fileName},'SHOP')
 	</insert>
 	<select id="storeFoodListGet" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT MT.*,
@@ -91,5 +105,23 @@
 		ON FD.STORENUM = FOP.STORENUM
 		AND FD.FOODNUM = FOP.FOODNUM
 		WHERE FD.STORENUM = #{storenum} AND FD.FOODNUM = #{foodnum}
+		ORDER BY FOP.OPTIONGROUP, FOP.OPTIONNUM
 	</select>
+	<update id="foodMainUpdate" parameterType="java.util.Map">
+			UPDATE FOOD
+			SET 
+			FOODNAME = #{foodName}
+			,PRICE = #{foodPrice}
+			,WAITTIME = #{waitTime}
+			,FOOTTEXT = #{foodtext}
+			,CLASSIFY = #{classify}
+			WHERE FOODNUM = #{foodnum} AND STORENUM = #{storeNum}
+	</update>
+	<delete id="foodOptiondelete" parameterType="java.util.Map">
+		DELETE FROM FOODOPTION WHERE FOODNUM = #{foodnum} AND  STORENUM = #{storeNum}
+	</delete>
+	<delete id="foodImageDelete" parameterType="java.util.Map">
+		DELETE FROM IMAGEBOX WHERE BOARDNUM = #{foodnum} AND  CLASSIFY = 'SHOP'
+	</delete>	
+	
 </mapper>

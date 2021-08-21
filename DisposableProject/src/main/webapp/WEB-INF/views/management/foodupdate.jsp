@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .foodInsertContainer{
 width: 100%;height: 800px;margin: auto;overflow: auto;
@@ -55,6 +56,7 @@ height: 27px !important;
 <div class="foodInsertContainer">
 <form name="foodForm">
 	<input type="hidden" name="storeNum" value="${userInfo.STORENUM}" >
+	<input type="hidden" name="foodnum"  value="${resultMap[0].FOODNUM}">
 	<h2>음식 관리</h2>
 	<button  id="dupliButton"  type="button" onclick="addFood()">등록하기</button>
 	<table class="mainTable">
@@ -91,7 +93,22 @@ height: 27px !important;
 			<tr>
 				<td class="titleTd">음식 분류</td>
 				<td colspan="3">
-					<button  id="dupliButton"  type="button">분류 찾기</button>
+				
+					<input  type="radio" name="classify"  value="KOR"  <c:if test="${resultMap[0].CLASSIFY =='KOR' }">checked</c:if> />한식 
+					<input  type="radio" name="classify" value="JPN"<c:if test="${resultMap[0].CLASSIFY =='JPN' }">checked</c:if> />일식
+					<input  type="radio" name="classify" value="WEST" <c:if test="${resultMap[0].CLASSIFY =='WEST' }">checked</c:if> />양식
+					<input  type="radio" name="classify"  value="SIMPLE"<c:if test="${resultMap[0].CLASSIFY =='SIMPLE' }">checked</c:if> />분식
+					<input  type="radio" name="classify"  value="CHICKEN"<c:if test="${resultMap[0].CLASSIFY =='CHICKEN' }">checked</c:if> />치킨
+					<input  type="radio" name="classify"  value="PIG" <c:if test="${resultMap[0].CLASSIFY =='PIG' }">checked</c:if> />족발/보쌈
+					<input  type="radio" name="classify"  value="CAFE"<c:if test="${resultMap[0].CLASSIFY =='CAFE' }">checked</c:if> />카페
+					<input  type="radio" name="classify"  value="ANOTHER"<c:if test="${resultMap[0].CLASSIFY =='ANOTHER' }">checked</c:if> />기타
+				</td>
+			
+			</tr>
+			<tr>
+				<td class="titleTd">음식 설명</td>
+				<td colspan="3">
+					<textarea name="foodtext" >${resultMap[0].FOOTTEXT}</textarea>
 				</td>
 			
 			</tr>
@@ -114,24 +131,41 @@ height: 27px !important;
 				<td style="width: 280px">옵션 그룹 명: <input type="text" id="optionName" /></td>
 				<td><button  id="dupliButton"  type="button" onclick="addOption()">옵션 추가하기</button></td>
 			</tr>
-			<tr class='optionBox option"+optionLength+"'>
-			<td class="titleTd optionNameTd"></td>
-			<td colspan="3">
-			<span>다중 선택 가능 <input type='checkbox' id='multipleCheck' value='multi' ></span>
-			<button onclick='deleteOption("+optionLength+")'>삭제</button>
-			<table style="border-top:1px solid #e7e7e7">
-			<tbody>
-					<tr>
-					<input type='hidden' id='optionNum' value=""/>
-					<input type='hidden' id='optionGroupName' value="" />
-					<input type='hidden' id='optionGroupNum' value="" />
-					<td class="titleTd" style="width: 20px">옵션 명: </td>
-						<td style="width:10px"><input type="text" name="option" id="optionName"></td>
-						<td class="titleTd" style="width: 20px">가격: </td>
-						<td style="width:150px"><input type="number" name="price" id="optionPrice" /></td>
-					</tr>
-				</tbody>
-			</table>
+			<c:set var="groupnum" value="-1"></c:set>
+			<c:set var="checknum" value="-1"></c:set>
+			<c:forEach  items="${resultMap}" var="optionInfo">
+			<c:set var="checknum" value="${checknum+1}"></c:set>
+				<c:if test="${optionInfo.OPTIONGROUP !=  groupnum}">
+				<c:set var="groupnum" value="${optionInfo.OPTIONGROUP}"></c:set>
+							<tr class='optionBox option${groupnum}'>
+							<td class="titleTd optionNameTd">${optionInfo.OPTIONGRNAME}</td>
+							<td colspan="3">
+							<span>다중 선택 가능 <input type='checkbox' id='multipleCheck' value='multi' ></span>
+							<button onclick='deleteOption("${groupnum}")'>삭제</button>
+				</c:if>
+				<c:if test="${optionInfo.OPTIONGROUP ==  groupnum}">
+							<table style="border-top:1px solid #e7e7e7">
+							
+								<tbody>
+									<tr>
+									<input type='hidden' id='optionNum' value="${optionInfo.OPTIONNUM}"/>
+									<input type='hidden' id='optionGroupName' value="${optionInfo.OPTIONGRNAME}" />
+									<input type='hidden' id='optionGroupNum' value="${optionInfo.OPTIONGROUP}" />
+										<td class="titleTd" style="width: 20px">옵션 명: </td>
+										<td style="width:10px"><input type="text" name="option" id="optionName"  value="${optionInfo.OPTIONNAME}" /></td>
+										<td class="titleTd" style="width: 20px">가격: </td>
+										<td style="width:150px"><input type="number" name="price" id="optionPrice"  value="${optionInfo.OPTIONPRICE}" /></td>
+									</tr>
+								</tbody>
+							</table>
+				</c:if>
+				<c:if test="${resultMap[checknum+1].OPTIONGROUP !=  groupnum}">
+				</td>
+				</tr>
+				</c:if>
+			</c:forEach>
+
+			
 		</tbody>
 	</table>
 	</form>
@@ -197,6 +231,7 @@ function addFood(){
 			multiple = 'Y'
 		}
 		var foodOptionInfo = {
+				foodnum:  '${resultMap[0].FOODNUM}',
 				storeNum : '${userInfo.STORENUM}',
 				optionGroupName : $(this).find("#optionGroupName").val(),
 				optionGroupNum : $(this).find("#optionGroupNum").val(),
@@ -227,7 +262,7 @@ function addFood(){
 	
 	$.ajax({
 		type : 'POST',
-		url : '/management/foodInsertPro.do',
+		url : '/management/foodUpdatePro.do',
 		//contentType: 'application/json',
 		processData:false,
 		contentType: false,
@@ -235,11 +270,11 @@ function addFood(){
 		//data : JSON.stringify(foodData),
 		//dataType : 'json',
 		success : function(json){
-			alert("등록되었습니다.");
+			alert("수정되었습니다.");
 			location.href = '/management/managementMain.do'
 		},
 		error: function(xhr, status, error){
-			alert("가입에 실패했습니다."+error);
+			alert("수정에 실패했습니다."+error);
 		}
 	});
 }
