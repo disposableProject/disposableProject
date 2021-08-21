@@ -1,10 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6"></script>
-<div id="map" style="width: 100%; height: 100%" ></div>
+<style>
+.shopTag{
+width: 98%;
+margin:auto;
+display: flex;
+flex-wrap:wrap;
+}
+.shopTag .tag{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 15px;
+margin-top: 20px;
+border: 1px solid #ddd;
+border-radius: 10px;
+width: 75px;
+height: 30px;
+cursor: pointer;
+}
+.clickTag{
+background-color: #B6CBA3;
+color: #fff;
+}
+.tag:hover:not(.clickTag) {background-color: #ddd;}
+ input{
+border: 1px solid #aaa;
+height: 27px !important;
+outline: none;
+}
+input:focus{
+border: #264e36 1px solid;
+}
+</style>
 
+
+<div style="width: 100%;height: 100%;display: flex;">
+<div id="map" style="width: 70%; height: 100%" ></div>
+<div style="width: 30%; height: 100%">
+	<div class="shopTag">
+			<span class="tag clickTag">전체</span>
+			<span class="tag">한식</span>
+			<span class="tag">일식</span>
+			<span class="tag">양식</span>
+			<span class="tag">분식</span>
+			<span class="tag">치킨</span>
+			<span class="tag">족발/보쌈</span>
+			<span class="tag">카페</span>
+	</div>
+	<div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;width: 98%;margin: auto;margin-top: 30px">
+		<input style="width: 350px;" /><button  id="dupliButton"  >검색하기</button>
+	</div>
+</div>
+</div>
 
 <script>
+$(document).ready(function(){
+	
+	$(".tag").click(function(){
+		console.log("ok")
+		$(this).addClass("clickTag")
+		$(this).siblings().removeClass("clickTag")
+	});
+})
+
+
 var StoreInfo = JSON.parse('${AllStoreList}'); 
 console.log(StoreInfo)
 	var LONGITUDE = '${getStoreInfo[0].LONGITUDE}'
