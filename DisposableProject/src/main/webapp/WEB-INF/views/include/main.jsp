@@ -161,7 +161,7 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
-	getShopList(1,'first')
+	getShopList(1,'first','')
 	
 	$(".tag").click(function(){
 		console.log("ok")
@@ -170,15 +170,15 @@ $(document).ready(function(){
 	});
 })
 
-function getShopList(now,flag){
+function getShopList(now,flag,classify){
 	$.ajax({
 		type : 'POST',
 		url : '/getStoreList.do',
-		data : {page:now,classify:'2'},
+		data : {page:now,classify:classify},
 		dataType : 'json',
 		success : function(json){
 			var total = json[0].TOTALCNT
-			makePaging(total,now)
+			makePaging(total,now,classify)
 			var html = ""
 			for(var i=0;i<json.length;i++){
 				if(json[i].PHOTO){
@@ -202,7 +202,7 @@ function getShopList(now,flag){
 	});
 }
 
-function makePaging(total,now){
+function makePaging(total,now,classify){
 	var pagecnt = Math.ceil(total/12.0)
 	var startCnt = Math.floor((now-1)/5) * 5 + 1 
 	var pageBlock = Math.ceil(pagecnt/5)
@@ -213,13 +213,13 @@ function makePaging(total,now){
 	console.log("nowBlock",nowBlock)
 	var html = ""
 	if(pageBlock > 1 && nowBlock > 1){
-		html += "<li class='noclick' onclick='getShopList("+(nowBlock*5-4)+"'> &laquo;</li>"
+		html += "<li class='noclick' onclick='getShopList("+(nowBlock*5-4)+","+now+","+classify+"'> &laquo;</li>"
 	}
 	for(var i=startCnt;i<=pagecnt;i++){
 		if(now == i){
-			html += "<li class='nowpage' onclick='getShopList("+i+")'>"+i+"</li>"
+			html += "<li class='nowpage' onclick='getShopList("+i+","+now+","+classify+")'>"+i+"</li>"
 		}else{
-			html += "<li class='noclick' onclick='getShopList("+i+")'>"+i+"</li>"
+			html += "<li class='noclick' onclick='getShopList("+i+","+now+","+classify+")'>"+i+"</li>"
 		}
 		
 	}
@@ -338,14 +338,14 @@ function ok(){
 	<section style="margin-bottom:30px">
 	<h2 class="storeTitle" style="padding: 79px 0 35px;text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;">우리동네 가게</h2>
 		<div class="shopTag">
-			<span class="tag clickTag">전체</span>
-			<span class="tag">한식</span>
-			<span class="tag">일식</span>
-			<span class="tag">양식</span>
-			<span class="tag">분식</span>
-			<span class="tag">치킨</span>
-			<span class="tag">족발/보쌈</span>
-			<span class="tag">카페</span>
+			<span class="tag clickTag" onclick="getShopList('1','first')" id="ALL">전체</span>
+			<span class="tag" onclick="getShopList('1','first','KOR')" id="KOR">한식</span>
+			<span class="tag" onclick="getShopList('1','first','JPN')" id="JPN">일식</span>
+			<span class="tag" onclick="getShopList('1','first','WEST')" id="WEST">양식</span>
+			<span class="tag" onclick="getShopList('1','first','SIMPLE')" id="SIMPLE">분식</span>
+			<span class="tag" onclick="getShopList('1','first','CHICKEN')" id="CHICKEN">치킨</span>
+			<span class="tag" onclick="getShopList('1','first','PIG')" id="PIG">족발/보쌈</span>
+			<span class="tag" onclick="getShopList('1','first','CAFE')" id="CAFE">카페</span>
 		</div>
 		<div class="shopListBox">
 			

@@ -3,9 +3,16 @@
 <mapper namespace="com.disposable.main.dao.indexdao">
 	<select id="storeList" resultType="java.util.Map" parameterType="java.util.Map">
 	SELECT SP.* 
-	,(SELECT COUNT(*) FROM SHOP) AS TOTALCNT
+	,(SELECT COUNT(*) FROM SHOP  
+		<if test="classify != '' and classify != null">
+		WHERE CLASSIFY = #{classify}
+		</if>
+	) AS TOTALCNT
 	FROM(
-		SELECT STORENUM,STORENAME,PHOTO,ROWNUM as RM FROM SHOP
+		SELECT STORENUM,STORENAME,PHOTO,ROWNUM as RM FROM SHOP 
+		<if test="classify != '' and classify != null">
+			WHERE CLASSIFY = #{classify}
+		</if>
 		) SP
 		WHERE SP.RM > #{startPage} AND #{endPage} > SP.RM 
 	</select>
@@ -33,5 +40,17 @@
 			INNER JOIN SHOP SP
 			ON FD.STORENUM = SP.STORENUM 
 			 WHERE FD.SALEPERCENT != 0
+	</select>
+	
+	<select id="getAroundstoreList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT * 
+		FROM SHOP
+		 WHERE LATITUDE IS NOT NULL
+		 <if test="classify !='' and classify != null">
+		 	AND CLASSIFY = #{classify}
+		 </if>
+		 <if test="storename !='' and storename != null">
+		 	AND STORENAME LIKE '%'||#{storename}||'%'
+		 </if>
 	</select>
 </mapper>
