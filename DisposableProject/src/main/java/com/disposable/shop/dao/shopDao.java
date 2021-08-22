@@ -12,4 +12,5 @@ public interface shopDao {
 	public List<Map<String,Object>> getStoreInfo(String shopnum);
 	public int orderInsert(Map<String, Object> map);
 	public List<Map<String,Object>> orderPayment(Map<String, Object> paramMap);
+	public int reviewWrite(Map<String, Object> paramMap);
 }

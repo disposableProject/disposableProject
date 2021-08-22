@@ -101,4 +101,9 @@ public class managementServiceImpl implements managementService{
 		Integer check = managementDao.foodImageDelete(paramMap);
 		return check;
 	}
+	@Override
+	public Integer updateOrderOne(Map<String, Object> paramMap) throws SQLException {
+		Integer	check = managementDao.updateOrder(paramMap);
+		return check;
+	}
 }

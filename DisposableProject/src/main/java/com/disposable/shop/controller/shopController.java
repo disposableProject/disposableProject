@@ -1,5 +1,6 @@
 package com.disposable.shop.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.disposable.management.service.managementService;
 import com.disposable.shop.service.shopService;
 import com.disposable.utils.KakaoPay;
 
@@ -23,6 +25,8 @@ public class shopController {
 	private shopService shopservice;
 	@Autowired
 	private KakaoPay kakaopay;
+	@Autowired
+	private managementService managementservice;
 	
 	@RequestMapping(value="shopMain.do")
 	public String shopMain(Model model,@RequestParam("shopnum") String shopnum,@RequestParam("device") String device) {
@@ -111,9 +115,18 @@ public class shopController {
 	}
 	
 	@RequestMapping(value="kakaoPaySuccess.do")
-	public String kakaoPaySuccess(@RequestParam("ordercode") String ordercode) {
+	public String kakaoPaySuccess(@RequestParam("ordercode") String ordercode) throws SQLException {
 		System.out.println("ordercode" + ordercode);
-		return "shop/kakaoReturn";
+		Map <String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ordercode",ordercode);
+		paramMap.put("state","PAY");
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		Integer result = managementservice.updateOrderOne(paramMap);
+		if(result > 0) {
+			return "shop/kakaoReturn";
+		}else {
+			return "redirect:kakaoPaySuccessFail.do";
+		}
 	}
 	
 	@RequestMapping(value="kakaoPayCancel.do")
