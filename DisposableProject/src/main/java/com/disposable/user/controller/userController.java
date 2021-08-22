@@ -151,5 +151,10 @@ public class userController {
 		return "user/setSnsInfo";
 	}
 	
+	@RequestMapping(value="myPage.do")
+	public String myPage() {
+		
+		return "user/myPage";
+	}
 
 }

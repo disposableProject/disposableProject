@@ -126,10 +126,3 @@
 		</div>
 	</div>
 </div>
-<script>
-/* jQuery('#payFrom').submit(
-	function(){
-		alert('주문 및 결제가 완료되었습니다.');
-	}
-); */
-</script>
