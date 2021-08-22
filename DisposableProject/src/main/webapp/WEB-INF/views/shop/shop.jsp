@@ -167,7 +167,7 @@ border-bottom: 1px solid #d5d5d5;
 			</div>
 			<!-- 리뷰 작성은 마이페이지 구매 내역으로 / 로그인 안한 사람은 로그인 화면으로 / 구매하지 않은 사람은 alert+현재페이지에-->
 			<p class="writeReview">
-				<a href="#none">
+				<a href="/user/myPage.do">
 					<span>후기쓰기</span>
 				</a>
 			</p>
