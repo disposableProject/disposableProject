@@ -123,10 +123,10 @@ border-bottom: 1px solid #d5d5d5;
 			<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 				<c:forEach items="${StoreFoodList}" var="foodInfo">
 				<c:if test="${foodInfo.SALEPERCENT != null and foodInfo.SALEPERCENT  != '' and foodInfo.SALEPERCENT  != '0' and foodInfo.SALEDATE > nowDate }">
-					<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }')">
+					<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px;cursor: pointer;"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }')">
 				</c:if>
 				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0}">
-				<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
+				<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px;cursor: pointer;"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
 				</c:if>
 				<div style="height: 70%">
 					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
@@ -195,7 +195,7 @@ border-bottom: 1px solid #d5d5d5;
 			</div>
 			<!-- 리뷰 작성은 마이페이지 구매 내역으로 / 로그인 안한 사람은 로그인 화면으로 / 구매하지 않은 사람은 alert+현재페이지에-->
 			<p class="writeReview">
-				<span class="reviewClick" onclick="reviewWrite('${getStoreInfo[0].STORENUM}')">후기쓰기</span>
+				<button  id="dupliButton"  type="button"  class="reviewClick" onclick="reviewWrite('${getStoreInfo[0].STORENUM}')">후기쓰기</button>
 			</p>
 		</div>
 	</div>

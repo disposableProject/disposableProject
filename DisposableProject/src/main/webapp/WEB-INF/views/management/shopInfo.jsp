@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6&libraries=services"></script>
-
+<link rel="stylesheet"   href="/js/datetimepicker/jquery.datetimepicker.css" />
+<script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 <style>
 .shopInfoContainer{
 width: 90%;height: 100%;margin: auto;
@@ -54,6 +55,10 @@ border: #264e36 2px solid;
 				<input  type="hidden" id="longitude"  name="LONGITUDE"   value="${storeInfo.LONGITUDE}" >
 			</tr>
 			<tr>
+				<td class="titleTd">영업시간</td>
+				<td colspan="3"><input  type="text"   id="date_timepicker_start"  name="opentime"    value=""  style="width: 50px"> ~ <input  type="text"  id="date_timepicker_end"  name="closetime"    value="" style="width: 50px"></td>
+			</tr>
+			<tr>
 				<td class="titleTd">가게 분류</td>
 				<td colspan="3">
 				
@@ -82,6 +87,26 @@ border: #264e36 2px solid;
 </div>
 </form>
 <script>
+jQuery(function(){
+jQuery('#date_timepicker_start').datetimepicker({
+	format:'H:i',
+	datepicker:false,
+	 allowTimes:[
+	  '00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00'
+	  , '07:00', '07:30', '08:00', '08:30', '09:00', '10:00', '10:30','11:00', '11:30' ,'12:00','12:30' ,'13:00', '13:30', '14:00', '14:30', '15:00'
+	  , '15:30', '16:00', '16:30','17:00', '17:30', '18:00', '18:30' ,'19:00', '19:30','20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'
+	 ]
+	});
+jQuery('#date_timepicker_end').datetimepicker({
+	format:'H:i',
+	datepicker:false,
+	 allowTimes:[
+		 '00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00'
+		  , '07:00', '07:30', '08:00', '08:30', '09:00', '10:00', '10:30','11:00', '11:30', '12:00','12:30', '13:00', '13:30', '14:00', '14:30' ,'15:00'
+		  , '15:30', '16:00', '16:30','17:00', '17:30', '18:00', '18:30', '19:00', '19:30','20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'
+	 ]
+	});
+});
 function update(){
 	var paramMap = common.serializeObject($("form[name=shopForm]"));
 	var phoneRegExp = /^\d{3}-\d{3,4}-\d{4}$/;
