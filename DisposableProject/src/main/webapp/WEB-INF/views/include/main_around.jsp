@@ -38,7 +38,7 @@ border: #264e36 1px solid;
 
 
 <div style="width: 100%;height: 100%;display: flex;">
-<div id="map" style="width: 70%; height: 100%" ></div>
+<div id="map_outer" style="width: 70%; height: 100%" ></div>
 <div style="width: 30%; height: 100%">
 	<div class="shopTag">
 			<span class="tag clickTag"   id="ALL">전체</span>
@@ -99,6 +99,7 @@ $(document).ready(function(){
 	
 	
 	function settingMap(){
+		$("#map_outer").html("<div id='map' style='width:100%;height:100%'></div>")
 		var LONGITUDE = '${getStoreInfo[0].LONGITUDE}'
 			var LATITUDE =  '${getStoreInfo[0].LATITUDE}'
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -132,17 +133,17 @@ $(document).ready(function(){
 		 		console.log(positions[i])
 		 		 var imageSize =  null; 
 		 		if(positions[i].CLASSIFY == "KOR"){
-		 			imageSrc = "https://kmug.co.kr/data/file/design/data_image_1228918259_%EA%B7%B8%EB%A6%BC_2.png"
-		 			imageSize = new kakao.maps.Size(60, 65); 
+		 			imageSrc = "/images/shop/kor.png"
+		 			imageSize = new kakao.maps.Size(70, 75); 
 		 		}else if(positions[i].CLASSIFY == "JPN"){
-		 			imageSrc = "/images/shop/japan.jpg"
-		 			imageSize = new kakao.maps.Size(60, 65); 
+		 			imageSrc = "/images/shop/JPN.png"
+		 			imageSize = new kakao.maps.Size(60, 35); 
 		 		}else if(positions[i].CLASSIFY == "WEST"){
-		 			imageSrc = "https://kmug.co.kr/data/file/design/data_image_1228918259_%EA%B7%B8%EB%A6%BC_2.png"
-		 	 		imageSize = new kakao.maps.Size(60, 65); 
+		 			imageSrc =  "/images/shop/west.png"
+		 	 		imageSize = new kakao.maps.Size(80, 65); 
 		 		}else if(positions[i].CLASSIFY == "SIMPLE"){
 		 			imageSrc ="/images/shop/simple.png"
-		 	 		imageSize = new kakao.maps.Size(60, 65); 
+		 	 		imageSize = new kakao.maps.Size(70, 75); 
 		 		}else if(positions[i].CLASSIFY == "CHICKEN"){
 		 			imageSrc = "/images/shop/chicken.png"
 		 	 		imageSize = new kakao.maps.Size(60, 65); 
@@ -150,8 +151,8 @@ $(document).ready(function(){
 		 			imageSrc = "https://kmug.co.kr/data/file/design/data_image_1228918259_%EA%B7%B8%EB%A6%BC_2.png"
 		 	 		imageSize = new kakao.maps.Size(60, 65); 
 		 		}else if(positions[i].CLASSIFY == "CAFE"){
-		 			imageSrc = "https://kmug.co.kr/data/file/design/data_image_1228918259_%EA%B7%B8%EB%A6%BC_2.png"
-		 	 		imageSize = new kakao.maps.Size(60, 65); 
+		 			imageSrc =  "/images/shop/cafe.png"
+		 	 		imageSize = new kakao.maps.Size(80, 85); 
 		 		}else{
 		 		   imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"
 				   imageSize =  new kakao.maps.Size(24, 35); 
