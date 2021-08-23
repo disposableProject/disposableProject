@@ -42,4 +42,9 @@ public class shopServiceImpl implements shopService{
 		// TODO Auto-generated method stub
 		return shopDao.orderPayment(paramMap);
 	}
+	@Override
+	public int reviewWrite(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return shopDao.reviewWrite(paramMap);
+	}
 }

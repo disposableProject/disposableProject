@@ -167,9 +167,7 @@ border-bottom: 1px solid #d5d5d5;
 			</div>
 			<!-- 리뷰 작성은 마이페이지 구매 내역으로 / 로그인 안한 사람은 로그인 화면으로 / 구매하지 않은 사람은 alert+현재페이지에-->
 			<p class="writeReview">
-				<a href="/user/myPage.do">
-					<span>후기쓰기</span>
-				</a>
+				<span class="reviewClick" onclick="reviewWrite('${getStoreInfo[0].STORENUM}')">후기쓰기</span>
 			</p>
 		</div>
 	</div>
@@ -342,6 +340,34 @@ function orderInsert(){
 		});
 	}
 }
+
+function reviewWrite(storenum){
+	var userInfo = '${userInfo.EMAIL}';
+	if(userInfo == null || userInfo == ''){
+		alert("로그인이 필요합니다.");
+		window.location.replace("http://localhost:8110/user/userLogin.do");
+		return false;
+	}
+	$.ajax({
+		type : 'POST',
+		url : '/shop/reviewWrite.do',
+		data : {storenum:storenum},
+		dataType : 'json',
+		success : function(json){
+			console.log("jsonjson =>")
+			console.log(json)
+			if(json.result == "YES"){
+				location.href="/user/myPage.do";
+			}else{
+				alert("주문 이력이 없습니다.")
+			}
+		},
+		error: function(xhr, status, error){
+			alert("주문서를 생성하지 못했습니다."+error);
+		}
+	});
+}
+
 var StoreName =  '${getStoreInfo[0].STORENAME}'
 var LONGITUDE = '${getStoreInfo[0].LONGITUDE}'
 var LATITUDE =  '${getStoreInfo[0].LATITUDE}'

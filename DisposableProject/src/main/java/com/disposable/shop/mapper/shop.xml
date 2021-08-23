@@ -50,4 +50,12 @@
 		VALUES (REVIEW_SEQ.NEXTVAL, #{foodnum}, #{storenum}, #{nickname}, #{email}, #{review}, #{photo}, CURRENT_DATE)
 	</insert>
 	
+	<!-- 댓글 작성 조건 -->
+	<select id="reviewWrite" parameterType="java.util.Map" resultType="int">
+	SELECT COUNT(*)
+	FROM ORDERFOOD
+	WHERE STORENUM=#{storenum} AND EMAIL=#{email} AND STATES='PICKUP'
+	</select>
+	
+	
 </mapper>

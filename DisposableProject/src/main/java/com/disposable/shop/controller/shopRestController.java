@@ -87,4 +87,28 @@ public class shopRestController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@RequestMapping(value="/reviewWrite.do", method=RequestMethod.POST)
+	public Map<String,Object> reviewWrite(String storenum, HttpSession session){
+		System.out.println("String storenum" + storenum);
+		
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		System.out.println("userInfo====>" + userInfo);
+		String email = String.valueOf(userInfo.get("EMAIL"));
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		paramMap.put("storenum", storenum);
+		paramMap.put("email", email);
+		
+		int isS = shopservice.reviewWrite(paramMap);
+		
+		if (isS > 0) {
+			resultMap.put("result", "YES");
+		}else {
+			resultMap.put("result", "NO");
+		}
+		
+		return resultMap;
+	}
 }
