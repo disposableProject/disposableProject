@@ -13,23 +13,23 @@
 	width: 890px;	position: relative;	overflow: auto;height: 800px
 }
 .rightSection{
-	width: 360px;height: 500px;max-height:800px;border: 1px solid black;overflow: auto;background: white;
+	width: 360px;min-height: 500px;max-height:600px;border: 1px solid black;overflow: auto;background: white;
 }
 
 .leftSection {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
 .leftSection::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+	display: none; /* Chrome, Safari, Opera*/
 }
 
 .rightSection {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
 .rightSection::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+	display: none; /* Chrome, Safari, Opera*/
 }
 .topBox{
 	border: 1px solid black;
