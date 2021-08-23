@@ -74,12 +74,15 @@ public class managementRestController {
 		return resultMap;
 	}
 	@RequestMapping(value="/storeOrderList.do", method=RequestMethod.POST)
-	public List<Map<String,Object>> storeOrderList(HttpSession session,HttpServletRequest request,@RequestParam(value="STATE", required=false) String state) throws SQLException, Exception {
+	public List<Map<String,Object>> storeOrderList(HttpSession session,HttpServletRequest request,@RequestParam(value="STATE", required=false) String state,@RequestParam(value="startDate", required=false) String startDate,@RequestParam(value="endDate", required=false) String endDate) throws SQLException, Exception {
 		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
 		String storenum = String.valueOf(userInfo.get("STORENUM"));
 		Map <String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("storenum",storenum);
 		paramMap.put("state",state);
+		paramMap.put("startDate",startDate);
+		paramMap.put("endDate",endDate);
+		System.out.println(paramMap);
 		List<Map<String,Object>> resultMap = managementservice.storeOrderList(paramMap);
 		return resultMap;
 	}

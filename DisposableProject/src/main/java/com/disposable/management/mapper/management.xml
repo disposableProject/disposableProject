@@ -80,6 +80,12 @@
 				<if test="state != ''  and state != null">
 				AND STATES = #{state}
 				</if>
+				<if test="startDate != ''  and startDate != null">
+				AND ORDERDATE >  to_date(replace( #{startDate},'/','-'),'YYYY-MM-DD HH24:MI:SS')
+				</if>
+				<if test="endDate != ''  and endDate != null">
+				AND  to_date(replace( #{endDate},'/','-'),'YYYY-MM-DD HH24:MI:SS') > ORDERDATE
+				</if>
 	</select>
 	<update id="updateOrder" parameterType="java.util.Map">
 			UPDATE ORDERFOOD 

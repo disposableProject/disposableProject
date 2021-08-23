@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7471cecaa76c6d8951aaabeda997b7c6"></script>
 <style>
-*{
+/* *{
 	box-sizing: border-box;	letter-spacing: 0.1rem;
-}
+} */
 .container{
 	width: 1340px;	display: flex; flex-direction: row; margin: 0 auto;justify-content: space-between;
 }
@@ -97,6 +98,7 @@ border-bottom: 1px solid #d5d5d5;
 } */
 </style>
 
+<jsp:useBean id="toDay" class="java.util.Date" />
 
 <div class="container">
 	<div class="leftSection">
@@ -118,14 +120,30 @@ border-bottom: 1px solid #d5d5d5;
 		
 		<div class="middleBox">
 			<div class="items">
+			<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
 				<c:forEach items="${StoreFoodList}" var="foodInfo">
-					<div class="foodBox" onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
-						<div class="foodImg">
-							<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
-						</div>
-						<span>${foodInfo.FOODNAME} -> </span>
-						<span>${foodInfo.PRICE}원</span>
-					</div>
+				<c:if test="${foodInfo.SALEPERCENT != null and foodInfo.SALEPERCENT  != '' and foodInfo.SALEPERCENT  != '0' and foodInfo.SALEDATE > nowDate }">
+					<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }')">
+				</c:if>
+				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0}">
+				<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
+				</c:if>
+				<div style="height: 70%">
+					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${foodInfo.IMGNAME}" style="width: 100%;height: 100%">
+				</div>
+				<div style="padding: 10px 5px 5px 5px">
+				<div style="font-weight: bold;font-size: 20px"> ${foodInfo.FOODNAME}</div>
+				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0}">
+				<div>판매가: <fmt:formatNumber value="${foodInfo.PRICE}" type="currency"  /></div>
+				
+				</c:if>
+				<c:if test="${foodInfo.SALEPERCENT != null and foodInfo.SALEPERCENT  != '' and foodInfo.SALEPERCENT  != '0' and foodInfo.SALEDATE > nowDate }">
+				<div style="text-decoration:line-through">판매가: <fmt:formatNumber value="${foodInfo.PRICE}" type="currency"  /></div>
+				<div>할인가: <fmt:formatNumber value="${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }" type="currency"/> (${foodInfo.SALEPERCENT}%)</div>
+				<div class="time"><input type="hidden" class="now" value="${foodInfo.SALEDATE}"><span class="timetext" style="color: red;font-size: 13px"></span></div>
+				</c:if>
+				</div>
+			</div>
 				</c:forEach>
 			</div>
 		</div>
@@ -194,9 +212,30 @@ border-bottom: 1px solid #d5d5d5;
 </div>
 <input type="hidden" id="totalPaymentInput" value="0" />
 <script>
+$(document).ready(function(){
+
+	timeset()
+	setInterval(timeset, 1000);
+})
+function timeset(){
+	var date = new Date();
+	$(".time").each(function(){
+	var date2 = new Date($(this).find(".now").val());
+	var gap = date2 - date
+	var days = Math.floor(gap / (1000 * 60 * 60 * 24)); // 일
+	var hour = String(Math.floor((gap/ (1000 * 60 *60 )) % 24 )).padStart(2, "0"); // 시
+	var minutes = String(Math.floor((gap  / (1000 * 60 )) % 60 )).padStart(2, "0"); // 분
+	var second = String(Math.floor((gap / 1000 ) % 60)).padStart(2, "0"); // 초
+
+	 $(this).find(".timetext").text(days+"일"+hour+"시간"+minutes+"분"+second+"초")
+	});
+}
+
+
 var totalPrice = 0;
 
 function getFoodOption(storenum,foodnum,foodname,foodprice){
+	foodprice = Math.round(foodprice)
 	$("#totalPrice").html("선택 가격: "+common.format(foodprice)+"원 <br><button  id='dupliButton'  onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',

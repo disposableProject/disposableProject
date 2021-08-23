@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 
 
-<script src="/js/jqueryGrid/js/jquery.jqGrid.min.js"></script> 
-<script src="/js/jqueryGrid/js/i18n/grid.locale-en.js"></script>
 
-<link rel="stylesheet" href="/js/jqueryGrid/css/ui.jqgrid-bootstrap-ui.css"> 
-<link rel="stylesheet" href="/js/jqueryGrid/css/ui.jqgrid-bootstrap.css"> 
-<link rel="stylesheet" href="/js/jqueryGrid/css/ui.jqgrid-bootstrap4.css"> 
-<link rel="stylesheet" href="/js/jqueryGrid/css/ui.jqgrid.css">
-<link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.css"> 
-<link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.structure.css">
- <link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.theme.css">
  
-
+<link rel="stylesheet"   href="/js/datetimepicker/jquery.datetimepicker.css" />
+<script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
  <style>
 .ui-jqgrid .ui-jqgrid-htable .ui-th-div {
     height: 19px;
@@ -49,6 +41,9 @@ select {
         </form>
 	</div>
 	<div style="height: 50%;display: flex;align-items: center;">
+		<input id="date_timepicker_start"  name="startdate"  type="text"  style="height: 34px;border: 1px solid #999;border-radius: 0px;width: 120px" readonly="readonly">
+		<span style="font-weight: bold;font-size: 14px"> ~ </span>
+		<input id="date_timepicker_end" name="enddate"  type="text"  style="height: 34px;border: 1px solid #999;border-radius: 0px;width: 120px" readonly="readonly">
 		<select id="States" style="margin-left: 5px;margin-right: 5px">
 			<option value="PAY"> 주문내역</option>
 			<option value="TAKE"> 주문접수</option>
@@ -69,7 +64,28 @@ select {
 $(document).ready(function(){
 	storeOrderList();
 })
-
+jQuery(function(){
+	 jQuery('#date_timepicker_start').datetimepicker({
+		  format:'Y/m/d',
+		  defaultDate:new Date(),
+		  onShow:function( ct ){
+		   this.setOptions({
+		    maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+		   })
+		  },
+		  timepicker:false
+		 });
+		 jQuery('#date_timepicker_end').datetimepicker({
+		  format:'Y/m/d',
+		  defaultDate:new Date(),
+		  onShow:function( ct ){
+		   this.setOptions({
+		    minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
+		   })
+		  },
+		  timepicker:false
+		 });
+});
 		var check = "1"
 
 		function checkCeckBox(){
@@ -90,10 +106,13 @@ $(document).ready(function(){
 
 		function storeOrderList(){
 			var STATE = $("#States").val()
+			var startDate = $("#date_timepicker_start").val();
+			var endDate = $("#date_timepicker_end").val()
+			console.log("startDate =>"+startDate)
 			$.ajax({
 				type : 'POST',
 				url : 'storeOrderList.do',
-				data : {STATE:STATE},
+				data : {STATE:STATE,startDate:startDate,endDate:endDate},
 				dataType : 'json',
 				success : function(json){
 					var html = "";
