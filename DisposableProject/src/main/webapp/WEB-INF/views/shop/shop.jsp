@@ -7,14 +7,23 @@
 	box-sizing: border-box;	letter-spacing: 0.1rem;
 }
 .container{
-	width: 1240px;	display: flex; flex-direction: row; margin: 0 auto;
+	width: 1340px;	display: flex; flex-direction: row; margin: 0 auto;justify-content: space-between;
 }
 .leftSection{
-	width: 880px;	position: relative;	
+	width: 890px;	position: relative;	overflow: auto;height: 800px
 }
 .rightSection{
-	width: 360px;	min-height: 500px;max-height:800px	;position: fixed;	left: 64%;	border: 1px solid black;overflow: auto;background: white;
+	width: 360px;height: 500px;max-height:800px;border: 1px solid black;overflow: auto;background: white;
 }
+
+.leftSection {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.leftSection::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
 .rightSection {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -39,10 +48,11 @@
 	min-height: 100px;
 }
 .foodBox{
-	border: 1px solid; width: 280px; height: 300px; display: flex; flex-direction: column;
+	border: 1px solid; width: 280px; height: 300px; display: flex; flex-direction: column;margin: 8px
 }
 .items{
-	display: grid; grid-template-columns: 280px 280px 280px; grid-template-rows: 300px; gap: 20px 20px;
+	/* display: grid; grid-template-columns: 280px 280px 280px; grid-template-rows: 300px; gap: 20px 20px; */
+	display: flex;flex-wrap: wrap;
 }
 .selectBox{
 	display: flex; flex-direction: row-reverse; padding-top: 20px;
