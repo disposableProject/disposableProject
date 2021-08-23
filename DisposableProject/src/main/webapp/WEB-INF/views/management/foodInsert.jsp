@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet"   href="/js/datetimepicker/jquery.datetimepicker.css" />
+<script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 <style>
 .foodInsertContainer{
 width: 100%;height: 800px;margin: auto;overflow: auto;
@@ -85,6 +87,7 @@ height: 27px !important;
 				<td class="titleTd">할인률</td>
 				<td colspan="3">
 					<input type="text" name="salepercent"  >
+					<input id="datetimepicker" name="saledate" type="text" >
 				</td>
 				
 			</tr>
@@ -142,6 +145,7 @@ height: 27px !important;
 </div>
 
 <script type="text/javascript">
+jQuery('#datetimepicker').datetimepicker();
 function addOption(){
 	var optionCount = $("#optionCount").val()
 	var optionName = $("#optionName").val()

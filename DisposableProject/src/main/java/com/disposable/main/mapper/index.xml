@@ -40,6 +40,8 @@
 			INNER JOIN SHOP SP
 			ON FD.STORENUM = SP.STORENUM 
 			 WHERE FD.SALEPERCENT != 0
+			 AND SALEDATE > sysdate
+			 ORDER BY SALEDATE
 	</select>
 	
 	<select id="getAroundstoreList" resultType="java.util.Map" parameterType="java.util.Map">
