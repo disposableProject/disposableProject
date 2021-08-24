@@ -9,6 +9,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,4 +73,12 @@ public class indexRestController {
 		List<Map<String,Object>> resultMap = indexservice.getAroundstoreList(paramMap);
 		return resultMap;
 	}
+	
+	@MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public String addUser(String username, SimpMessageHeaderAccessor headerAccessor){
+        headerAccessor.getSessionAttributes().put("username", username);
+        System.out.println("username =>"+username);
+        return username;
+    }
 }

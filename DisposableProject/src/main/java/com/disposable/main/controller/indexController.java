@@ -28,7 +28,7 @@ public class indexController {
 	}
 	@RequestMapping(value="/new.do")
 		public String main_new(Model model) {
-		System.out.println("best");
+		System.out.println("new");
 		return "include/main_new";
 	}
 	@RequestMapping(value="/best.do")
