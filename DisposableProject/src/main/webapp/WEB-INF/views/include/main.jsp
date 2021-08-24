@@ -29,30 +29,6 @@ right: -30px;
     background: url(https://res.kurly.com/pc/service/main/1908/btn_next_default.png?v=1) no-repeat 50% 50%;
     transition: background 0.5s;
 }
-
-.shopTag{
-width: 1200px;
-margin: auto;
-display: flex;
-}
-.shopTag .tag{
-display: flex;
-justify-content: center;
-align-items: center;
-margin-right: 15px;
-margin-top: 20px;
-border: 1px solid #ddd;
-border-radius: 10px;
-width: 75px;
-height: 30px;
-cursor: pointer;
-}
-.clickTag{
-background-color: #B6CBA3;
-color: #fff;
-}
-.tag:hover:not(.clickTag) {background-color: #ddd;}
-
 .shopListBox{
 
 width: 1200px;
@@ -76,31 +52,7 @@ color: #444;
 }
 
 
-.pageAreaUl {
-  display: inline-block;
-  list-style: none;
-}
 
-.pageAreaUl li {
-
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-  cursor: pointer;
-}
-.noclick{
-  color: black;
-}
-.nowpage {
-  background-color: #B6CBA3;
-  color: white; 
-  border: 1px solid #4CAF50;
-}
-
-.pageAreaUl li:hover:not(.nowpage) {background-color: #ddd;}
 </style>
 <script>
 $(document).ready(function(){

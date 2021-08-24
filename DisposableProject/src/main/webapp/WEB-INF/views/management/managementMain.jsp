@@ -9,9 +9,7 @@ display: flex;justify-content: space-around;align-items: center;height: 30%;min-
 .totalCount{
 width: 150px; height: 150px; border: 1px solid black;border-radius: 50%;display: flex;justify-content: center;align-items: center;flex-direction: column;
 }
-.hide{
-display: none
-}
+
 </style>
 <div class="managementMContainer">
 	<div class="innerContainer">

@@ -1,23 +1,2 @@
 @charset "UTF-8";
 
-html,body {
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	height: 100%;
-}
-
-
-#purpleButton{
-background: white;border: 2px solid purple;height: 40px;width: 120px;
-}
-#purpleButton:hover{ 
-background: purple;border: 2px solid purple;color:white;height: 40px;width: 120px;cursor: pointer;
-}
-
-#dupliButton{
-background: white;border: 2px solid #B6CBA3;height: 40px;width: 120px;
-}
-#dupliButton:hover{ 
-background: #264e36;border: 2px solid #B6CBA3;color:white;height: 40px;width: 120px;cursor: pointer;
-}

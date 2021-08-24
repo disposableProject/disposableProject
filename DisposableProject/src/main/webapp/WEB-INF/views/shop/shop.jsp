@@ -17,21 +17,6 @@
 	width: 360px;min-height: 500px;max-height:600px;border: 1px solid black;overflow: auto;background: white;
 }
 
-.leftSection {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-}
-.leftSection::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera*/
-}
-
-.rightSection {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-}
-.rightSection::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera*/
-}
 .topBox{
 	border: 1px solid black;
 }
@@ -101,7 +86,7 @@ border-bottom: 1px solid #d5d5d5;
 <jsp:useBean id="toDay" class="java.util.Date" />
 
 <div class="container">
-	<div class="leftSection">
+	<div class="leftSection noscroll">
 		<div class="topBox">
 			<div class="storeInfo">
 				<div class="leftInfo">	
@@ -201,7 +186,7 @@ border-bottom: 1px solid #d5d5d5;
 	</div>
 	
 	<!-- 고정 + 주문하기 -->
-	<div class="rightSection">
+	<div class="rightSection noscroll">
 		<div id="optionList"></div>
 		<div id="totalPrice"></div>
 		<!-- 최종 장바구니 + 최종 결제 금액 -->

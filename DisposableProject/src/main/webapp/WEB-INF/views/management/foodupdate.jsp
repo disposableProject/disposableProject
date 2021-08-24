@@ -2,60 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet"   href="/js/datetimepicker/jquery.datetimepicker.css" />
 <script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-<style>
-.foodInsertContainer{
-width: 100%;height: 800px;margin: auto;overflow: auto;
-}
-.foodInsertContainer form{
-width: 90%;margin: auto;
-}
-.foodInsertContainer {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
-.foodInsertContainer::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-}
-.foodInsertContainer table{
-width: 100%;border-collapse: collapse;margin: auto;
-}
-.foodInsertContainer .mainTable{
-border-top: 2px solid #747474;margin-top: 10px
-}
-.foodInsertContainer table tr{
-height: 50px;border-bottom: 1px solid #e7e7e7;
-}
-.foodInsertContainer table .imageTr{
-height: 350px;
-}
-
-.foodInsertContainer table .titleTd{
-background: #f8f8f8;width: 100px;color:#393939;font-size: 13px;font-weight: bold;text-align: center;border-right: 1px solid #e7e7e7;
-}
-.foodInsertContainer input[type=text]{
-border: 1px solid #aaa;
-height: 27px !important;
-outline: none;
-}
-.foodInsertContainer input[type=number]{
-border: 1px solid #aaa;
-height: 27px !important;
-outline: none;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-.foodInsertContainer input:focus{
-border: #264e36 1px solid;
-}
-.foodInsertContainer select{
-border: 1px solid #aaa;
-width:85px;
-height: 27px !important;
-}
-</style>
-<div class="foodInsertContainer">
+<link rel="stylesheet"   href="/css/management.css" />
+<div class="foodInsertContainer noscroll">
 <form name="foodForm">
 	<input type="hidden" name="storeNum" value="${userInfo.STORENUM}" >
 	<input type="hidden" name="foodnum"  value="${resultMap[0].FOODNUM}">
