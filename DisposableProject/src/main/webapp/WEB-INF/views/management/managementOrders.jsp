@@ -39,6 +39,7 @@
 		
 $(document).ready(function(){
 	storeOrderList();
+	connect();
 })
 jQuery(function(){
 	 jQuery('#date_timepicker_start').datetimepicker({
@@ -196,4 +197,22 @@ jQuery(function(){
 				}
 			});
 		}
+		
+
+		function connect() {
+				var socket = new SockJS('/ws');
+				stompClient = Stomp.over(socket);
+				stompClient.connect({}, onConnected, onError);
+		}
+
+		function onError(error) {
+		console.log(error)
+		}
+		function onConnected() {
+			 stompClient.subscribe('/topic/public/${storenum}', onMessageReceived);
+		}
+		function onMessageReceived(payload) {
+				storeOrderList()
+			   console.log("payload =>"+payload)
+			}
 </script>

@@ -101,8 +101,12 @@ public class managementController {
 	 * @description 가게 주문 관리 페이지 이동
 	 */
 	@RequestMapping(value="managementOrders.do")
-	public String managementOrders() {
+	public String managementOrders(HttpSession session,Model model) {
 		System.out.println("managementOrders");
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		System.out.println("num ==>"+(Map<String, Object>) session.getAttribute("userInfo"));
+		String storenum = String.valueOf(userInfo.get("STORENUM"));
+		model.addAttribute("storenum", storenum);
 		return "management/managementOrders";
 	}
 	/**

@@ -53,6 +53,7 @@ h1 {
 <script type="text/javascript">
 jQuery(document).ready(function () {
 	$(".modal").show();
+	 connect()
 });
 
 </script>
@@ -66,9 +67,34 @@ const openModal = () => {
     modal.classList.remove("hidden");
 }
 const closeModal = () => {
+	
    location.href="http://localhost:8110/";
 }
 overlay.addEventListener("click", closeModal);
 closeBtn.addEventListener("click", closeModal);
+
+
+
+
+function connect() {
+		var socket = new SockJS('/ws');
+		stompClient = Stomp.over(socket);
+		stompClient.connect({}, onConnected, onError);
+}
+
+function onError(error) {
+console.log(error)
+}
+function onConnected() {
+    // Tell your username to the server
+    stompClient.send("/app/live/oreder/${storenum}",
+        {},'${storenum}')
+     //{}, JSON.stringify({storenum: '${storenum}', type: 'JOIN'}))
+
+    //connectingElement.classList.add('hidden');
+}
+
+
+
 
 </script>

@@ -23,7 +23,7 @@ public class KakaoPay {
     private KakaoPayReadyVO kakaoPayReadyVO;
     private KakaoPayApprovalVO kakaoPayApprovalVO;
     
-    public String kakaoPayReady(String allprice, String ordercode, String shopname) {
+    public String kakaoPayReady(String allprice, String ordercode, String shopname,String storenum) {
  
         RestTemplate restTemplate = new RestTemplate();
  
@@ -42,7 +42,7 @@ public class KakaoPay {
         params.add("quantity", "1");
         params.add("total_amount", allprice);
         params.add("tax_free_amount", "100");
-        params.add("approval_url", "http://localhost:8110/shop/kakaoPaySuccess.do?ordercode="+ordercode);
+        params.add("approval_url", "http://localhost:8110/shop/kakaoPaySuccess.do?ordercode="+ordercode+"&storenum="+storenum);
         params.add("cancel_url", "http://localhost:8110/shop/kakaoPayCancel.do");
         params.add("fail_url", "http://localhost:8110/shop/kakaoPaySuccessFail.do");
  

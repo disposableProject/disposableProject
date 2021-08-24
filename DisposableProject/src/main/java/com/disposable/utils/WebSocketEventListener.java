@@ -27,12 +27,12 @@ public class WebSocketEventListener {
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
 		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-		String username = (String) headerAccessor.getSessionAttributes().get("username");
-		if(username != null) {
-			logger.info("User Disconnected : " + username);
-			System.out.println("username =>"+username);
+		String storenum = (String) headerAccessor.getSessionAttributes().get("storenum");
+		if(storenum != null) {
+			logger.info("User Disconnected : " + storenum);
+			System.out.println("storenumin =>"+storenum);
 
-			messagingTemplate.convertAndSend("/topic/public", "");
+			messagingTemplate.convertAndSend("/topic/public/"+storenum,storenum);
 		}
 	}
 }

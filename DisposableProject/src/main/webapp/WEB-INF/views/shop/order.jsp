@@ -119,6 +119,7 @@
 			<form action="/shop/kakaoPayment.do" id="payFrom">
 				<input type="hidden" name="allprice" value="${orderPayment[0].ALLPRICE}">
 				<input type="hidden" name="ordercode" value="${orderPayment[0].ORDERCODE}">
+				<input type="hidden" name="storenum" value="${orderPayment[0].STORENUM}">
 				<input type="hidden" name="shopname" value="test">
 				<button type="submit" class="payBtn">결제하기</button>
 			</form>
