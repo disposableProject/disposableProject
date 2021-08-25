@@ -8,7 +8,7 @@
 	box-sizing: border-box;	letter-spacing: 0.1rem;
 } */
 .container{
-	width: 1340px;	display: flex; flex-direction: row; margin: 0 auto;justify-content: space-between;
+	width: 1340px;	display: flex; flex-direction: col; margin: 0 auto;justify-content: space-between;
 }
 .leftSection{
 	width: 890px;	position: relative;	overflow: auto;height: 800px
@@ -86,6 +86,7 @@ border-bottom: 1px solid #d5d5d5;
 <jsp:useBean id="toDay" class="java.util.Date" />
 
 <div class="container">
+	<div style="display: flex;justify-content: space-between;width: 1340px;">
 	<div class="leftSection noscroll">
 		<div class="topBox">
 			<div class="storeInfo">
@@ -110,7 +111,7 @@ border-bottom: 1px solid #d5d5d5;
 				<c:if test="${foodInfo.SALEPERCENT != null and foodInfo.SALEPERCENT  != '' and foodInfo.SALEPERCENT  != '0' and foodInfo.SALEDATE > nowDate }">
 					<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px;cursor: pointer;"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }')">
 				</c:if>
-				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0}">
+				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0 or  foodInfo.SALEDATE < nowDate}">
 				<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px;cursor: pointer;"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE}')">
 				</c:if>
 				<div style="height: 70%">
@@ -118,7 +119,7 @@ border-bottom: 1px solid #d5d5d5;
 				</div>
 				<div style="padding: 10px 5px 5px 5px">
 				<div style="font-weight: bold;font-size: 20px"> ${foodInfo.FOODNAME}</div>
-				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0}">
+				<c:if test="${foodInfo.SALEPERCENT == null or foodInfo.SALEPERCENT  == '' or foodInfo.SALEPERCENT  == 0 or  foodInfo.SALEDATE < nowDate}">
 				<div>판매가: <fmt:formatNumber value="${foodInfo.PRICE}" type="currency"  /></div>
 				
 				</c:if>
@@ -183,9 +184,8 @@ border-bottom: 1px solid #d5d5d5;
 				<button  id="dupliButton"  type="button"  class="reviewClick" onclick="reviewWrite('${getStoreInfo[0].STORENUM}')">후기쓰기</button>
 			</p>
 		</div>
-	</div>
-	
-	<!-- 고정 + 주문하기 -->
+		</div>
+		<!-- 고정 + 주문하기 -->
 	<div class="rightSection noscroll">
 		<div id="optionList"></div>
 		<div id="totalPrice"></div>
@@ -194,6 +194,9 @@ border-bottom: 1px solid #d5d5d5;
 		<div id="totalPayment"></div>
 		<input id="dupliButton"  type="button" onclick="orderInsert()" value="주문하기">
 	</div>
+	
+	
+	
 </div>
 <input type="hidden" id="totalPaymentInput" value="0" />
 <script>
