@@ -137,4 +137,6 @@ background: #264e36;border: 2px solid #B6CBA3;color:white;height: 40px;width: 12
 .hide{
 display: none !important;
 }
-
+input[type=file] {
+border: 0px !important;
+}

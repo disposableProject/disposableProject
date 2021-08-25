@@ -69,10 +69,13 @@ public class managementController {
 		paramMap.put("storenum", storeNum);
 		List<Map<String,Object>> resultMap =   managementservice.storeFoodListGet(paramMap);
 		model.addAttribute("foodList", resultMap);
-		
+		int totalCmtCnt = 0;
 		int pageGroupNum = (int) Math.floor((pageNum - 1) / 5 + 1);
 		int startPage = (pageGroupNum - 1) * 5 + 1;
-		int totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
+		if(resultMap.size() > 0) {
+			totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
+		}
+		
 		int totalPageCnt = (int) Math.floor(totalCmtCnt / 12);
 		if (totalCmtCnt % 12 > 0) {
 			totalPageCnt++;

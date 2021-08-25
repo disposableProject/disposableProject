@@ -64,6 +64,9 @@ border: 1px solid #1f9401;cursor: pointer;
 	</div>
 	
 	<div class="gridContainer">
+	<c:if test="${foodList.size() == 0 }">
+	등록된 음식이 없습니다.
+	</c:if>
 	<c:forEach items="${foodList}" var="foodInfo">
 	<%-- <table>
 		<thead></thead>

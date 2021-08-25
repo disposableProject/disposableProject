@@ -43,5 +43,10 @@ border: #264e36 1px solid;
 .foodInsertContainer select{
 border: 1px solid #aaa;
 width:85px;
-height: 27px !important;
+height: 40px !important;
+}
+input {
+    border: 1px solid #aaa;
+    /* height: 27px; */
+    outline: none;
 }
