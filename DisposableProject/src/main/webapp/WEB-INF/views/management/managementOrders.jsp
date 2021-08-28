@@ -3,8 +3,8 @@
 <script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 
 
-<div style="height: 780px;overflow: auto;margin-top: 20px">
-<div style="height: 80px;width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
+<div style="height: 800px;overflow: auto;margin-top: 20px">
+<div style="width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
 	<div style="height: 50%">
 		<button id="dupliButton"  onclick="checkCeckBox()">모두선택/해제</button>
 		<button id="dupliButton"  onclick="takeOrder('TAKE')">주문접수</button>
