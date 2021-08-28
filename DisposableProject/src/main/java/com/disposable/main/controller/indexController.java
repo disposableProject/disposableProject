@@ -22,7 +22,9 @@ public class indexController {
 	@RequestMapping(value="/")
 		public String index(Model model) {
 		System.out.println("index");
+		List<Map<String,Object>> RecommendFoodList = indexservice.RecommendFoodList("main");
 		List<Map<String,Object>> SaleFoodList = indexservice.SaleFoodList();
+		model.addAttribute("RecommendFoodList",RecommendFoodList);
 		model.addAttribute("SaleFoodList",SaleFoodList);
 		return "index";
 	}
@@ -33,6 +35,8 @@ public class indexController {
 	}
 	@RequestMapping(value="/best.do")
 		public String main_best(Model model) {
+		List<Map<String,Object>> RecommendFoodList = indexservice.RecommendFoodList("");
+		model.addAttribute("RecommendFoodList",RecommendFoodList);
 		System.out.println("best");
 		
 		return "include/main_best";

@@ -21,4 +21,5 @@ public interface managementDao {
 	public Integer foodMainUpdate(Map<String, Object> paramMap) throws SQLException;
 	public Integer foodOptiondelete(Map<String, Object> paramMap) throws SQLException;
 	public Integer foodImageDelete(Map<String, Object> paramMap) throws SQLException;
+	public List<Map<String,Object>> shopSalesInfo(Map<String, Object> paramMap);
 }

@@ -148,4 +148,14 @@
 		DELETE FROM IMAGEBOX WHERE BOARDNUM = #{foodnum} AND  CLASSIFY = 'SHOP'
 	</delete>	
 	
+	<select id="shopSalesInfo" parameterType="java.util.Map"  resultType="java.util.Map">	
+	SELECT  
+	TO_CHAR(ORDERDATE, 'YYYY/MM/DD') AS ORDERDATE  
+	, SUM(ALLPRICE) AS TOTAL , 
+	COUNT(*) AS ORDERCOUNT
+	FROM ORDERFOOD 
+	WHERE STORENUM=#{storeNum}
+	GROUP BY TO_CHAR(ORDERDATE, 'YYYY/MM/DD')
+	ORDER BY ORDERDATE
+	</select>
 </mapper>

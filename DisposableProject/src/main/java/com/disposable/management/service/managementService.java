@@ -19,4 +19,5 @@ public interface managementService {
 	public Integer foodOptiondelete(List<Object> paramMap) throws SQLException;
 	public Integer foodImageDelete(Map<String, Object> paramMap) throws SQLException;
 	public Integer updateOrderOne(Map<String, Object> paramMap) throws SQLException;
+	public List<Map<String,Object>> shopSalesInfo(Map<String, Object> paramMap);
 }

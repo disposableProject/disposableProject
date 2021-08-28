@@ -9,4 +9,5 @@ public interface indexService {
 	public List<Map<String,Object>> AllStoreList();
 	public List<Map<String,Object>> SaleFoodList();
 	public List<Map<String,Object>> getAroundstoreList(Map<String, Object> paramMap);
+	public List<Map<String,Object>> RecommendFoodList(String Flag);
 }

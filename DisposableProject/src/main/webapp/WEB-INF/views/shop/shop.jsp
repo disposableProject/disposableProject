@@ -66,6 +66,17 @@ width: 100%;
 height: 70%;
 border-bottom: 1px solid #d5d5d5;
 }
+.optiondesign{
+height:30px;background:#b6cba3;color:#f2f2f2;font-size:18px;font-weight:bold;display:flex;align-items:center;justify-content:center;margin-top: 10px
+}
+#totalPrice{
+margin-top: 10px
+}
+#choiceprice{
+font-size: 20px;
+font-weight: bold;
+}
+
 /* @media screen and (max-width: 768px){
 	.rightSection{
 		display: none;
@@ -106,7 +117,12 @@ border-bottom: 1px solid #d5d5d5;
 		
 		<div class="middleBox">
 			<div class="items">
-			<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
+			<fmt:setLocale value="ko_kr"/>
+
+		
+	
+		 <fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd hh:mm:ss' var="nowDate"/> 
+			
 				<c:forEach items="${StoreFoodList}" var="foodInfo">
 				<c:if test="${foodInfo.SALEPERCENT != null and foodInfo.SALEPERCENT  != '' and foodInfo.SALEPERCENT  != '0' and foodInfo.SALEDATE > nowDate }">
 					<div style="width: 277px;height: 350px;border: 1px solid #ddd;margin: 8px;cursor: pointer;"onclick="getFoodOption('${foodInfo.STORENUM}','${foodInfo.FOODNUM}','${foodInfo.FOODNAME}','${foodInfo.PRICE - foodInfo.PRICE * (foodInfo.SALEPERCENT/100) }')">
@@ -209,7 +225,12 @@ function timeset(){
 	var date = new Date();
 	$(".time").each(function(){
 	var date2 = new Date($(this).find(".now").val());
+	date2.setHours(date2.getHours()+2)
+	console.log('${nowDate}')
 	var gap = date2 - date
+	console.log(date2)
+	console.log(date)
+	console.log(gap)
 	var days = Math.floor(gap / (1000 * 60 * 60 * 24)); // 일
 	var hour = String(Math.floor((gap/ (1000 * 60 *60 )) % 24 )).padStart(2, "0"); // 시
 	var minutes = String(Math.floor((gap  / (1000 * 60 )) % 60 )).padStart(2, "0"); // 분
@@ -224,7 +245,7 @@ var totalPrice = 0;
 
 function getFoodOption(storenum,foodnum,foodname,foodprice){
 	foodprice = Math.round(foodprice)
-	$("#totalPrice").html("선택 가격: "+common.format(foodprice)+"원 <br><button  id='dupliButton'  onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
+	$("#totalPrice").html("<div id='choiceprice'>선택 가격: "+common.format(foodprice)+"원 </div> <br><button  id='dupliButton'  onclick=getOrderInfo('"+foodname+"','"+foodprice+"')>메뉴 담기</button>")
 	$.ajax({
 		type : 'POST',
 		url : '/shop/getFoodOption.do',
@@ -237,12 +258,12 @@ function getFoodOption(storenum,foodnum,foodname,foodprice){
 			var optionGroupNum = 0;
 			html += "<div><span>"+foodname+"</span><span> "+common.format(foodprice)+"원</span></div>"
 			if(json.length > 0){
-				html += "<div>추가옵션</div>"
-				html += "<div> <div>옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"</div>"
+				
+				html += "<div> <div class='optiondesign' >옵션"+optionGroupNum+" : "+json[0].OPTIONGRNAME+"</div>"
 				for(var i=0;i<json.length;i++){
 					if(json[i].OPTIONGROUP != optionGroupNum){
 						optionGroupNum = json[i].OPTIONGROUP
-						html += "</div><div> <div>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
+						html += "</div><div> <div class='optiondesign'>옵션"+optionGroupNum+": "+json[i].OPTIONGRNAME+"</div>"
 					}
 					if(json[i].CHECKFLAG == "N"){
 						optionprice = json[i].OPTIONPRICE;
@@ -275,7 +296,7 @@ function setFoodPrice(foodPrice,foodname,foodnum,optionprice){
 		optionPrice = parseInt(optionPrice) + parseInt(value);
 	});
 	console.log(foodnum)
-	$("#totalPrice").html("선택 가격: "+common.format(optionPrice)+"원 <br><button id='dupliButton' onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionprice+"')>메뉴 담기</button>")
+	$("#totalPrice").html("<div id='choiceprice'>선택 가격: "+common.format(optionPrice)+"원</div> <br><button id='dupliButton' onclick=getOrderInfo('"+foodname+"','"+optionPrice+"','"+foodnum+"','"+optionprice+"')>메뉴 담기</button>")
 }
 
 // 메뉴 선택 정보를 가져옴

@@ -41,4 +41,9 @@ public class indexServiceImpl implements indexService{
 		// TODO Auto-generated method stub
 		return indexdao.getAroundstoreList(paramMap);
 	}
+	@Override
+	public List<Map<String, Object>> RecommendFoodList(String Flag) {
+		// TODO Auto-generated method stub
+		return indexdao.RecommendFoodList(Flag);
+	}
 }

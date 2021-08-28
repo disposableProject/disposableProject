@@ -33,6 +33,12 @@ width: 90%; height: 450px;border: #ccc 2px solid; resize: none; outline: none;fo
 .shopInfoContainer textarea:focus{
 border: #264e36 2px solid;
 }
+input[type=checkbox] {
+height: 18px
+}
+input[type=radio] {
+height: 18px
+}
 </style>
 
 <form name="shopForm" id="shopForm" method = "post">

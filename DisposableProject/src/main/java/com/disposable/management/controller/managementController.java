@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.disposable.management.service.managementService;
+import com.disposable.utils.JsonChanger;
 
 @Controller
 @RequestMapping("/management")
@@ -36,8 +37,14 @@ public class managementController {
 	 * @description 가게 관리 메인 페이지 이동
 	 */
 	@RequestMapping(value="managementMain.do")
-	public String managementMain() {
+	public String managementMain(Model model,HttpSession session) {
 		System.out.println("managementMain");
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storeNum = String.valueOf(userInfo.get("STORENUM"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storeNum", storeNum);
+		List<Map<String,Object>> shopSalesInfo =   managementservice.shopSalesInfo(paramMap);
+		model.addAttribute("shopSalesInfo",JsonChanger.jsonarray(shopSalesInfo).toString());
 		return "management/managementMain";
 	}
 	/**
