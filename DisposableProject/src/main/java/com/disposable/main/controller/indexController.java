@@ -61,4 +61,12 @@ public class indexController {
 		System.out.println("mobile");
 		return "mobile";
 	}
+	@RequestMapping(value="/mobile/around.do")
+	public String mobile_around(Model model) {
+	List<Map<String,Object>> AllStoreList = indexservice.AllStoreList();
+
+	model.addAttribute("AllStoreList",JsonChanger.jsonarray(AllStoreList).toString());
+	System.out.println("mobile_around");
+	return "mobile/include/around";
+}
 }

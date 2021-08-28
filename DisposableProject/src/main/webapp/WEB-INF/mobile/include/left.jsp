@@ -9,7 +9,7 @@
 					<a href="/shop/best.do">BEST</a>
 				</li>
 				<li>
-					<a href="#">AROUND</a>
+					<a href="/mobile/around.do">AROUND</a>
 				</li>
 				<li>
 					<a href="#">SALE</a>
