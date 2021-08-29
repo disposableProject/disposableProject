@@ -1,34 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-
-
-
- 
 <link rel="stylesheet"   href="/js/datetimepicker/jquery.datetimepicker.css" />
 <script  src="/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
- <style>
-.ui-jqgrid .ui-jqgrid-htable .ui-th-div {
-    height: 19px;
-    margin-top: 5px;
-} 
-select {
-  width: 200px;
-  height:40px;
-  padding: .8em .5em;
-  font-family: inherit;
-  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid #999;
-  border-radius: 0px;
-}
 
-</style>
-<!-- <table id="jqGrid" style="margin: auto"></table> 
-<div id="gridpager"></div> -->
 
-<div style="height: 780px;overflow: auto;margin-top: 20px">
-<div style="height: 80px;width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
+<div style="height: 800px;overflow: auto;margin-top: 20px">
+<div style="width: 80%;margin: auto;display: flex;justify-content: space-between;align-items: center;">
 	<div style="height: 50%">
 		<button id="dupliButton"  onclick="checkCeckBox()">모두선택/해제</button>
 		<button id="dupliButton"  onclick="takeOrder('TAKE')">주문접수</button>
@@ -37,8 +13,8 @@ select {
 		
 		 <form action="downloadOrder.do" method="get" style="display: inline-flex;">
 		 	<input type="hidden"  name="state" value="NEW" />
-            <button id="dupliButton"  type="submit" >내역 다운로드</button>
-        </form>
+			<button id="dupliButton"  type="submit" >내역 다운로드</button>
+		</form>
 	</div>
 	<div style="height: 50%;display: flex;align-items: center;">
 		<input id="date_timepicker_start"  name="startdate"  type="text"  style="height: 34px;border: 1px solid #999;border-radius: 0px;width: 120px" readonly="readonly">
@@ -63,6 +39,7 @@ select {
 		
 $(document).ready(function(){
 	storeOrderList();
+	connect();
 })
 jQuery(function(){
 	 jQuery('#date_timepicker_start').datetimepicker({
@@ -126,7 +103,7 @@ jQuery(function(){
 						if(ordercode != json[i].ORDERCODE){
 							totalPrice = 0
 							num = 1
-							html += '<div  style="width:80%;margin: auto;margin-top: 20px;"><input type="checkbox" class="orderCode" value="'+json[i].ORDERCODE+'" />주문코드: '+json[i].ORDERCODE+' 주문시간: '+json[i].ORDERDATE+'</div>'
+							html += '<div  style="width:80%;margin: auto;margin-top: 20px;display: flex;align-items:center"><input type="checkbox" class="orderCode" value="'+json[i].ORDERCODE+'" />주문코드: '+json[i].ORDERCODE+' 주문시간: '+json[i].ORDERDATE+'</div>'
 							html += '<div style="width:80%;min-height: 100px;border: 1px solid black; margin: auto;display: flex;justify-content: space-between;"><div style="width: 80%;display:flex;align-items:center;padding-left:20px"><div style="width: 100%;margin-bottom:10px;line-height: 25px;">'
 						}
 						
@@ -220,4 +197,22 @@ jQuery(function(){
 				}
 			});
 		}
+		
+
+		function connect() {
+				var socket = new SockJS('/ws');
+				stompClient = Stomp.over(socket);
+				stompClient.connect({}, onConnected, onError);
+		}
+
+		function onError(error) {
+		console.log(error)
+		}
+		function onConnected() {
+			 stompClient.subscribe('/topic/public/${storenum}', onMessageReceived);
+		}
+		function onMessageReceived(payload) {
+				storeOrderList()
+			   console.log("payload =>"+payload)
+			}
 </script>

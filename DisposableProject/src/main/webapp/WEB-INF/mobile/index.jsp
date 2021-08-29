@@ -290,7 +290,7 @@ html,body  {
 		<tiles:insertAttribute name="body"/>
 	</div>
 
-	<div style="min-height: 50px;width: 100%;position: fixed;bottom: 0px;background: white;border-top: 1px solid  #f2f2f2;display: flex;">
+	<div style="min-height: 50px;width: 100%;position: fixed;bottom: 0px;background: white;border-top: 1px solid  #f2f2f2;display: flex;z-index: 999">
 		<tiles:insertAttribute name="footer"/> 
 	</div>
 <script src="/mobile/js/mobilecommon.js"></script>

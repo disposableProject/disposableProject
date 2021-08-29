@@ -6,12 +6,45 @@
 width: 98%;
 flex-wrap:wrap;
 }
+
+.shopTag .tag{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 15px;
+margin-top: 20px;
+border: 1px solid #ddd;
+border-radius: 10px;
+width: 75px;
+height: 30px;
+cursor: pointer;
+}
+.clickTag{
+background-color: #B6CBA3;
+color: #fff;
+}
+.tag:hover:not(.clickTag) {background-color: #ddd;}
+.shopTag{
+margin: auto;
+display: flex;
+}
+input{
+border: 1px solid #aaa;
+height: 40px;
+outline: none;
+}
+input:focus{
+border: #264e36 1px solid;
+}
+#dupliButton{
+background: white;border: 2px solid #B6CBA3;height: 40px;width: 120px;
+}
+
 </style>
 
 
-<div style="width: 100%;height: 100%;display: flex;">
-<div id="map_outer" style="width: 70%; height: 100%" ></div>
-<div style="width: 30%; height: 100%">
+<div style="width: 100%;height: 100%;display: flex;flex-direction: column;min-height: 700px">
+<div style="width: 100%; ">
 	<div class="shopTag">
 			<span class="tag clickTag"   id="ALL">전체</span>
 			<span class="tag"   id="KOR">한식</span>
@@ -30,6 +63,8 @@ flex-wrap:wrap;
 		<input type="range"  style="width: 95%"/>
 	</div>
 </div>
+<div id="map_outer" style="width: 100%; height: 80%" ></div>
+
 </div>
 
 <script>
@@ -157,7 +192,7 @@ $(document).ready(function(){
 	}
 	function makeClickListener(map, StoreName, LATITUDE,LONGITUDE,storenum) {
 		return function() {
-		location.href="/shop/shopMain.do?shopnum="+storenum+"&device=web"
+		location.href="/shop/shopMain.do?shopnum="+storenum+"&device=mobile"
 	//	window.open("https://map.kakao.com/link/to/"+StoreName+","+LATITUDE+","+LONGITUDE)
 		};
 	}

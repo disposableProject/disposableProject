@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=2104222" /><!-- 버전 수정 -->
 
+<link rel="stylesheet" type="text/css" href="/css/ceoRegister.css?v=2104222" /><!-- 버전 수정 -->
+<style>
+input[name=classify]{
+height: 18px !important;
+width: 12px !important;
+}
+</style>
 
 <form name="registerForm" id="registerForm" method = "post">
 	<table >
@@ -46,12 +52,28 @@
 			<tr>
 				<td class="text">주소</td>
 				<td><input id="address" name="address" readonly="readonly"></td>
-				<td class="btnTd"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'))">주소검색</button></td>
+				<td class="btnTd"><button id="dupliButton" type="button" onclick="common.findAddress($('#address'),$('#latitude'),$('#longitude'))">주소검색</button></td>
+				<input  type="hidden" id="latitude"  name="LATITUDE"    value="${storeInfo.LATITUDE}" >
+				<input  type="hidden" id="longitude"  name="LONGITUDE"   value="${storeInfo.LONGITUDE}" >
 			</tr>
 			<tr>
 				<td class="text">가게이름</td>
 				<td><input id="storename" name="storename"></td>
 				<td class="btnTd"></td>
+			</tr>
+			<tr>
+				<td class="text">가게 분류</td>
+				<td colspan="3">
+				
+					<input  type="radio" name="classify"  value="KOR"  checked  />한식 
+					<input  type="radio" name="classify" value="JPN" />일식
+					<input  type="radio" name="classify" value="WEST"  />양식
+					<input  type="radio" name="classify"  value="SIMPLE" />분식
+					<input  type="radio" name="classify"  value="CHICKEN" />치킨
+					<input  type="radio" name="classify"  value="PIG"  />족발/보쌈
+					<input  type="radio" name="classify"  value="CAFE" />카페
+					<input  type="radio" name="classify"  value="ANOTHER" />기타
+				</td>
 			</tr>
 			<tr>
 				<td class="text">전화번호</td>

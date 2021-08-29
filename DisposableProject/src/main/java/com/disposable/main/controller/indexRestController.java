@@ -1,28 +1,31 @@
 package com.disposable.main.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.disposable.main.service.indexService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class indexRestController {
 	@Autowired
 	private indexService indexservice;
+	
+	@Autowired
+	private SimpMessageSendingOperations messagingTemplate;
+	
 	
 	/**
 	 * @author 손호일
@@ -70,4 +73,12 @@ public class indexRestController {
 		List<Map<String,Object>> resultMap = indexservice.getAroundstoreList(paramMap);
 		return resultMap;
 	}
+	
+	@MessageMapping("/live/oreder/{storenum}")
+    public void addUser(String storenum,SimpMessageHeaderAccessor headerAccessor){
+		  headerAccessor.getSessionAttributes().put("storenum", storenum);
+		  System.out.println("storenum ==>"+storenum);
+		  messagingTemplate.convertAndSend("/topic/public/"+storenum,storenum);
+       // return storenum;
+    }
 }

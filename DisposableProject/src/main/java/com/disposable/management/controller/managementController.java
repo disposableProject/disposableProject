@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.disposable.management.service.managementService;
+import com.disposable.utils.JsonChanger;
 
 @Controller
 @RequestMapping("/management")
@@ -36,8 +37,14 @@ public class managementController {
 	 * @description 가게 관리 메인 페이지 이동
 	 */
 	@RequestMapping(value="managementMain.do")
-	public String managementMain() {
+	public String managementMain(Model model,HttpSession session) {
 		System.out.println("managementMain");
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String storeNum = String.valueOf(userInfo.get("STORENUM"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("storeNum", storeNum);
+		List<Map<String,Object>> shopSalesInfo =   managementservice.shopSalesInfo(paramMap);
+		model.addAttribute("shopSalesInfo",JsonChanger.jsonarray(shopSalesInfo).toString());
 		return "management/managementMain";
 	}
 	/**
@@ -69,10 +76,13 @@ public class managementController {
 		paramMap.put("storenum", storeNum);
 		List<Map<String,Object>> resultMap =   managementservice.storeFoodListGet(paramMap);
 		model.addAttribute("foodList", resultMap);
-		
+		int totalCmtCnt = 0;
 		int pageGroupNum = (int) Math.floor((pageNum - 1) / 5 + 1);
 		int startPage = (pageGroupNum - 1) * 5 + 1;
-		int totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
+		if(resultMap.size() > 0) {
+			totalCmtCnt = Integer.parseInt(String.valueOf(resultMap.get(0).get("TOTALCNT")));
+		}
+		
 		int totalPageCnt = (int) Math.floor(totalCmtCnt / 12);
 		if (totalCmtCnt % 12 > 0) {
 			totalPageCnt++;
@@ -101,8 +111,12 @@ public class managementController {
 	 * @description 가게 주문 관리 페이지 이동
 	 */
 	@RequestMapping(value="managementOrders.do")
-	public String managementOrders() {
+	public String managementOrders(HttpSession session,Model model) {
 		System.out.println("managementOrders");
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		System.out.println("num ==>"+(Map<String, Object>) session.getAttribute("userInfo"));
+		String storenum = String.valueOf(userInfo.get("STORENUM"));
+		model.addAttribute("storenum", storenum);
 		return "management/managementOrders";
 	}
 	/**

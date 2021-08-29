@@ -22,17 +22,21 @@ public class indexController {
 	@RequestMapping(value="/")
 		public String index(Model model) {
 		System.out.println("index");
+		List<Map<String,Object>> RecommendFoodList = indexservice.RecommendFoodList("main");
 		List<Map<String,Object>> SaleFoodList = indexservice.SaleFoodList();
+		model.addAttribute("RecommendFoodList",RecommendFoodList);
 		model.addAttribute("SaleFoodList",SaleFoodList);
 		return "index";
 	}
 	@RequestMapping(value="/new.do")
 		public String main_new(Model model) {
-		System.out.println("best");
+		System.out.println("new");
 		return "include/main_new";
 	}
 	@RequestMapping(value="/best.do")
 		public String main_best(Model model) {
+		List<Map<String,Object>> RecommendFoodList = indexservice.RecommendFoodList("");
+		model.addAttribute("RecommendFoodList",RecommendFoodList);
 		System.out.println("best");
 		
 		return "include/main_best";
@@ -57,4 +61,12 @@ public class indexController {
 		System.out.println("mobile");
 		return "mobile";
 	}
+	@RequestMapping(value="/mobile/around.do")
+	public String mobile_around(Model model) {
+	List<Map<String,Object>> AllStoreList = indexservice.AllStoreList();
+
+	model.addAttribute("AllStoreList",JsonChanger.jsonarray(AllStoreList).toString());
+	System.out.println("mobile_around");
+	return "mobile/include/around";
+}
 }

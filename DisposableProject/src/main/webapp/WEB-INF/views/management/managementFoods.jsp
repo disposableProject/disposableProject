@@ -2,10 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .ManagementFoodsContainer{
-width: 1200px;height: 800px;margin: auto;overflow: auto;-ms-overflow-style: none;
+width: 1200px;height: 800px;margin: auto;overflow: auto;
 }
-.ManagementFoodsContainer::-webkit-scrollbar { display: none; }
-
 .ManagementFoodsContainer table{
 width: 100%;border-collapse: collapse;margin: auto;margin-top: 10px;border: 1px solid #d5d5d5;
 }
@@ -55,41 +53,20 @@ height: 300px;
 border: 1px solid #1f9401;cursor: pointer;
 }
 
-.pageAreaUl {
-  display: inline-block;
-  list-style: none;
-}
 
-.pageAreaUl li {
-
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-  cursor: pointer;
-}
-.noclick{
-  color: black;
-}
-.nowpage { 
-  background-color: #B6CBA3;
-  color: white; 
-  border: 1px solid #4CAF50;
-}
-
-.pageAreaUl li:hover:not(.nowpage) {background-color: #ddd;}
 </style>
 
 
-<div class="ManagementFoodsContainer">
+<div class="ManagementFoodsContainer noscroll">
 	<div class="InnerHeader">
 		<h2>음식 관리</h2>
 		<button id="dupliButton"  onclick='location.href="foodInsert.do"'>등록하기</button>
 	</div>
 	
 	<div class="gridContainer">
+	<c:if test="${foodList.size() == 0 }">
+	등록된 음식이 없습니다.
+	</c:if>
 	<c:forEach items="${foodList}" var="foodInfo">
 	<%-- <table>
 		<thead></thead>

@@ -46,7 +46,7 @@
 			</tr>
 				<tr>
 				<td></td>
-				<td><a   style="width:90%;margin: auto;height: 40px;display: flex;align-items: center;justify-content: center;" id="regiButton" class="g-signin2"  onClick="onSignIn()">Google Login</a>구글 로그인</td>
+				<td style="display: flex;justify-content: center;"><a   class="g-signin2"  data-width="372" data-height="45" onClick="onSignIn()">Google Login</a></td>
 				<td class="btnTd"></td>
 			</tr>
 		</tbody>

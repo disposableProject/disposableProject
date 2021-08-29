@@ -105,17 +105,17 @@ public class shopController {
 	}
 	
 	@RequestMapping(value="kakaoPayment.do")
-	public String kakaoPayment(@RequestParam("allprice") String allprice,@RequestParam("ordercode") String ordercode,@RequestParam("shopname") String shopname) {
+	public String kakaoPayment(@RequestParam("allprice") String allprice,@RequestParam("ordercode") String ordercode,@RequestParam("shopname") String shopname,@RequestParam("storenum") String storenum) {
 		
 		System.out.println("allprice==>" + allprice);
 		System.out.println("ordercode==>" + ordercode);
 		System.out.println("shopname==>" + shopname);
 		
-		return "redirect:" + kakaopay.kakaoPayReady(allprice,ordercode,shopname);
+		return "redirect:" + kakaopay.kakaoPayReady(allprice,ordercode,shopname,storenum);
 	}
 	
 	@RequestMapping(value="kakaoPaySuccess.do")
-	public String kakaoPaySuccess(@RequestParam("ordercode") String ordercode) throws SQLException {
+	public String kakaoPaySuccess(Model model,@RequestParam("ordercode") String ordercode,@RequestParam("storenum") String storenum) throws SQLException {
 		System.out.println("ordercode" + ordercode);
 		Map <String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ordercode",ordercode);
@@ -123,6 +123,7 @@ public class shopController {
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		Integer result = managementservice.updateOrderOne(paramMap);
 		if(result > 0) {
+			model.addAttribute("storenum", storenum);
 			return "shop/kakaoReturn";
 		}else {
 			return "redirect:kakaoPaySuccessFail.do";

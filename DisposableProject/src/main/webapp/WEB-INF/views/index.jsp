@@ -23,5 +23,6 @@
 		<tiles:insertAttribute name="footer"/> 
 	</div>
 	<jsp:include page="./common/progress.jsp"></jsp:include>
+	<script  src="/js/common/common.js?v=210916"></script>
 </body>
 </html>

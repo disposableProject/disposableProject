@@ -106,4 +106,9 @@ public class managementServiceImpl implements managementService{
 		Integer	check = managementDao.updateOrder(paramMap);
 		return check;
 	}
+	@Override
+	public List<Map<String, Object>> shopSalesInfo(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return managementDao.shopSalesInfo(paramMap);
+	}
 }

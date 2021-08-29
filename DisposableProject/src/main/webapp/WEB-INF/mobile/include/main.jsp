@@ -113,21 +113,25 @@ $(document).ready(function(){
 		  // And if we need scrollbar
 		
 		});
-	getShopList()
+	getShopList('')
 	getBestShopList()
 })
 
-function getShopList(){
+function getShopList(classify){
 	$.ajax({
 		type : 'POST',
 		url : '/getStoreList.do',
-		data : {page:'1',classify:'2'},
+		data : {page:'1',classify:classify},
 		dataType : 'json',
 		success : function(json){
 			var html = ""
-			for(var i=0;i<8;i++){
+			for(var i=0;i<json.length;i++){
+				if(i > 8){
+					break;
+				}
 				html += "<div class='square' onclick='location.href=\"/shop/shopMain.do?shopnum="+json[i].STORENUM+"&device=mobile\"' ><img src='https://cookingcoding.s3.ap-northeast-2.amazonaws.com/"+json[i].PHOTO+"' style='width:100%;height:70%;'>"
 				html += "<div style='width:100%;height:30%;margin-top:10px'><div style='width:100%;text-align:left;font-size:14px;font-weight:bold'>"+json[i].STORENAME+"</div><div style='width:100%;text-align:left;font-size:10px'>4.8(10) 1.2km</div></div></div>"
+				
 			}
 			//html += "<div class='square' style='width: 20%'><img><div style='height:100%'></div></div>"
 			$(".recommendShop").html(html)
@@ -162,43 +166,40 @@ function getBestShopList(){
 </script>
 <div class="bigSlider swiper-container">
 	 <!-- Additional required wrapper -->
-  <div class="swiper-wrapper">
-    <!-- Slides -->
-    <div class="swiper-slide">
-		<img style="width:100%;height: 100%" src="https://us.123rf.com/450wm/kesu87/kesu871904/kesu87190400215/121887103-spring-rolls-asian-food-with-various-ingredients-on-stone.jpg?ver=6">
-	</div>
-    <div class="swiper-slide">
-		<img style="width:100%;height: 100%" src="https://s3.envato.com/files/269504081/DSC_8614%20copy.jpg">
-	</div>
-    <div class="swiper-slide">
-		<img style="width:100%;height: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXPKBr_2DAu8_r_SFoVB4QjpiMdro8SDkNwQ&usqp=CAU">
-	</div>
-  </div>
+
 </div>
 <div class="bannerBox foodOptionBox">
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('')">
+		<div class="foodClassifyimg"></div>
+		<div class="foodClassifyTxt">전체</div>
+	</div>
+	<div class="foodClassify" onclick="getShopList('KOR')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">한식</div>
 	</div>
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('JPN')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">일식</div>
 	</div>
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('WEST')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">양식</div>
 	</div>
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('SIMPLE')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">분식</div>
 	</div>
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('CHICKEN')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">치킨</div>
 	</div>
-	<div class="foodClassify">
+	<div class="foodClassify" onclick="getShopList('PIG')">
 		<div class="foodClassifyimg"></div>
 		<div class="foodClassifyTxt">족발/보쌈</div>
+	</div>
+	<div class="foodClassify" onclick="getShopList('CAFE')">
+		<div class="foodClassifyimg"></div>
+		<div class="foodClassifyTxt">카페</div>
 	</div>
 </div>
 <div class="evenBox">
