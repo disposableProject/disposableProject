@@ -283,6 +283,9 @@ html,body  {
 	<div id="left" style="height:100%; width: 100%;position: fixed;">
 			<tiles:insertAttribute name="left"/> 
 	</div>
+	<div id="myPageLeft" style="height:100%; width: 100%;position: fixed;">
+			<tiles:insertAttribute name="myPageLeft"/> 
+	</div>
 	<div style="min-height: 700px;width: 100%;padding-top: 60px;padding-bottom: 50px">
 		<tiles:insertAttribute name="body"/>
 	</div>

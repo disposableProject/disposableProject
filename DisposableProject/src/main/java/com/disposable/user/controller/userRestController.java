@@ -378,4 +378,15 @@ public class userRestController {
 
 		return resultMap;
 	}
+	
+	/**
+	 * @author 정연우
+	 * @description 주문 후기 댓글 작성
+	 */
+	@RequestMapping(value="reviewWrite.do",  method = {RequestMethod.GET,RequestMethod.POST})
+	public String reviewWrite() {
+		
+		return "user/myPage";
+	}
+	
 }
