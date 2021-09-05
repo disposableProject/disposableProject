@@ -17,6 +17,7 @@
 </head>
 <body>
 <style>
+
 .slider .slick-list {
     margin:0 -10px;
 }
@@ -206,31 +207,31 @@ function timeset(){
 	<section>
 	<ul class="slide01" style="height: 370px;padding: 0px;margin: 0px">
 	
-		<li><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1621841214.jpg" style="width: 100%"></li>
-		<li ><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1583112495.jpg" style="width: 100%"></li>
-		<li ><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1596164134.jpg" style="width: 100%"></li> 
+		<li><img src="images/shop/mybanner1.png" style="width: 100%;height: 400px"></li>
+		<li ><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1583112495.jpg" style="width: 100%;;height: 400px"></li>
+		<li ><img src="https://img-cf.kurly.com/shop/data/main/1/pc_img_1596164134.jpg" style="width: 100%;;height: 400px"></li> 
 	</ul>
 	</section>
-	<section style="height:582px">
-		<div style="padding: 69px 0 35px;display: flex;align-items: center;justify-content: space-around;width: 500px;margin: auto;">
+	<section style="height:652px">
+		<div style="padding: 69px 0 35px;display: flex;align-items: center;justify-content: center;width: 500px;margin: auto;">
 		<span></span>
-		<h2 style="text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;display: inline-block;">추천 음식 소개</h2>
-		<span style="font-size: 40px;color: #ddd" onclick="location.href='/best.do'">></span>
+		<div style="text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;display: inline-block;" onclick="location.href='/best.do'">추천 음식 소개</div>
+
 		</div>
 		
 		<!-- <div class="arrowSlider" style="display: flex;width: 1400px;justify-content: space-between;position:relative;left: 13%;top: 200px">
 			<span class="prev" id="aro1_prev">prev</span>
 			<span class="next" id="aro1_next">next</span>
 		</div> -->
-		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
+		<ul class="slide02" style="height: 455px;width:248px;padding: 0px;margin-bottom: 10px;width: 1100px;margin: auto;">
 			<c:forEach items="${RecommendFoodList}" var="RecommendFoodList">
-			<div style="width: 250px;height: 350px;border: 1px solid #ddd;margin: 10px"  onclick='location.href="/shop/shopMain.do?shopnum=${RecommendFoodList.STORENUM}&device=web"'>
-				<div style="height: 70%">
+			<div style="height: 400px;margin: 10px"  onclick='location.href="/shop/shopMain.do?shopnum=${RecommendFoodList.STORENUM}&device=web"'>
+				<div style="height: 320px">
 					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${RecommendFoodList.IMGNAME}" style="width: 100%;height: 100%">
 				</div>
 				<div style="padding: 10px 5px 5px 5px">
-				<div style="font-weight: bold;font-size: 20px">${RecommendFoodList.STORENAME} - ${RecommendFoodList.FOODNAME}</div>
-				<div>판매가: <fmt:formatNumber value="${RecommendFoodList.PRICE}" type="currency"  /></div>
+				<div style="font-size: 16px;line-height: 23px;">[${RecommendFoodList.STORENAME}]  ${RecommendFoodList.FOODNAME}</div>
+				<div style="display: block;padding-top: 9px;font-weight: 800;font-size: 16px;line-height: 20px;"><fmt:formatNumber value="${RecommendFoodList.PRICE}" type="currency"  /></div>
 				<div>주문수: ${RecommendFoodList.ORDERCOUNT} 회 </div>
 				
 				</div>
@@ -239,17 +240,17 @@ function timeset(){
 		</ul>
 		
 	</section>
-	<section style="height:584px;background-color: #f7f7f7;">
+	<section style="height:652px;background-color: #f7f7f7;">
 		<div style="padding: 69px 0 35px;display: flex;align-items: center;justify-content: space-around;width: 500px;margin: auto;">
 		<span></span>
 		<h2 style="text-align: center;margin: 0px; font-weight: 700;color:#333;font-size: 28px;font-family: noto sans;display: inline-block;">특가 음식</h2>
 		<span style="font-size: 40px;color: #ddd" onclick="location.href='/sale.do'">></span>
 		</div>
-		<ul class="slide02" style="height: 400px;padding: 0px;margin: 0px;width: 1200px;margin: auto;">
+		<ul class="slide02" style="height: 455px;padding: 0px;margin: 0px;width: 1100px;margin: auto;">
 		
 		<c:forEach items="${SaleFoodList}" var="SaleFoodLists">
-			<div style="width: 250px;height: 350px;border: 1px solid #ddd;margin: 10px"  onclick='location.href="/shop/shopMain.do?shopnum=${SaleFoodLists.STORENUM}&device=web"'>
-				<div style="height: 70%">
+			<div style="height: 400px;border: 1px solid #ddd;margin: 10px"  onclick='location.href="/shop/shopMain.do?shopnum=${SaleFoodLists.STORENUM}&device=web"'>
+				<div style="height: 320px">
 					<img src="https://cookingcoding.s3.ap-northeast-2.amazonaws.com/${SaleFoodLists.IMGNAME}" style="width: 100%;height: 100%">
 				</div>
 				<div style="padding: 10px 5px 5px 5px">
