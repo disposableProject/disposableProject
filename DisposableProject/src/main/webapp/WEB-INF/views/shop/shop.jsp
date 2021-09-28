@@ -415,7 +415,7 @@ function reviewWrite(storenum){
 			console.log("jsonjson =>")
 			console.log(json)
 			if(json.result == "YES"){
-				location.href="/user/myPage.do";
+				location.href="/myPage/myPage.do";
 			}else{
 				alert("주문 이력이 없습니다.")
 			}

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.disposable.myPage.dao.myPageDao">
+<select id="userOrderList" parameterType="java.util.Map"  resultType="java.util.Map">
+			SELECT 
+					OFD.ORDERNUM
+					,OFD.STORENUM
+					,OFD.FOODNUM
+					,OFD.ALLPRICE
+					,OFD.EMAIL
+					,OFD.ORDERCODE
+					,OFD.OPTIONS
+					,OFD.STATES
+					,OFD.MEMO
+					,FD.FOODNAME
+					,to_char(OFD.ORDERDATE, 'yyyy-mm-dd hh:mi:ss') AS ORDERDATE
 
+				FROM ORDERFOOD OFD
+				INNER JOIN FOOD FD
+				ON OFD.FOODNUM = FD.FOODNUM
+				AND OFD.STORENUM = FD.STORENUM
+				
+				INNER JOIN MEMBERS MBS
+				ON OFD.EMAIL = MBS.EMAIL
+				WHERE OFD.EMAIL = ${email}
+	</select>
 
 </mapper>

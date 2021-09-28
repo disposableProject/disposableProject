@@ -74,7 +74,7 @@ align-items: center;
 <div class="NavTop">
 	<c:if test="${userInfo != null && userInfo != ''}">
 		<span>
-		<c:out value="${userInfo.NICKNAME}"></c:out>
+		<a href="/myPage/myorderList.do"><c:out value="${userInfo.NICKNAME}"></c:out></a> 
 		<c:if test="${userInfo.STORENAME != null && userInfo.STORENAME != ''}">
 			<a href="/management/managementMain.do">${userInfo.STORENAME}</a> 
 		</c:if>

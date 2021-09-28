@@ -21,6 +21,7 @@
 			<div class="orderInfo">
 				<div>포토</div>
 				<div>주문내역</div>
+				${userOrderList}
 			</div>
 		</div>
 	</div>
