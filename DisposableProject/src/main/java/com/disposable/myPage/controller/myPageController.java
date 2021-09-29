@@ -30,6 +30,7 @@ public class myPageController {
 		String email = String.valueOf(userInfo.get("EMAIL"));
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("email", email);
+		paramMap.put("states", "PICKUP");
 		List<Map<String, Object>> userOrderList =  mypageservice.userOrderList(paramMap);
 		model.addAttribute("userOrderList", userOrderList);
 		return "myPage/myPage";
@@ -37,8 +38,15 @@ public class myPageController {
 	
 	
 	@RequestMapping(value="myorderList.do")
-	public String myorderList() {
+	public String myorderList(HttpSession session,Model model) {
 		System.out.println("myorderList");
+		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+		String email = String.valueOf(userInfo.get("EMAIL"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", email);
+		paramMap.put("states", "ORDER");
+		List<Map<String, Object>> userOrderList =  mypageservice.userOrderList(paramMap);
+		model.addAttribute("userOrderList", userOrderList);
 		return "myPage/myorderList";
 	}
 	

@@ -3,18 +3,16 @@
 <mapper namespace="com.disposable.myPage.dao.myPageDao">
 <select id="userOrderList" parameterType="java.util.Map"  resultType="java.util.Map">
 			SELECT 
-					OFD.ORDERNUM
-					,OFD.STORENUM
-					,OFD.FOODNUM
+				OFD.STORENUM
 					,OFD.ALLPRICE
 					,OFD.EMAIL
 					,OFD.ORDERCODE
-					,OFD.OPTIONS
+					,LISTAGG(OFD.OPTIONS, '**') WITHIN GROUP (ORDER BY OFD.ORDERCODE) AS OPTIONS
 					,OFD.STATES
 					,OFD.MEMO
-					,FD.FOODNAME
+					,LISTAGG(FD.FOODNAME, '**') WITHIN GROUP (ORDER BY OFD.OPTIONS) AS FOODNAME
 					,to_char(OFD.ORDERDATE, 'yyyy-mm-dd hh:mi:ss') AS ORDERDATE
-
+					,SP.PHOTO AS PHOTO
 				FROM ORDERFOOD OFD
 				INNER JOIN FOOD FD
 				ON OFD.FOODNUM = FD.FOODNUM
@@ -22,7 +20,24 @@
 				
 				INNER JOIN MEMBERS MBS
 				ON OFD.EMAIL = MBS.EMAIL
-				WHERE OFD.EMAIL = ${email}
+				LEFT JOIN SHOP SP
+				ON OFD.STORENUM = SP.STORENUM
+				WHERE OFD.EMAIL =#{email}
+				<if test="states != ''  and states != null and states != 'PICKUP'">
+					AND STATES IN ('PAY','TAKE')
+				</if>
+				<if test="states != ''  and states != null and states == 'PICKUP'">
+					AND STATES = #{states}
+				</if>
+					GROUP BY 
+					OFD.STORENUM
+					,OFD.ALLPRICE
+					,OFD.EMAIL
+					,OFD.ORDERCODE
+					,OFD.STATES
+					,OFD.MEMO
+					,OFD.ORDERDATE
+					,SP.PHOTO
 	</select>
 
 </mapper>

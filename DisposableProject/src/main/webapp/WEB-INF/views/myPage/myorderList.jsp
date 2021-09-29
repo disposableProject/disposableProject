@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
-*{
-	box-sizing: border-box;	letter-spacing: 0.1rem;
-}
+
 .container{
 	width: 1240px;	display: flex; flex-direction: row; margin: 0 auto;
 }
